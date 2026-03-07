@@ -1,0 +1,220 @@
+{
+  "tag": "SIM-1772110552106",
+  "startedAt": "2026-02-26T12:55:52.106Z",
+  "steps": [
+    {
+      "name": "login:client",
+      "ok": true,
+      "details": "client@test.com authenticated",
+      "at": "2026-02-26T12:55:53.311Z"
+    },
+    {
+      "name": "login:admin",
+      "ok": true,
+      "details": "admin@test.com authenticated",
+      "at": "2026-02-26T12:55:53.581Z"
+    },
+    {
+      "name": "login:commissioner",
+      "ok": true,
+      "details": "commissioner@test.com authenticated",
+      "at": "2026-02-26T12:55:53.848Z"
+    },
+    {
+      "name": "login:developer",
+      "ok": true,
+      "details": "developer@test.com authenticated",
+      "at": "2026-02-26T12:55:54.133Z"
+    },
+    {
+      "name": "client:create_project",
+      "ok": true,
+      "details": "Project created: e419c510-9874-4f77-8f19-7dcafcc34e8e",
+      "at": "2026-02-26T12:55:54.562Z"
+    },
+    {
+      "name": "finance:create_deposit_invoice",
+      "ok": true,
+      "details": "Invoice 55a0596e-2790-4a58-ab39-2540b66a13d9 amount KSh 81,000",
+      "at": "2026-02-26T12:55:54.935Z"
+    },
+    {
+      "name": "finance:generate_deposit_payment_link",
+      "ok": true,
+      "details": "Link generated",
+      "at": "2026-02-26T12:55:56.363Z"
+    },
+    {
+      "name": "finance:simulate_deposit_paid",
+      "ok": true,
+      "details": "Invoice marked paid",
+      "at": "2026-02-26T12:55:56.548Z"
+    },
+    {
+      "name": "finance:record_deposit_transaction",
+      "ok": true,
+      "details": "Transaction recorded",
+      "at": "2026-02-26T12:55:56.724Z"
+    },
+    {
+      "name": "developer:submit_proposal",
+      "ok": true,
+      "details": "Proposal 1f208ca8-0a59-439b-8afb-b8461a1ccde6 created",
+      "at": "2026-02-26T12:55:56.915Z"
+    },
+    {
+      "name": "commissioner:assign_developer",
+      "ok": true,
+      "details": "Project moved to in-progress",
+      "at": "2026-02-26T12:55:57.092Z"
+    },
+    {
+      "name": "commissioner:accept_proposal",
+      "ok": true,
+      "details": "Proposal accepted",
+      "at": "2026-02-26T12:55:57.264Z"
+    },
+    {
+      "name": "project:create_milestones",
+      "ok": true,
+      "details": "Milestone creation path succeeded",
+      "at": "2026-02-26T12:55:57.438Z"
+    },
+    {
+      "name": "developer:submit_milestone",
+      "ok": true,
+      "details": "Milestone 5a6cada8-c7a0-4ce0-bfde-bdf62332ba58 submitted",
+      "at": "2026-02-26T12:55:58.327Z"
+    },
+    {
+      "name": "client:approve_milestone",
+      "ok": true,
+      "details": "Milestone approved/paid",
+      "at": "2026-02-26T12:55:58.504Z"
+    },
+    {
+      "name": "finance:record_milestone_release",
+      "ok": true,
+      "details": "Milestone payment recorded",
+      "at": "2026-02-26T12:55:58.714Z"
+    },
+    {
+      "name": "conflict:create_dispute",
+      "ok": true,
+      "details": "Dispute e3a3ea2a-fe92-4161-a91f-c9eb22fedf2c created",
+      "at": "2026-02-26T12:55:58.909Z"
+    },
+    {
+      "name": "admin:resolve_dispute",
+      "ok": true,
+      "details": "Resolved as refund",
+      "at": "2026-02-26T12:55:59.088Z"
+    },
+    {
+      "name": "finance:record_dispute_outcome",
+      "ok": true,
+      "details": "Dispute transaction recorded",
+      "at": "2026-02-26T12:55:59.319Z"
+    },
+    {
+      "name": "commissioner:request_payout",
+      "ok": true,
+      "details": "Payout 2fe5f2c9-8501-497f-95ef-069481af25d8",
+      "at": "2026-02-26T12:55:59.671Z"
+    },
+    {
+      "name": "developer:request_payout",
+      "ok": true,
+      "details": "Payout caba48fc-d8a1-4cfd-8764-09a44d38c917",
+      "at": "2026-02-26T12:56:00.042Z"
+    },
+    {
+      "name": "admin:approve_and_pay_payout:2fe5f2c9",
+      "ok": true,
+      "details": "payout=200 tx=200",
+      "at": "2026-02-26T12:56:00.391Z"
+    },
+    {
+      "name": "admin:approve_and_pay_payout:caba48fc",
+      "ok": true,
+      "details": "payout=200 tx=200",
+      "at": "2026-02-26T12:56:00.732Z"
+    },
+    {
+      "name": "finance:generate_final_payment_link",
+      "ok": true,
+      "details": "Final payment link generated",
+      "at": "2026-02-26T12:56:04.538Z"
+    },
+    {
+      "name": "finance:simulate_final_invoice_paid",
+      "ok": true,
+      "details": "Final invoice marked paid",
+      "at": "2026-02-26T12:56:04.749Z"
+    },
+    {
+      "name": "realtime:insert_client_notification",
+      "ok": true,
+      "details": "Notification inserted for realtime test",
+      "at": "2026-02-26T12:56:04.932Z"
+    },
+    {
+      "name": "email:send_report_to_target",
+      "ok": false,
+      "details": "status=200, email={\"sent\":false,\"skipped\":false,\"provider\":\"gmail\",\"error\":\"Error: Token has been expired or revoked.\"}",
+      "at": "2026-02-26T12:56:05.649Z"
+    },
+    {
+      "name": "email:send_payment_link_to_target",
+      "ok": true,
+      "details": "status=200, auth_url=present, email={\"sent\":true,\"skipped\":false,\"provider\":\"paystack\",\"note\":\"Payment request notification sent by Paystack\"}",
+      "at": "2026-02-26T12:56:07.145Z"
+    }
+  ],
+  "entities": {
+    "users": {
+      "client_id": "3961d2b6-eb9e-44f4-a55f-918fd4ba6a84",
+      "commissioner_id": "369095e2-a42a-4cfc-9072-10877c22720d",
+      "developer_id": "5bab5fed-176a-4e20-9b6d-8b7129ba530e",
+      "admin_id": "d05dcce5-659d-4689-89a0-f3119b1da708"
+    },
+    "project_id": "e419c510-9874-4f77-8f19-7dcafcc34e8e",
+    "deposit_invoice_id": "55a0596e-2790-4a58-ab39-2540b66a13d9",
+    "proposal_id": "1f208ca8-0a59-439b-8afb-b8461a1ccde6",
+    "dispute_id": "e3a3ea2a-fe92-4161-a91f-c9eb22fedf2c",
+    "final_invoice_id": "81f2768c-1bff-408b-b720-99f45ad8d0be"
+  },
+  "links": [
+    {
+      "type": "deposit_payment_link",
+      "url": "https://checkout.paystack.com/rpqnv69lipe8q30"
+    },
+    {
+      "type": "final_payment_link",
+      "url": "https://checkout.paystack.com/p6nltiwf1glp37n"
+    },
+    {
+      "type": "target_payment_link",
+      "url": "https://checkout.paystack.com/yx41n0il6l6s0ox"
+    }
+  ],
+  "emailAttempt": {
+    "ok": true,
+    "status": 200,
+    "body": {
+      "success": true,
+      "recipients": [
+        "mikomike200@gmail.com"
+      ],
+      "email": {
+        "sent": false,
+        "skipped": false,
+        "provider": "gmail",
+        "error": "Error: Token has been expired or revoked."
+      },
+      "fallback_notifications": 1,
+      "error": null
+    }
+  },
+  "endedAt": "2026-02-26T12:56:07.145Z"
+}

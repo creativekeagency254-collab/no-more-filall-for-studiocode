@@ -1,0 +1,3891 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commissioner Dashboard - CODESTUDIO.KENYA</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script>
+    if (window.protectDashboard) protectDashboard();
+  </script>
+  <style>
+    :root {
+      --bg-page: #0A0A0A;
+      --bg-sidebar: #000000;
+      --bg-card: #111111;
+      --bg-inset: #1A1A1A;
+      --bg-hover: #242424;
+      --bg-btn: #2E2E2E;
+      --text-1: #FFFFFF;
+      --text-2: #E4E4E4;
+      --text-3: #C0C0C0;
+      --text-4: #909090;
+      --text-5: #606060;
+      --text-6: #3A3A3A;
+      --border-0: rgba(255, 255, 255, 0.04);
+      --border-1: rgba(255, 255, 255, 0.08);
+      --border-2: rgba(255, 255, 255, 0.14);
+      --border-3: rgba(255, 255, 255, 0.26);
+      --green: #22C55E;
+      --gbg: rgba(34, 197, 94, .09);
+      --gbdr: rgba(34, 197, 94, .22);
+      --amber: #EAB308;
+      --abg: rgba(234, 179, 8, .09);
+      --abdr: rgba(234, 179, 8, .22);
+      --red: #EF4444;
+      --rbg: rgba(239, 68, 68, .09);
+      --rbdr: rgba(239, 68, 68, .22);
+      --blue: #60A5FA;
+      --bbg: rgba(96, 165, 250, .09);
+      --bbdr: rgba(96, 165, 250, .22);
+      --r4: 4px;
+      --r8: 8px;
+      --r12: 12px;
+      --r16: 16px;
+      --r20: 20px;
+      --rpill: 9999px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, .5);
+    }
+
+    [data-theme="light"] {
+      --bg-page: #F5F5F5;
+      --bg-sidebar: #FFFFFF;
+      --bg-card: #FFFFFF;
+      --bg-inset: #F0F0F0;
+      --bg-hover: #E8E8E8;
+      --bg-btn: #E0E0E0;
+      --text-1: #0A0A0A;
+      --text-2: #1A1A1A;
+      --text-3: #3A3A3A;
+      --text-4: #606060;
+      --text-5: #909090;
+      --text-6: #C0C0C0;
+      --border-0: rgba(0, 0, 0, 0.05);
+      --border-1: rgba(0, 0, 0, 0.09);
+      --border-2: rgba(0, 0, 0, 0.15);
+      --border-3: rgba(0, 0, 0, 0.25);
+      --green: #16A34A;
+      --gbg: rgba(22, 163, 74, .08);
+      --gbdr: rgba(22, 163, 74, .2);
+      --amber: #B45309;
+      --abg: rgba(180, 83, 9, .08);
+      --abdr: rgba(180, 83, 9, .2);
+      --red: #DC2626;
+      --rbg: rgba(220, 38, 38, .08);
+      --rbdr: rgba(220, 38, 38, .2);
+      --blue: #2563EB;
+      --bbg: rgba(37, 99, 235, .08);
+      --bbdr: rgba(37, 99, 235, .2);
+      --shadow: 0 1px 4px rgba(0, 0, 0, .1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-page);
+      color: var(--text-2);
+      display: flex;
+      min-height: 100vh;
+      height: 100vh;
+      overflow-x: hidden;
+      overflow-y: hidden;
+      line-height: 1.5;
+      transition: background .2s, color .2s;
+    }
+
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--bg-btn);
+      border-radius: var(--rpill);
+    }
+
+    .sidebar {
+      width: 230px;
+      min-width: 230px;
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--border-1);
+      display: flex;
+      flex-direction: column;
+      padding: 16px 11px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+      transition: background .2s, border-color .2s;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 3px 6px;
+      margin-bottom: 20px;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, .92);
+      color: #000;
+      border: 1.6px solid #000;
+      border-radius: var(--r8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color .2s, color .2s;
+    }
+
+    .logo-mark svg {
+      width: 18px;
+      height: 18px;
+      stroke: #000;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .logo-name {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      line-height: 1;
+    }
+
+    .brand-cursor {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: var(--text-1);
+      white-space: nowrap;
+      overflow: hidden;
+      width: 17ch;
+      border-right: 1px solid var(--text-3);
+      animation: brandTyping 2.8s steps(17, end) 1, brandCaret .9s step-end infinite;
+    }
+
+    .brand-roll {
+      position: relative;
+      height: 15px;
+      perspective: 360px;
+      transform-style: preserve-3d;
+      overflow: hidden;
+    }
+
+    .brand-roll span {
+      position: absolute;
+      inset: 0;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text-5);
+      transform-origin: center center -10px;
+      backface-visibility: hidden;
+      opacity: 0;
+      animation: brandCube 10s infinite;
+    }
+
+    .brand-roll span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .brand-roll span:nth-child(2) {
+      animation-delay: 2s;
+    }
+
+    .brand-roll span:nth-child(3) {
+      animation-delay: 4s;
+    }
+
+    .brand-roll span:nth-child(4) {
+      animation-delay: 6s;
+    }
+
+    .brand-roll span:nth-child(5) {
+      animation-delay: 8s;
+    }
+
+    @keyframes brandTyping {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 17ch;
+      }
+    }
+
+    @keyframes brandCaret {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    @keyframes brandCube {
+      0%,
+      15% {
+        opacity: 1;
+        transform: rotateX(0deg) translateZ(10px);
+      }
+
+      20%,
+      100% {
+        opacity: 0;
+        transform: rotateX(-90deg) translateZ(10px);
+      }
+    }
+
+    .sb-user {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 9px;
+      border-radius: var(--r8);
+      border: 1px solid var(--border-1);
+      background: var(--bg-inset);
+      margin-bottom: 16px;
+      cursor: pointer;
+      transition: border-color .15s, background .2s;
+    }
+
+    .sb-user:hover {
+      border-color: var(--border-2);
+    }
+
+    .av {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r8);
+      flex-shrink: 0;
+      overflow: hidden;
+      background: var(--bg-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-3);
+      border: 1px solid var(--border-1);
+      position: relative;
+    }
+
+    .av img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .av-lg {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--r12);
+      font-size: 14px;
+    }
+
+    .sb-uname {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-1);
+    }
+
+    .sb-urole {
+      font-size: 9.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--text-5);
+      margin-top: 1px;
+    }
+
+    .nav-sec {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--text-6);
+      padding: 0 7px;
+      margin: 12px 0 4px;
+    }
+
+    .ni {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6.5px 8px;
+      border-radius: var(--r8);
+      color: var(--text-5);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      border: 1px solid transparent;
+      margin-bottom: 1px;
+      text-decoration: none;
+      user-select: none;
+    }
+
+    .ni:hover {
+      color: var(--text-2);
+      background: var(--bg-inset);
+    }
+
+    .ni.active {
+      color: var(--text-1);
+      background: var(--bg-inset);
+      border-color: var(--border-1);
+    }
+
+    .ni svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.8;
+    }
+
+    .nc {
+      margin-left: auto;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--text-5);
+      background: var(--bg-hover);
+      padding: 1px 6px;
+      border-radius: var(--rpill);
+      border: 1px solid var(--border-0);
+    }
+
+    .sb-foot {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-0);
+    }
+
+    .theme-pill {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 10px;
+      border-radius: var(--r8);
+      background: var(--bg-inset);
+      border: 1px solid var(--border-1);
+      margin-bottom: 6px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .theme-pill:hover {
+      border-color: var(--border-2);
+    }
+
+    .theme-pill-lbl {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .theme-pill-lbl svg {
+      flex-shrink: 0;
+    }
+
+    .theme-switch {
+      width: 36px;
+      height: 20px;
+      border-radius: var(--rpill);
+      background: var(--bg-btn);
+      border: 1px solid var(--border-2);
+      position: relative;
+      transition: background .2s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .theme-switch.on {
+      background: var(--text-1);
+    }
+
+    .theme-switch::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--bg-card);
+      transition: all .2s;
+    }
+
+    .theme-switch.on::after {
+      left: 18px;
+      background: var(--bg-sidebar);
+    }
+
+    .so-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6.5px 8px;
+      border-radius: var(--r8);
+      color: var(--text-5);
+      font-size: 12.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all .15s;
+      background: none;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      width: 100%;
+    }
+
+    .so-btn:hover {
+      color: var(--red);
+      background: var(--rbg);
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 26px;
+      border-bottom: 1px solid var(--border-0);
+      background: var(--bg-page);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      transition: background .2s, border-color .2s;
+    }
+
+    .pg-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      color: var(--text-1);
+    }
+
+    .pg-sub {
+      font-size: 11px;
+      color: var(--text-5);
+      margin-top: 1px;
+    }
+
+    .tb-right {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .db-status {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: var(--rpill);
+      font-size: 10.5px;
+      font-weight: 600;
+      background: var(--gbg);
+      border: 1px solid var(--gbdr);
+      color: var(--green);
+    }
+
+    .db-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    .page {
+      display: none;
+      padding: 22px 26px;
+      overflow-y: auto;
+      flex: 1;
+      min-height: 0;
+      overscroll-behavior-y: contain;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-gutter: stable both-edges;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .msg-filter-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: var(--r8);
+      cursor: pointer;
+      transition: all .15s;
+      border: none;
+      white-space: nowrap;
+    }
+
+    .btn-w {
+      background: var(--text-1);
+      color: var(--bg-sidebar);
+    }
+
+    .btn-w:hover {
+      opacity: .88;
+    }
+
+    .btn-g {
+      background: transparent;
+      border: 1px solid var(--border-2);
+      color: var(--text-3);
+    }
+
+    .btn-g:hover {
+      border-color: var(--border-3);
+      color: var(--text-1);
+      background: var(--bg-inset);
+    }
+
+    .btn-sm {
+      padding: 4px 10px;
+      font-size: 11.5px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r16);
+      padding: 18px;
+      transition: border-color .2s, background .2s;
+      box-shadow: var(--shadow);
+    }
+
+    .card:hover {
+      border-color: var(--border-2);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-2);
+    }
+
+    .card-lnk {
+      font-size: 11.5px;
+      color: var(--text-5);
+      cursor: pointer;
+      transition: color .15s;
+    }
+
+    .card-lnk:hover {
+      color: var(--text-1);
+    }
+
+    .sc {
+      background: var(--bg-card);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r16);
+      padding: 16px 18px;
+      transition: all .2s;
+      cursor: default;
+      box-shadow: var(--shadow);
+    }
+
+    .sc:hover {
+      border-color: var(--border-2);
+      background: var(--bg-inset);
+    }
+
+    .sc-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r8);
+      background: var(--bg-inset);
+      border: 1px solid var(--border-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      margin-bottom: 11px;
+      color: var(--text-3);
+    }
+
+    .sc-icon svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--text-3);
+    }
+
+    .sc-val {
+      font-family: 'DM Mono', monospace;
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: -.03em;
+      margin-bottom: 2px;
+    }
+
+    .sc-lbl {
+      font-size: 11px;
+      color: var(--text-5);
+      font-weight: 500;
+    }
+
+    .sc-d {
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+    .up {
+      color: var(--green);
+    }
+
+    .dn {
+      color: var(--red);
+    }
+
+    .neu {
+      color: var(--text-5);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: var(--rpill);
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .b-g {
+      background: var(--gbg);
+      color: var(--green);
+      border: 1px solid var(--gbdr);
+    }
+
+    .b-a {
+      background: var(--abg);
+      color: var(--amber);
+      border: 1px solid var(--abdr);
+    }
+
+    .b-r {
+      background: var(--rbg);
+      color: var(--red);
+      border: 1px solid var(--rbdr);
+    }
+
+    .b-b {
+      background: var(--bbg);
+      color: var(--blue);
+      border: 1px solid var(--bbdr);
+    }
+
+    .b-w {
+      background: var(--bg-hover);
+      color: var(--text-2);
+      border: 1px solid var(--border-1);
+    }
+
+    .tbl {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .tbl th {
+      text-align: left;
+      padding: 0 10px 8px;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--text-6);
+      border-bottom: 1px solid var(--border-1);
+    }
+
+    .tbl td {
+      padding: 9px 10px;
+      font-size: 12.5px;
+      border-bottom: 1px solid var(--border-0);
+      vertical-align: middle;
+      color: var(--text-2);
+    }
+
+    .tbl tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tbl tr:hover td {
+      background: var(--bg-inset);
+    }
+
+    .pbg {
+      background: var(--bg-hover);
+      border-radius: var(--rpill);
+      height: 3px;
+      overflow: hidden;
+    }
+
+    .pf {
+      height: 100%;
+      border-radius: var(--rpill);
+      background: var(--text-1);
+    }
+
+    .pf-g {
+      background: var(--green);
+    }
+
+    .pf-a {
+      background: var(--amber);
+    }
+
+    .sl {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-6);
+      margin-bottom: 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sl::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border-0);
+    }
+
+    .mono {
+      font-family: 'DM Mono', monospace;
+    }
+
+    .div {
+      height: 1px;
+      background: var(--border-0);
+      margin: 12px 0;
+    }
+
+    .g4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 11px;
+      margin-bottom: 18px;
+    }
+
+    .g2l {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+
+    .g3l {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 13px;
+      margin-bottom: 18px;
+    }
+
+    .stars {
+      color: var(--amber);
+      font-size: 11px;
+    }
+
+    /* brief card */
+    .brief {
+      background: var(--bg-inset);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r12);
+      padding: 12px 13px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+
+    .brief:hover {
+      border-color: var(--border-2);
+    }
+
+    .brief:last-child {
+      margin-bottom: 0;
+    }
+
+    .brief-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 4px;
+    }
+
+    .brief-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-1);
+    }
+
+    .brief-budget {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text-2);
+    }
+
+    .brief-meta {
+      font-size: 11px;
+      color: var(--text-5);
+    }
+
+    .tag {
+      display: inline-flex;
+      padding: 2px 8px;
+      border-radius: var(--rpill);
+      font-size: 10.5px;
+      font-weight: 500;
+      background: var(--bg-hover);
+      border: 1px solid var(--border-1);
+      color: var(--text-4);
+      margin: 2px 2px 0 0;
+    }
+
+    /* proposal */
+    .prop {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 10px;
+      background: var(--bg-inset);
+      border: 1px solid var(--border-1);
+      border-radius: var(--r12);
+      margin-bottom: 7px;
+      transition: border-color .15s;
+    }
+
+    .prop:hover {
+      border-color: var(--border-2);
+    }
+
+    .prop:last-child {
+      margin-bottom: 0;
+    }
+
+    .prop-av {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--r8);
+      flex-shrink: 0;
+      overflow: hidden;
+      background: var(--bg-hover);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-3);
+      position: relative;
+      border: 1px solid var(--border-1);
+    }
+
+    .prop-av img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .prop-info {
+      flex: 1;
+    }
+
+    .prop-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-1);
+    }
+
+    .prop-meta {
+      font-size: 11px;
+      color: var(--text-5);
+    }
+
+    .prop-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    .prop-bid {
+      font-family: 'DM Mono', monospace;
+      font-size: 12.5px;
+      color: var(--text-2);
+    }
+
+    .prop-del {
+      font-size: 10px;
+      color: var(--text-5);
+    }
+
+    .p-hire {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: var(--rpill);
+      background: var(--text-1);
+      color: var(--bg-sidebar);
+      border: none;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    .p-msg {
+      font-size: 10.5px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--rpill);
+      background: var(--bg-hover);
+      color: var(--text-3);
+      border: 1px solid var(--border-1);
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 4px;
+      display: inline-block;
+      margin-left: 4px;
+    }
+
+    /* earnings row */
+    .earn-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-0);
+    }
+
+    .earn-row:last-child {
+      border-bottom: none;
+    }
+
+    .earn-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-2);
+    }
+
+    .earn-meta {
+      font-size: 11px;
+      color: var(--text-5);
+    }
+
+    .ea-in {
+      color: var(--green);
+    }
+
+    .ea-hold {
+      color: var(--amber);
+    }
+
+    /* message */
+    .msg {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 9px 6px;
+      cursor: pointer;
+      border-radius: var(--r8);
+      border-bottom: 1px solid var(--border-0);
+      transition: background .15s;
+    }
+
+    .msg:last-child {
+      border-bottom: none;
+    }
+
+    .msg:hover {
+      background: var(--bg-inset);
+    }
+
+    .msg-sender {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-1);
+    }
+
+    .msg-time {
+      font-size: 10px;
+      color: var(--text-6);
+    }
+
+    .msg-prev {
+      font-size: 11.5px;
+      color: var(--text-5);
+    }
+
+    .unread-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--text-1);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    /* input */
+    .input {
+      background: var(--bg-inset);
+      border: 1px solid var(--border-1);
+      color: var(--text-1);
+      border-radius: var(--r8);
+      padding: 8px 11px;
+      font-size: 13px;
+      font-family: 'DM Sans', sans-serif;
+      width: 100%;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    .input:focus {
+      border-color: var(--border-3);
+    }
+
+    .input::placeholder {
+      color: var(--text-6);
+    }
+
+    .input-lbl {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-5);
+      margin-bottom: 4px;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      background: var(--text-1);
+      color: var(--bg-sidebar);
+      padding: 9px 16px;
+      border-radius: var(--r8);
+      font-size: 12.5px;
+      font-weight: 700;
+      z-index: 9999;
+      animation: fadeUp .25s ease;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .fu {
+      animation: fadeUp .28s ease both;
+    }
+
+    .d1 {
+      animation-delay: .04s
+    }
+
+    .d2 {
+      animation-delay: .08s
+    }
+
+    .d3 {
+      animation-delay: .12s
+    }
+
+    .loading-text {
+      font-size: 12px;
+      color: var(--text-5);
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* -- Enhanced profile avatar -- */
+    .av {
+      position: relative;
+      border-radius: var(--r8);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 11px;
+      color: var(--text-1);
+      background: var(--bg-inset);
+      flex-shrink: 0;
+      border: 2px solid var(--border-1);
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .av img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: inherit;
+    }
+
+    .sb-user {
+      border-radius: var(--r12);
+      transition: background .15s, border-color .15s;
+    }
+
+    .sb-user:hover .av {
+      border-color: var(--border-2);
+      box-shadow: 0 0 0 3px var(--gbg, rgba(34, 197, 94, .08));
+    }
+
+    /* Status dot on avatar */
+    .av-wrap {
+      position: relative;
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
+    .av-online {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 2px solid var(--bg-sidebar, var(--bg-page));
+      z-index: 2;
+    }
+
+    .onb-divider {
+      height: 1px;
+      background: var(--border-0);
+      margin: 14px 0;
+    }
+
+    .onb-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .onb-theme-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .onb-theme-pill {
+      border: 1px solid var(--border-1);
+      background: var(--bg-inset);
+      color: var(--text-3);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+
+    .onb-theme-pill:hover {
+      border-color: var(--border-2);
+      color: var(--text-2);
+    }
+
+    .onb-theme-pill.active {
+      color: var(--text-1);
+      border-color: var(--gbdr);
+      background: var(--gbg);
+    }
+
+    .onb-actions {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .onb-link-wrap {
+      margin-top: 10px;
+    }
+
+    @media(max-width:720px) {
+      .onb-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ===================================================
+   UNIVERSAL SIDEBAR - retractable on ALL screen sizes
+=================================================== */
+
+    /* Backdrop for mobile/tablet overlay */
+    .sb-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      z-index: 199;
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+
+    .sb-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* -- Sidebar base -- */
+    .sidebar {
+      transition: width .3s cubic-bezier(.25, .46, .45, .94),
+        transform .3s cubic-bezier(.25, .46, .45, .94),
+        padding .3s ease,
+        background .2s, border-color .2s;
+      will-change: transform;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 100;
+    }
+
+    /* -- Sidebar COLLAPSED on desktop -- */
+    body.sb-collapsed .sidebar {
+      width: 58px !important;
+      min-width: 58px !important;
+      overflow: hidden;
+    }
+
+    body.sb-collapsed .sidebar .sb-uname,
+    body.sb-collapsed .sidebar .sb-urole,
+    body.sb-collapsed .sidebar .nav-sec,
+    body.sb-collapsed .sidebar .logo-name {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      transition: opacity .2s, width .2s;
+    }
+
+    body.sb-collapsed .sidebar .logo-name {
+      display: none;
+    }
+
+    body.sb-collapsed .sidebar .ni span,
+    body.sb-collapsed .sidebar .ni em {
+      opacity: 0;
+      width: 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    body.sb-collapsed .sidebar .ni {
+      justify-content: center;
+      padding: 10px 0;
+    }
+
+    body.sb-collapsed .sidebar .ni svg {
+      margin: 0;
+    }
+
+    body.sb-collapsed .sidebar .avail-label,
+    body.sb-collapsed .sidebar .avail-toggle-label {
+      display: none;
+    }
+
+    body.sb-collapsed .sidebar .sb-user {
+      justify-content: center;
+      padding: 8px 0;
+    }
+
+    body.sb-collapsed .sidebar .sb-user .av-wrap,
+    body.sb-collapsed .sidebar .sb-user>div:last-child {
+      /* hide text column, keep avatar */
+    }
+
+    body.sb-collapsed .sidebar .sb-user>div:last-child {
+      display: none;
+    }
+
+    body.sb-collapsed .sidebar .logo {
+      justify-content: center;
+      padding: 3px 0;
+    }
+
+    /* -- Toggle button (always visible in topbar) -- */
+    .sb-toggle {
+      width: 34px;
+      height: 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border-1, var(--bd1));
+      border-radius: 8px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background .15s, border-color .15s;
+      padding: 0;
+    }
+
+    .sb-toggle:hover {
+      background: var(--bg-inset, var(--b3));
+      border-color: var(--border-2, var(--bd2));
+    }
+
+    .sb-toggle-bar {
+      width: 14px;
+      height: 1.5px;
+      background: var(--text-2, var(--s2));
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s, width .25s;
+      flex-shrink: 0;
+    }
+
+    /* Animate to X when open on mobile */
+    .sb-toggle.is-open .sb-toggle-bar:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+
+    .sb-toggle.is-open .sb-toggle-bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .sb-toggle.is-open .sb-toggle-bar:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
+    }
+
+    /* -- MOBILE (<=900px) - full overlay slide-in -- */
+    @media(max-width:900px) {
+      .sidebar {
+        position: fixed !important;
+        left: 0;
+        top: 0;
+        height: 100vh !important;
+        width: 230px !important;
+        min-width: 230px !important;
+        transform: translateX(-100%);
+        z-index: 200;
+        box-shadow: 6px 0 40px rgba(0, 0, 0, .25);
+      }
+
+      .sidebar.mob-open {
+        transform: translateX(0) !important;
+      }
+
+      .sb-backdrop {
+        display: block;
+      }
+
+      .main {
+        width: 100% !important;
+      }
+
+      .page,
+      .content {
+        padding: 14px 14px !important;
+      }
+
+      .topbar {
+        padding: 11px 16px !important;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .tb-right {
+        width: 100%;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+      }
+
+      .g4,
+      .g3l,
+      .g2l,
+      .g2 {
+        grid-template-columns: 1fr !important;
+        gap: 10px !important;
+      }
+
+      /* Collapse classes don't apply on mobile */
+      body.sb-collapsed .sidebar {
+        width: 230px !important;
+        min-width: 230px !important;
+      }
+
+      body.sb-collapsed .sidebar .sb-uname,
+      body.sb-collapsed .sidebar .sb-urole,
+      body.sb-collapsed .sidebar .nav-sec,
+      body.sb-collapsed .sidebar .logo-name,
+      body.sb-collapsed .sidebar .ni span,
+      body.sb-collapsed .sidebar .ni em {
+        opacity: 1;
+        width: auto;
+      }
+
+      body.sb-collapsed .sidebar .logo-name {
+        display: block;
+      }
+
+      body.sb-collapsed .sidebar .ni {
+        justify-content: flex-start;
+        padding: 10px 9px;
+      }
+
+      body.sb-collapsed .sidebar .ni svg {
+        margin: 0;
+      }
+
+      body.sb-collapsed .sidebar .sb-user {
+        justify-content: flex-start;
+        padding: 8px 9px;
+      }
+
+      body.sb-collapsed .sidebar .sb-user>div:last-child {
+        display: block;
+      }
+
+      body.sb-collapsed .sidebar .logo {
+        justify-content: flex-start;
+        padding: 3px 6px;
+      }
+
+      /* Stat grids */
+      .stats-row,
+      .sc-row,
+      .sc-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+      }
+
+      .cards-grid,
+      .feat-grid,
+      .dp-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+      }
+
+      .tbl-wrap,
+      .table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .tbl,
+      .data-table {
+        min-width: 580px;
+      }
+
+      .msg-filter-row {
+        flex-direction: column;
+      }
+
+      #msg-role-filter {
+        width: 100% !important;
+      }
+
+      #chat-input-area {
+        flex-direction: column;
+      }
+
+      #chat-send-btn {
+        width: 100%;
+      }
+    }
+
+    /* -- Small phone <=500px -- */
+    @media(max-width:500px) {
+
+      .stats-row,
+      .sc-row,
+      .sc-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .cards-grid,
+      .feat-grid,
+      .dp-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .page,
+      .content {
+        padding: 10px 10px !important;
+      }
+
+      .tb-right {
+        justify-content: stretch;
+      }
+
+      .tb-right .btn {
+        flex: 1 1 calc(50% - 6px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <aside class="sidebar">
+    <div class="logo">
+      <div class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 3 4 7.5v9L12 21l8-4.5v-9z" />
+          <path d="M12 21v-9" />
+          <path d="m4 7.5 8 4.5 8-4.5" />
+        </svg>
+      </div>
+      <div class="logo-name">
+        <span class="brand-cursor">CODESTUDIO.KENYA</span>
+        <span class="brand-roll" aria-hidden="true">
+          <span>Websites</span>
+          <span>Apps</span>
+          <span>CRM</span>
+          <span>ERP</span>
+          <span>Customs</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="sb-user" onclick="showPage('profile')">
+      <div class="av-wrap">
+        <div class="av av-lg" id="sb-av">
+          <img id="sb-av-img" src="" alt=""
+            onerror="this.style.display='none'">
+          <span id="sb-initials">U</span>
+        </div>
+        <div class="av-online"></div>
+      </div>
+      <div>
+        <div class="sb-uname" id="sb-name">Commissioner User</div>
+        <div class="sb-urole">Commissioner</div>
+      </div>
+    </div>
+
+    <div class="nav-sec">My Work</div>
+    <a class="ni active" data-page="dashboard" onclick="showPage('dashboard')">
+      <svg viewBox="0 0 24 24">
+        <rect x="3" y="3" width="7" height="7" rx="1" />
+        <rect x="14" y="3" width="7" height="7" rx="1" />
+        <rect x="3" y="14" width="7" height="7" rx="1" />
+        <rect x="14" y="14" width="7" height="7" rx="1" />
+      </svg>
+      Dashboard
+    </a>
+    <a class="ni" data-page="briefs" onclick="showPage('briefs')">
+      <svg viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+      </svg>
+      My Briefs
+      <span class="nc">0</span>
+    </a>
+    <a class="ni" data-page="proposals" onclick="showPage('proposals')">
+      <svg viewBox="0 0 24 24">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+        <circle cx="9" cy="7" r="4" />
+      </svg>
+      Proposals
+      <span class="nc">0</span>
+    </a>
+    <a class="ni" data-page="projects" onclick="showPage('projects')">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+      </svg>
+      Managed Projects
+    </a>
+
+    <div class="nav-sec">Finance</div>
+    <a class="ni" data-page="invoices" onclick="showPage('invoices')">
+      <svg viewBox="0 0 24 24">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+      </svg>
+      <span>Invoices</span>
+      <span class="nc" id="invoice-badge"></span>
+    </a>
+    <a class="ni" data-page="earnings" onclick="showPage('earnings')">
+      <svg viewBox="0 0 24 24">
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+      </svg>
+      Earnings
+    </a>
+    <a class="ni" data-page="analytics" onclick="showPage('analytics')">
+      <svg viewBox="0 0 24 24">
+        <line x1="18" y1="20" x2="18" y2="10" />
+        <line x1="12" y1="20" x2="12" y2="4" />
+        <line x1="6" y1="20" x2="6" y2="14" />
+      </svg>
+      Analytics
+    </a>
+
+    <div class="nav-sec">Communicate</div>
+    <a class="ni" data-page="messages" onclick="showPage('messages')">
+      <svg viewBox="0 0 24 24">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      </svg>
+      Messages
+      <span class="nc">0</span>
+    </a>
+
+    <div class="sb-foot">
+      <div class="theme-pill" onclick="toggleTheme()">
+        <span class="theme-pill-lbl" id="theme-lbl"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg> Dark Mode</span>
+        <div class="theme-switch" id="theme-sw"></div>
+      </div>
+      <button class="so-btn" onclick="signOut()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="14" height="14">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+          <polyline points="16 17 21 12 16 7" />
+          <line x1="21" y1="12" x2="9" y2="12" />
+        </svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="pg-title" id="topbar-title">Commissioner Hub</div>
+        <div class="pg-sub" id="topbar-sub">Manage briefs, proposals and projects</div>
+      </div>
+      <div class="tb-right">
+        <div class="db-status" id="db-status">
+          <div class="db-dot"></div><span id="db-status-text">Connecting...</span>
+        </div>
+        <button class="btn btn-g" onclick="showPage('briefs')">My Briefs</button>
+        <button class="btn btn-w" onclick="showModal('post-brief')">
+          <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          Post Brief
+        </button>
+      </div>
+    </div>
+
+    <!-- === DASHBOARD === -->
+    <div id="page-dashboard" class="page active">
+      <div class="sl fu d1">Overview</div>
+      <div class="g4 fu d1">
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+              <polyline points="10 9 9 9 8 9" />
+            </svg></div>
+          <div class="sc-val">0</div>
+          <div class="sc-lbl">Active Briefs</div>
+          <div class="sc-d neu">Awaiting live data</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg></div>
+          <div class="sc-val">0</div>
+          <div class="sc-lbl">Projects Managed</div>
+          <div class="sc-d neu">Awaiting live data</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg></div>
+          <div class="sc-val">KSh 0</div>
+          <div class="sc-lbl">Total Commissioned</div>
+          <div class="sc-d neu">Awaiting live data</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path
+                d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 15a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.93 4h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 11a16 16 0 0 0 5.91 5.91l1.06-1.15a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+            </svg></div>
+          <div class="sc-val">0</div>
+          <div class="sc-lbl">New Proposals</div>
+          <div class="sc-d neu">Awaiting live data</div>
+        </div>
+      </div>
+
+      <div class="sl fu d2">Recent Briefs & Proposals</div>
+      <div class="g2l fu d2">
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Active Briefs</div><span class="card-lnk" onclick="showPage('briefs')">View All
+              -></span>
+          </div>
+          <div id="dash-briefs">
+            <div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">Loading...</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Top Proposals</div><span class="card-lnk" onclick="showPage('proposals')">All
+              -></span>
+          </div>
+          <div id="dash-proposals">
+            <div class="loading-text">Loading...</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sl fu d3">Projects & Earnings</div>
+      <div class="g3l fu d3">
+        <div class="card" style="grid-column:span 2">
+          <div class="card-head">
+            <div class="card-title">Managed Projects</div><span class="card-lnk" onclick="showPage('projects')">View All
+              -></span>
+          </div>
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>Project</th>
+                <th>Developer</th>
+                <th>Value</th>
+                <th>Progress</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="dash-projects-body">
+              <tr>
+                <td colspan="5" class="loading-text">Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Commission Earnings</div>
+          </div>
+          <div style="text-align:center;padding:8px 0 14px;">
+            <div
+              style="font-size:9px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-6);margin-bottom:4px;">
+              Current Month</div>
+            <div id="dash-commission-month" style="font-family:'DM Mono',monospace;font-size:28px;font-weight:500;color:var(--text-1);">KSh 0
+            </div>
+            <div id="dash-commission-sub" style="font-size:11px;color:var(--text-5);margin-top:3px;">Commission updates will appear here</div>
+            <div style="margin-top:10px;">
+              <div
+                style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-5);margin-bottom:4px;">
+                <span>Goal Progress</span><span id="dash-commission-progress-label">0%</span>
+              </div>
+              <div class="pbg">
+                <div class="pf" id="dash-commission-progress" style="width:0%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="div"></div>
+          <div id="dash-commission-list" style="padding:12px;text-align:center;color:var(--text-5);font-size:13px;">No commission transactions yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === MY BRIEFS === -->
+    <div id="page-briefs" class="page">
+      <div class="sl">My Briefs</div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:14px;">
+        <button class="btn btn-w" onclick="toast('Post Brief modal coming soon')">+ Post New Brief</button>
+      </div>
+      <div class="card fu d1" style="margin-bottom:13px;">
+        <div class="card-head">
+          <div class="card-title">All Posted Briefs</div><span class="badge b-w" id="briefs-total-badge">0 total</span>
+        </div>
+        <div id="all-briefs-list">
+          <div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === PROPOSALS === -->
+    <div id="page-proposals" class="page">
+      <div class="sl">Developer Proposals</div>
+      <div class="g2 fu d1" id="proposals-page-grid">
+        <div class="card" style="grid-column:span 2;padding:30px;text-align:center;color:var(--text-5);">Loading...</div>
+      </div>
+    </div>
+
+    <!-- === MANAGED PROJECTS === -->
+    <div id="page-projects" class="page">
+      <div class="sl">Managed Projects</div>
+      <div class="card fu d1">
+        <div class="card-head">
+          <div class="card-title">Managed Projects</div>
+        </div>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Developer</th>
+              <th>Value</th>
+              <th>Progress</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="managed-projects-body">
+            <tr>
+              <td colspan="5" class="loading-text">Loading...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- === INVOICES === -->
+    <div id="page-invoices" class="page">
+      <div class="sl">Invoices</div>
+      <div class="g2l fu d1">
+        <!-- Send Invoice Form -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Send Invoice</div>
+            <div style="font-size:11px;color:var(--text-5)">Client receives a payment link by email</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div><label class="input-lbl">Client Email *</label><input class="input" id="inv-email" type="email"
+                placeholder="client@example.com"></div>
+            <div><label class="input-lbl">Client Name</label><input class="input" id="inv-name" placeholder="Full name">
+            </div>
+            <div><label class="input-lbl">Description / Service *</label><input class="input" id="inv-desc"
+                placeholder="e.g. Website design - Phase 1"></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div><label class="input-lbl">Amount (KES) *</label><input class="input" id="inv-amount" type="number"
+                  min="1" placeholder="5000"></div>
+              <div><label class="input-lbl">Due Date</label><input class="input" id="inv-due" type="date"></div>
+            </div>
+            <div>
+              <label class="input-lbl">Link to Project</label>
+              <select class="input" id="inv-project" style="cursor:pointer">
+                <option value="">- No project -</option>
+              </select>
+            </div>
+            <div><label class="input-lbl">Notes (optional)</label><textarea class="input" id="inv-notes" rows="2"
+                placeholder="Any extra info for the client..." style="resize:vertical"></textarea></div>
+            <button class="btn btn-w" id="inv-send-btn" onclick="sendInvoice()" style="margin-top:6px;gap:8px">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+              Send Invoice by Email
+            </button>
+          </div>
+        </div>
+
+        <!-- Invoice History -->
+        <div class="card" style="overflow:hidden">
+          <div class="card-head">
+            <div class="card-title">Invoice History</div>
+            <button class="btn btn-g btn-xs" onclick="loadInvoices()">-> Refresh</button>
+          </div>
+          <div id="inv-list" style="max-height:480px;overflow-y:auto">
+            <div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px">Loading invoices...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === EARNINGS === -->
+    <div id="page-earnings" class="page">
+      <div class="sl">Earnings</div>
+      <div class="g4 fu d1">
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <line x1="12" y1="1" x2="12" y2="23" />
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+            </svg></div>
+          <div class="sc-val">KSh 0</div>
+          <div class="sc-lbl">This Month</div>
+          <div class="sc-d neu">Awaiting payouts</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+            </svg></div>
+          <div class="sc-val">KSh 0</div>
+          <div class="sc-lbl">Year to Date</div>
+          <div class="sc-d neu">Awaiting payouts</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon">⏳</div>
+          <div class="sc-val">KSh 0</div>
+          <div class="sc-lbl">Pending Release</div>
+          <div class="sc-d neu">Awaiting payouts</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10" />
+              <line x1="12" y1="20" x2="12" y2="4" />
+              <line x1="6" y1="20" x2="6" y2="14" />
+            </svg></div>
+          <div class="sc-val">10%</div>
+          <div class="sc-lbl">Commission Rate</div>
+          <div class="sc-d neu">Platform default</div>
+        </div>
+      </div>
+      <div class="card fu d2">
+        <div class="card-head">
+          <div class="card-title">Commission Breakdown</div>
+        </div>
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>Project</th>
+              <th>Milestone</th>
+              <th>Commission</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="earnings-table-body">
+            <tr>
+              <td colspan="5" style="text-align:center;color:var(--text-5);padding:20px;font-size:13px;">No commission transactions yet.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- === ANALYTICS === -->
+    <div id="page-analytics" class="page">
+      <div class="sl">Analytics</div>
+      <div class="g4 fu d1">
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+              <polyline points="17 6 23 6 23 12" />
+            </svg></div>
+          <div class="sc-val">—</div>
+          <div class="sc-lbl">Project Success Rate</div>
+          <div class="sc-d neu">Live data pending</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg></div>
+          <div class="sc-val">—</div>
+          <div class="sc-lbl">Avg. Project Length</div>
+          <div class="sc-d neu">Live data pending</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+            </svg></div>
+          <div class="sc-val">—</div>
+          <div class="sc-lbl">Developers Hired</div>
+          <div class="sc-d neu">Live data pending</div>
+        </div>
+        <div class="sc">
+          <div class="sc-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <polygon
+                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+            </svg></div>
+          <div class="sc-val">—</div>
+          <div class="sc-lbl">Avg. Dev Rating</div>
+          <div class="sc-d neu">Live data pending</div>
+        </div>
+      </div>
+      <div class="card fu d2">
+        <div class="card-head">
+          <div class="card-title">Monthly Commission History</div>
+        </div>
+        <div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">
+          Commission trend charts will populate as live transactions are recorded.
+        </div>
+      </div>
+    </div>
+
+    <!-- === MESSAGES === -->
+    <div id="page-messages" class="page">
+      <div class="sl">Messages</div>
+      <div class="g2l fu d1">
+        <div class="card" style="display:flex;flex-direction:column;gap:0;padding:0;overflow:hidden;">
+          <div class="card-head" style="padding:14px 16px;border-bottom:1px solid var(--border-0);">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+              <div class="card-title">Conversations</div>
+              <button class="btn btn-g btn-xs" onclick="focusMessageComposer()">New Message</button>
+            </div>
+            <div class="msg-filter-row">
+              <input id="msg-search" class="input" placeholder="Search name, role, project" oninput="window.loadThreads&&window.loadThreads()" style="flex:1;height:32px;">
+              <select id="msg-role-filter" class="input" onchange="window.loadThreads&&window.loadThreads()" style="width:138px;height:32px;">
+                <option value="all">All</option>
+                <option value="client">Clients</option>
+                <option value="developer">Developers</option>
+                <option value="commissioner">Commissioners</option>
+                <option value="unread">Unread</option>
+              </select>
+            </div>
+          </div>
+          <div id="msg-threads" style="flex:1;overflow-y:auto;padding:8px 0;">
+            <div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">Loading conversations...</div>
+          </div>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:0;padding:0;overflow:hidden;">
+          <div id="chat-header" class="card-head" style="padding:14px 16px;border-bottom:1px solid var(--border-0);">
+            <div class="card-title" id="chat-with-name">Select a conversation</div>
+            <div id="chat-with-meta" style="margin-top:4px;font-size:11px;color:var(--text-5);">Role: - | Project: -</div>
+          </div>
+          <div id="chat-messages"
+            style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:200px;">
+            <div style="text-align:center;color:var(--text-5);font-size:13px;margin:auto;">Select a conversation to
+              start chatting</div>
+          </div>
+          <div style="padding:10px 14px;border-top:1px solid var(--border-0);display:flex;gap:8px;"
+            id="chat-input-area">
+            <input id="chat-input" class="input" placeholder="Type a message..." style="flex:1;"
+              onkeydown="if(event.key==='Enter')sendMessage()" disabled>
+            <button class="btn btn-w" onclick="sendMessage()" id="chat-send-btn" disabled>Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === PROFILE === -->
+    <div id="page-profile" class="page">
+      <div class="sl">Profile Settings</div>
+      <div class="g2l fu d1">
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Personal Information</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+            <div style="position:relative;cursor:pointer;" onclick="document.getElementById('av-upload').click()">
+              <div class="av"
+                style="width:60px;height:60px;font-size:20px;border-radius:var(--r12);border:1px solid var(--border-2);">
+                <img id="profile-av-img"
+                  src="" alt=""
+                  style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:var(--r12);"
+                  onerror="this.style.display='none'">
+                <span id="profile-initials">U</span>
+              </div>
+              <div
+                style="position:absolute;bottom:-3px;right:-3px;width:20px;height:20px;background:var(--text-1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                  <circle cx="12" cy="13" r="4" />
+                </svg>
+              </div>
+            </div>
+            <input type="file" id="av-upload" accept="image/*" style="display:none"
+              onchange="handleAvatarUpload(event)">
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--text-1)">Profile Photo</div>
+              <div style="font-size:11px;color:var(--text-5);margin-top:2px">JPG, PNG or GIF  -  Max 5MB</div>
+              <button class="btn btn-g btn-sm" style="margin-top:7px"
+                onclick="document.getElementById('av-upload').click()">Upload Photo</button>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+            <div><label class="input-lbl">First Name</label><input class="input" id="f-fname" value=""></div>
+            <div><label class="input-lbl">Last Name</label><input class="input" id="f-lname" value=""></div>
+          </div>
+          <div style="margin-bottom:10px;"><label class="input-lbl">Email</label><input class="input" id="f-email"
+              value="" type="email"></div>
+          <div style="margin-bottom:18px;"><label class="input-lbl">Phone</label><input class="input" id="f-phone"
+              value="" type="tel"></div>
+          <button class="btn btn-w" onclick="saveProfile()" style="width:100%">Save Changes</button>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div class="card-title">Supabase Connection</div>
+          </div>
+          <div id="profile-sb-status" style="font-size:12px;color:var(--text-5)">Checking...</div>
+          <div class="onb-divider"></div>
+          <div class="card-head" style="padding:0 0 8px;">
+            <div class="card-title" style="display:flex;align-items:center;gap:8px;">
+              <span style="display:inline-block;width:11px;height:11px;border:2px solid var(--blue);transform:rotate(45deg);border-radius:2px;"></span>
+              Client Onboarding Portfolio
+            </div>
+          </div>
+          <div style="font-size:11px;color:var(--text-5);margin-bottom:10px;">Create a shareable sales profile link with theme, message, and portfolio links.</div>
+          <div class="onb-grid">
+            <div>
+              <label class="input-lbl">Headline</label>
+              <input class="input" id="onb-headline" placeholder="Your trusted software delivery partner">
+            </div>
+            <div>
+              <label class="input-lbl">Theme</label>
+              <div class="onb-theme-row" id="onb-theme-row">
+                <button type="button" class="onb-theme-pill active" data-theme="aurora" onclick="setOnboardTheme('aurora')">Aurora</button>
+                <button type="button" class="onb-theme-pill" data-theme="sunset" onclick="setOnboardTheme('sunset')">Sunset</button>
+                <button type="button" class="onb-theme-pill" data-theme="forest" onclick="setOnboardTheme('forest')">Forest</button>
+                <button type="button" class="onb-theme-pill" data-theme="mono" onclick="setOnboardTheme('mono')">Mono</button>
+                <button type="button" class="onb-theme-pill" data-theme="ocean" onclick="setOnboardTheme('ocean')">Ocean</button>
+                <button type="button" class="onb-theme-pill" data-theme="kenya" onclick="setOnboardTheme('kenya')">Kenya Live</button>
+                <button type="button" class="onb-theme-pill" data-theme="tech" onclick="setOnboardTheme('tech')">Tech Grid</button>
+              </div>
+              <input type="hidden" id="onb-theme" value="aurora">
+            </div>
+            <div style="grid-column:1/-1;">
+              <label class="input-lbl">Welcome Message</label>
+              <textarea class="input" id="onb-message" rows="3" placeholder="Hi, I’ll help you scope your software idea, structure payments, and match the right developers for delivery."></textarea>
+            </div>
+            <div>
+              <label class="input-lbl">Website</label>
+              <input class="input" id="onb-website" placeholder="https://your-portfolio.com">
+            </div>
+            <div>
+              <label class="input-lbl">LinkedIn</label>
+              <input class="input" id="onb-linkedin" placeholder="https://linkedin.com/in/yourname">
+            </div>
+            <div>
+              <label class="input-lbl">WhatsApp Link</label>
+              <input class="input" id="onb-whatsapp" placeholder="https://wa.me/2547XXXXXXXX">
+            </div>
+            <div>
+              <label class="input-lbl">Booking Link</label>
+              <input class="input" id="onb-calendar" placeholder="https://cal.com/your-handle">
+            </div>
+          </div>
+          <div class="onb-actions">
+            <button class="btn btn-w" onclick="generateOnboardingLink()">Generate Link</button>
+            <button class="btn btn-g" onclick="previewOnboardingLink()">Preview</button>
+            <button class="btn btn-g" onclick="copyOnboardingLink()">Copy</button>
+          </div>
+          <div class="onb-link-wrap">
+            <label class="input-lbl">Share Link</label>
+            <input class="input mono" id="onb-link-output" readonly placeholder="Generate your onboarding link">
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script type="module">
+    const SUPABASE_URL = window.SUPABASE_URL || 'https://smdbfaomeghoejqqkplv.supabase.co';
+    const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNtZGJmYW9tZWdob2VqcXFrcGx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1OTY4MDEsImV4cCI6MjA4NzE3MjgwMX0.HuQdEt6Knr7_MgYt2B_QiUbls2hy8SMPZlSxe5KPTqU';
+
+    let supabase = null;
+    let currentUserId = null;
+    let currentProfile = null;
+    const SALES_ONBOARD_KEY_PREFIX = 'code-studio-sales-onboard:';
+    const SALES_ONBOARD_THEME_SET = new Set(['aurora', 'sunset', 'forest', 'mono', 'ocean', 'kenya', 'tech']);
+    const SALES_ONBOARD_DEFAULT_THEME = 'aurora';
+    const SALES_ONBOARD_DEFAULT_MESSAGE = 'Hi, I will guide you through scoping, budget planning, milestone setup, and developer matching from kickoff to delivery.';
+    let onboardingInputsBound = false;
+
+    function safeTrim(value, limit = 400) {
+      const text = String(value || '').trim();
+      if (!text) return '';
+      return text.slice(0, limit);
+    }
+
+    function normalizeTheme(value) {
+      const normalized = String(value || '').trim().toLowerCase();
+      return SALES_ONBOARD_THEME_SET.has(normalized) ? normalized : SALES_ONBOARD_DEFAULT_THEME;
+    }
+
+    function normalizeUrlInput(value) {
+      const raw = safeTrim(value, 300);
+      if (!raw) return '';
+      const candidate = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+      try {
+        const parsed = new URL(candidate);
+        if (!['http:', 'https:'].includes(parsed.protocol)) return '';
+        return parsed.toString();
+      } catch (_) {
+        return '';
+      }
+    }
+
+    function getOnboardStorageKey() {
+      return `${SALES_ONBOARD_KEY_PREFIX}${currentUserId || 'guest'}`;
+    }
+
+    function parseJsonSafe(raw) {
+      try {
+        return JSON.parse(raw);
+      } catch (_) {
+        return null;
+      }
+    }
+
+    function onboardSalesDisplayName(user) {
+      const first = safeTrim(currentProfile?.first_name || document.getElementById('f-fname')?.value, 80);
+      const last = safeTrim(currentProfile?.last_name || document.getElementById('f-lname')?.value, 80);
+      const combined = `${first} ${last}`.trim();
+      return combined || safeTrim(user?.email, 120) || 'Sales Advisor';
+    }
+
+    function onboardSalesAvatar(user) {
+      const current = safeTrim(currentProfile?.avatar_url || '', 500);
+      if (current) return current;
+      const liveImg = safeTrim(document.getElementById('profile-av-img')?.src, 500);
+      if (liveImg && !liveImg.startsWith('data:')) return liveImg;
+      return safeTrim(user?.user_metadata?.avatar_url || user?.user_metadata?.picture || '', 500);
+    }
+
+    function readOnboardForm() {
+      return {
+        headline: safeTrim(document.getElementById('onb-headline')?.value, 120),
+        message: safeTrim(document.getElementById('onb-message')?.value, 420),
+        website: normalizeUrlInput(document.getElementById('onb-website')?.value),
+        linkedin: normalizeUrlInput(document.getElementById('onb-linkedin')?.value),
+        whatsapp: normalizeUrlInput(document.getElementById('onb-whatsapp')?.value),
+        calendar: normalizeUrlInput(document.getElementById('onb-calendar')?.value),
+        theme: normalizeTheme(document.getElementById('onb-theme')?.value),
+      };
+    }
+
+    function applyOnboardForm(cfg) {
+      const config = cfg || {};
+      const setVal = (id, value) => {
+        const input = document.getElementById(id);
+        if (input) input.value = value || '';
+      };
+      setVal('onb-headline', config.headline || '');
+      setVal('onb-message', config.message || '');
+      setVal('onb-website', config.website || '');
+      setVal('onb-linkedin', config.linkedin || '');
+      setVal('onb-whatsapp', config.whatsapp || '');
+      setVal('onb-calendar', config.calendar || '');
+      setOnboardTheme(config.theme || SALES_ONBOARD_DEFAULT_THEME, false);
+    }
+
+    function loadStoredOnboardConfig() {
+      const parsed = parseJsonSafe(localStorage.getItem(getOnboardStorageKey()));
+      return parsed && typeof parsed === 'object' ? parsed : null;
+    }
+
+    function saveStoredOnboardConfig(cfg) {
+      try {
+        localStorage.setItem(getOnboardStorageKey(), JSON.stringify(cfg || {}));
+      } catch (_) {
+        // ignore storage failures
+      }
+    }
+
+    function buildOnboardingLink(cfg, user) {
+      const pageUrl = new URL('sales_onboarding.html', `${window.location.origin}/`);
+      const params = pageUrl.searchParams;
+      params.set('sid', safeTrim(currentUserId, 80));
+      params.set('sname', onboardSalesDisplayName(user));
+      params.set('semail', safeTrim(currentProfile?.email || user?.email, 200));
+      params.set('savatar', onboardSalesAvatar(user));
+      params.set('theme', normalizeTheme(cfg.theme));
+      if (cfg.headline) params.set('headline', cfg.headline);
+      if (cfg.message) params.set('message', cfg.message);
+      if (cfg.website) params.set('website', cfg.website);
+      if (cfg.linkedin) params.set('linkedin', cfg.linkedin);
+      if (cfg.whatsapp) params.set('whatsapp', cfg.whatsapp);
+      if (cfg.calendar) params.set('calendar', cfg.calendar);
+      params.set('src', 'sales_portfolio');
+      return pageUrl.toString();
+    }
+
+    function normalizeShareLinkToCurrentOrigin(rawLink, fallbackPage = 'sales_onboarding.html') {
+      const raw = String(rawLink || '').trim();
+      if (!raw) return '';
+      try {
+        const parsed = new URL(raw, `${window.location.origin}/`);
+        const host = String(parsed.hostname || '').toLowerCase();
+        const isLocalHost = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.localhost');
+        if (!isLocalHost) return parsed.toString();
+        const relative = `${parsed.pathname || `/${fallbackPage}`}${parsed.search || ''}${parsed.hash || ''}`;
+        return new URL(relative, `${window.location.origin}/`).toString();
+      } catch (_) {
+        return new URL(fallbackPage, `${window.location.origin}/`).toString();
+      }
+    }
+
+    function hydrateOnboardBuilder(user) {
+      const existing = loadStoredOnboardConfig();
+      const fallback = {
+        headline: 'Your trusted software delivery partner',
+        message: SALES_ONBOARD_DEFAULT_MESSAGE,
+        theme: SALES_ONBOARD_DEFAULT_THEME,
+      };
+      applyOnboardForm({ ...fallback, ...(existing || {}) });
+      window.generateOnboardingLink(false, user);
+      if (!onboardingInputsBound) {
+        onboardingInputsBound = true;
+        ['onb-headline', 'onb-message', 'onb-website', 'onb-linkedin', 'onb-whatsapp', 'onb-calendar'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            el.addEventListener('input', () => window.generateOnboardingLink(false));
+          }
+        });
+      }
+    }
+
+    function setOnboardTheme(theme, refreshLink = true) {
+      const normalized = normalizeTheme(theme);
+      const hidden = document.getElementById('onb-theme');
+      if (hidden) hidden.value = normalized;
+      document.querySelectorAll('.onb-theme-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === normalized);
+      });
+      if (refreshLink) {
+        window.generateOnboardingLink(false);
+      }
+    }
+    window.setOnboardTheme = setOnboardTheme;
+
+    window.generateOnboardingLink = async function (showNotice = true, explicitUser = null) {
+      const { data: authData } = supabase
+        ? await supabase.auth.getUser()
+        : { data: { user: explicitUser || null } };
+      const user = explicitUser || authData?.user || null;
+      const cfg = readOnboardForm();
+      saveStoredOnboardConfig(cfg);
+      const shareUrl = normalizeShareLinkToCurrentOrigin(buildOnboardingLink(cfg, user), 'sales_onboarding.html');
+      const out = document.getElementById('onb-link-output');
+      if (out) out.value = shareUrl;
+      if (showNotice) toast('Onboarding link generated');
+      return shareUrl;
+    };
+
+    window.copyOnboardingLink = async function () {
+      const out = document.getElementById('onb-link-output');
+      const rawLink = (out?.value || '').trim() || await window.generateOnboardingLink(false);
+      const link = normalizeShareLinkToCurrentOrigin(rawLink, 'sales_onboarding.html');
+      if (out && link) out.value = link;
+      if (!link) {
+        toast('Generate a link first');
+        return;
+      }
+      try {
+        await navigator.clipboard.writeText(link);
+        toast('Link copied');
+      } catch (_) {
+        if (out) {
+          out.focus();
+          out.select();
+        }
+        toast('Copy failed. Press Ctrl+C to copy manually.');
+      }
+    };
+
+    window.previewOnboardingLink = async function () {
+      const out = document.getElementById('onb-link-output');
+      const rawLink = (out?.value || '').trim() || await window.generateOnboardingLink(false);
+      const link = normalizeShareLinkToCurrentOrigin(rawLink, 'sales_onboarding.html');
+      if (out && link) out.value = link;
+      if (!link) {
+        toast('Generate a link first');
+        return;
+      }
+      window.open(link, '_blank', 'noopener,noreferrer');
+    };
+
+    async function initSupabase() {
+      if (window._L) _L.info("Initializing Sales Dashboard...");
+      try {
+        supabase = window.sbClient;
+        if (!supabase) {
+          const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+          supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        }
+
+        // Load user profile
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+          if (window._L) _L.info("User session found:", { email: user.email });
+          currentUserId = user.id;
+          const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single();
+          if (profile) {
+            currentProfile = profile;
+            const authName = String(user.user_metadata?.full_name || user.user_metadata?.name || '').trim();
+            const fullName = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || authName || user.email;
+            document.getElementById('sb-name').textContent = fullName;
+            document.getElementById('f-fname').value = profile.first_name || '';
+            document.getElementById('f-lname').value = profile.last_name || '';
+            document.getElementById('f-email').value = profile.email || user.email;
+            document.getElementById('f-phone').value = profile.phone || '';
+            const initialsSource = `${profile.first_name || ''} ${profile.last_name || ''}`.trim() || authName;
+            const initials = (initialsSource
+              .split(/\s+/)
+              .filter(Boolean)
+              .slice(0, 2)
+              .map(part => part[0] || '')
+              .join('') || 'U').toUpperCase();
+            document.getElementById('sb-initials').textContent = initials;
+            const pInit = document.getElementById('profile-initials');
+            if (pInit) pInit.textContent = initials;
+            const avatarUrl = profile.avatar_url || user.user_metadata?.avatar_url || user.user_metadata?.picture || '';
+            if (avatarUrl) {
+              ['sb-av-img', 'profile-av-img'].forEach(id => {
+                const img = document.getElementById(id);
+                if (img) {
+                  img.src = avatarUrl;
+                  img.style.display = 'block';
+                }
+              });
+              const sbInit = document.getElementById('sb-initials');
+              if (sbInit) sbInit.style.display = 'none';
+              if (pInit) pInit.style.display = 'none';
+            }
+          }
+          hydrateOnboardBuilder(user);
+        } else {
+          if (window._L) _L.warn("No active user session.");
+          throw new Error("No user");
+        }
+
+        const { error: testErr } = await supabase.from('profiles').select('count').limit(1);
+        if (!testErr) {
+          if (window._L) _L.info("Database connection verified.");
+          setDbStatus('Connected', true);
+        }
+        else throw testErr;
+
+        await loadRealData(user?.id);
+      } catch (e) {
+        if (window._L) _L.warn("Error loading commissioner dashboard:", e.message);
+        setDbStatus('Error', false);
+        renderEmptyCommissionerData();
+      }
+      if (window.hideLoader) hideLoader();
+    }
+
+    function setDbStatus(text, ok) {
+      const el = document.getElementById('db-status');
+      if (!el) return;
+      const dotEl = el.querySelector('.db-dot');
+      const txtEl = document.getElementById('db-status-text');
+      if (txtEl) txtEl.textContent = text;
+      if (!ok && dotEl) dotEl.style.background = 'var(--amber)';
+      if (!ok) el.style.cssText += ';background:var(--abg);border-color:var(--abdr);color:var(--amber)';
+      const ps = document.getElementById('profile-sb-status');
+      if (ps) ps.innerHTML = `<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;"><div style="width:6px;height:6px;border-radius:50%;background:${ok ? 'var(--green)' : 'var(--amber)'}"></div><span style="color:${ok ? 'var(--green)' : 'var(--amber)'};font-weight:600">${text}</span></div><div style="font-size:11px;color:var(--text-5)">URL: ${SUPABASE_URL}</div>`;
+    }
+
+    async function loadRealData(userId) {
+      if (!supabase || !userId) {
+        if (window._L) _L.debug("Aborting commissioner data load - missing Supabase or user id.");
+        return;
+      }
+      if (window._L) _L.info("Loading commissioner dashboard data from Supabase...");
+      const { data: projects, error: projErr } = await supabase
+        .from('projects')
+        .select(`
+          *,
+          client:profiles!projects_client_id_fkey(id, first_name, last_name, email, avatar_url, status, available_for_work),
+          developer:profiles!projects_developer_id_fkey(id, first_name, last_name, email, avatar_url, status, available_for_work),
+          proposals(id, developer_id, amount, message, created_at,
+            developer:profiles!proposals_developer_id_fkey(id, first_name, last_name, email, avatar_url, status, available_for_work))
+        `)
+        .eq('commissioner_id', userId);
+
+      const { data: incomingLeads } = await supabase
+        .from('projects')
+        .select(`
+          id, title, description, total_value, created_at, client_id,
+          client:profiles!projects_client_id_fkey(id, first_name, last_name, email, avatar_url, status, available_for_work)
+        `)
+        .is('commissioner_id', null)
+        .eq('status', 'open')
+        .order('created_at', { ascending: false });
+
+      const contactMap = new Map();
+      const rememberContact = (
+        id,
+        name,
+        email = '',
+        role = 'user',
+        projectTitle = '',
+        projectId = null,
+        avatarUrl = '',
+        status = '',
+        availableForWork = null
+      ) => {
+        if (!id || id === userId) return;
+        const resolvedName = (name || '').trim() || email || 'User';
+        const existing = contactMap.get(id);
+        const merged = {
+          ...(existing || {}),
+          id,
+          name: resolvedName,
+          email: email || existing?.email || '',
+          role: (role || 'user').toLowerCase(),
+          project_title: projectTitle || existing?.project_title || '',
+          project_id: projectId || existing?.project_id || null,
+          avatar_url: avatarUrl || existing?.avatar_url || '',
+          status: status || existing?.status || 'active',
+          available_for_work: typeof availableForWork === 'boolean' ? availableForWork : existing?.available_for_work
+        };
+        contactMap.set(id, merged);
+      };
+      (projects || []).forEach(p => {
+        const clientName = p.client ? `${p.client.first_name || ''} ${p.client.last_name || ''}`.trim() : '';
+        rememberContact(
+          p.client?.id || p.client_id,
+          clientName,
+          p.client?.email || '',
+          'client',
+          p.title || '',
+          p.id,
+          p.client?.avatar_url || '',
+          p.client?.status || '',
+          p.client?.available_for_work
+        );
+        const devName = p.developer ? `${p.developer.first_name || ''} ${p.developer.last_name || ''}`.trim() : '';
+        rememberContact(
+          p.developer?.id || p.developer_id,
+          devName,
+          p.developer?.email || '',
+          'developer',
+          p.title || '',
+          p.id,
+          p.developer?.avatar_url || '',
+          p.developer?.status || '',
+          p.developer?.available_for_work
+        );
+        (p.proposals || []).forEach(prop => {
+          const propDevName = prop.developer ? `${prop.developer.first_name || ''} ${prop.developer.last_name || ''}`.trim() : '';
+          rememberContact(
+            prop.developer?.id || prop.developer_id,
+            propDevName,
+            prop.developer?.email || '',
+            'developer',
+            p.title || '',
+            p.id,
+            prop.developer?.avatar_url || '',
+            prop.developer?.status || '',
+            prop.developer?.available_for_work
+          );
+        });
+      });
+      (incomingLeads || []).forEach(lead => {
+        const leadClient = lead.client || {};
+        const leadClientName = `${leadClient.first_name || ''} ${leadClient.last_name || ''}`.trim();
+        rememberContact(
+          leadClient.id || lead.client_id,
+          leadClientName,
+          leadClient.email || '',
+          'client',
+          lead.title || 'New Lead',
+          lead.id,
+          leadClient.avatar_url || '',
+          leadClient.status || '',
+          leadClient.available_for_work
+        );
+      });
+      messageContacts = Array.from(contactMap.values());
+
+      if (!projErr && projects) {
+        const openBriefs = projects.filter(p => ['open', 'pending'].includes(String(p.status || '').toLowerCase()) && !p.developer_id);
+        const activeProjs = projects.filter(p => !['open', 'pending'].includes(String(p.status || '').toLowerCase()) || !!p.developer_id);
+
+        // Update sidebar badge
+        const briefBadge = document.querySelector('.ni[data-page="briefs"] .nc');
+        if (briefBadge) briefBadge.textContent = openBriefs.length;
+
+        // Count all proposals across projects
+        let totalProposals = projects.reduce((sum, p) => sum + (p.proposals?.length || 0), 0);
+        const propBadge = document.querySelector('.ni[data-page="proposals"] .nc');
+        if (propBadge) propBadge.textContent = totalProposals;
+
+        // Render briefs list
+        const briefsEl = document.getElementById('all-briefs-list');
+        const dashBriefsEl = document.getElementById('dash-briefs');
+        const pooledLeads = incomingLeads || [];
+        if (openBriefs.length === 0 && pooledLeads.length === 0) {
+          const empty = '<div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">No open briefs yet. Post your first brief!</div>';
+          if (briefsEl) briefsEl.innerHTML = empty;
+          if (dashBriefsEl) dashBriefsEl.innerHTML = empty;
+        } else {
+          const ownHtml = openBriefs.map(p => {
+            const pCount = p.proposals?.length || 0;
+            const ago = timeSince(p.created_at);
+            return `
+              <div class="brief">
+                <div class="brief-top">
+                  <div class="brief-title">${p.title}</div>
+                  <div class="brief-budget">KSh ${(p.total_value || 0).toLocaleString()}</div>
+                </div>
+                <div class="brief-meta">Posted ${ago} · ${pCount} proposal${pCount !== 1 ? 's' : ''} received</div>
+                <div style="margin-top:9px;display:flex;gap:7px;">
+                  <span class="badge b-g">Accepting Proposals</span>
+                  ${pCount > 0 ? `<button class="btn btn-g btn-sm" onclick="showPage('proposals')">View Proposals (${pCount})</button>` : ''}
+                </div>
+              </div>
+              <div style="height:1px;background:var(--border-0);margin:10px 0;"></div>`;
+          }).join('');
+
+          const leadHtml = pooledLeads.map(p => {
+            const ago = timeSince(p.created_at);
+            return `
+              <div class="brief">
+                <div class="brief-top">
+                  <div class="brief-title">${p.title}</div>
+                  <div class="brief-budget">KSh ${(p.total_value || 0).toLocaleString()}</div>
+                </div>
+                <div class="brief-meta">New client lead • ${ago}</div>
+                ${p.description ? `<div style="font-size:12px;color:var(--text-5);margin-top:5px;">${p.description.slice(0, 120)}</div>` : ''}
+                <div style="margin-top:9px;display:flex;gap:7px;">
+                  <span class="badge b-a">Unassigned</span>
+                  <button class="btn btn-g btn-sm" onclick="takeLead('${p.id}')">Take Lead</button>
+                </div>
+              </div>
+              <div style="height:1px;background:var(--border-0);margin:10px 0;"></div>`;
+          }).join('');
+
+          const combined = leadHtml + ownHtml;
+          if (briefsEl) briefsEl.innerHTML = combined;
+          if (dashBriefsEl) dashBriefsEl.innerHTML = (leadHtml + ownHtml).split('<div style="height:1px;background:var(--border-0);margin:10px 0;"></div>').slice(0, 3).join('<div style="height:1px;background:var(--border-0);margin:10px 0;"></div>');
+        }
+
+        // Render proposals page
+        const proposalsEl = document.getElementById('page-proposals');
+        if (proposalsEl) {
+          const proposalGroups = projects
+            .filter(p => p.proposals && p.proposals.length > 0)
+            .map(p => {
+              const props = p.proposals.map(prop => {
+                const devName = prop.developer ? `${prop.developer.first_name || ''} ${prop.developer.last_name || ''}`.trim() : 'Developer';
+                const initials = devName.split(' ').map(w => w[0]).join('').toUpperCase();
+                const devId = prop.developer?.id || prop.developer_id || '';
+                const safeDevName = devName.replace(/'/g, '');
+                return `
+                <div class="prop">
+                  <div class="prop-av"><img src="https://api.dicebear.com/8.x/thumbs/svg?seed=${devName.replace(' ', '')}&backgroundColor=222222" alt="" onerror="this.style.display='none'">${initials}</div>
+                  <div class="prop-info">
+                    <div class="prop-name">${devName}</div>
+                    <div class="prop-meta">${timeSince(prop.created_at)} ago</div>
+                    ${prop.message ? `<div style="font-size:11.5px;color:var(--text-4);margin-top:4px;">${prop.message.slice(0, 100)}...</div>` : ''}
+                  </div>
+                  <div class="prop-right">
+                    <div class="prop-bid">KSh ${(prop.amount || 0).toLocaleString()}</div>
+                    <div><button class="p-hire" onclick="hireProposal('${prop.id}','${prop.developer_id}','${p.id}')">Hire</button><button class="p-msg" onclick="${devId ? `startThreadWith('${devId}','${safeDevName}')` : `showPage('messages')`}">Message</button></div>
+                  </div>
+                </div>`;
+              }).join('');
+              return `<div class="card"><div class="card-head"><div class="card-title">${p.title} - ${p.proposals.length} Proposal${p.proposals.length !== 1 ? 's' : ''}</div></div>${props}</div>`;
+            }).join('');
+
+          const propPageContent = document.getElementById('proposals-page-grid') || proposalsEl.querySelector('.g2');
+          if (propPageContent) {
+            propPageContent.innerHTML = proposalGroups || '<div class="card" style="grid-column:span 2;padding:30px;text-align:center;color:var(--text-5);">No proposals received yet.</div>';
+          }
+        }
+
+        const projBodyEl = document.getElementById('dash-projects-body');
+        const managedBodyEl = document.getElementById('managed-projects-body');
+        const projectRows = activeProjs.slice(0, 12).map(p => {
+            const devName = p.developer ? `${p.developer.first_name || ''} ${p.developer.last_name || ''}`.trim() : '-';
+            const ms = Array.isArray(p.milestones) ? p.milestones : [];
+            const paid = ms.filter(m => m.status === 'paid').reduce((a, m) => a + (m.amount || 0), 0);
+            const prog = p.total_value > 0 ? Math.round((paid / p.total_value) * 100) : 0;
+            return `<tr>
+                  <td style="font-weight:700;color:var(--text-1)">${p.title}</td>
+                  <td>${devName}</td>
+                  <td class="mono">KSh ${(p.total_value || 0).toLocaleString()}</td>
+                  <td><div style="display:flex;align-items:center;gap:6px"><div class="pbg" style="flex:1"><div class="pf pf-g" style="width:${prog}%"></div></div><span style="font-size:10px;color:var(--text-5)">${prog}%</span></div></td>
+                  <td><span class="badge b-g">${p.status || 'Active'}</span></td>
+                </tr>`;
+          }).join('');
+        const emptyProjectsRow = '<tr><td colspan="5" style="text-align:center;color:var(--text-5);padding:20px;font-size:13px;">No active projects yet. New projects will appear here.</td></tr>';
+        if (projBodyEl) projBodyEl.innerHTML = projectRows || emptyProjectsRow;
+        if (managedBodyEl) managedBodyEl.innerHTML = projectRows || emptyProjectsRow;
+
+        // Render dashboard top proposals
+        const dashPropsEl = document.getElementById('dash-proposals');
+        if (dashPropsEl) {
+          const allProposals = projects.flatMap(p => (p.proposals || []).map(pr => ({ ...pr, projectTitle: p.title, projectId: p.id })));
+          if (allProposals.length === 0) {
+            dashPropsEl.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-5);font-size:13px;">No proposals yet.</div>';
+          } else {
+            dashPropsEl.innerHTML = allProposals.slice(0, 3).map(prop => {
+              const devName = prop.developer ? `${prop.developer.first_name || ''} ${prop.developer.last_name || ''}`.trim() : 'Developer';
+              const initials = devName.split(' ').map(w => w[0]).join('').toUpperCase();
+              const devId = prop.developer?.id || prop.developer_id || '';
+              const safeDevName = devName.replace(/'/g, '');
+              return `<div class="prop">
+                    <div class="prop-av"><img src="https://api.dicebear.com/8.x/thumbs/svg?seed=${devName.replace(' ', '')}&backgroundColor=222222" alt="" onerror="this.style.display='none'">${initials}</div>
+                    <div class="prop-info"><div class="prop-name">${devName}</div><div class="prop-meta">${prop.projectTitle}</div></div>
+                    <div class="prop-right"><div class="prop-bid">KSh ${(prop.amount || 0).toLocaleString()}</div><div style="display:flex;gap:6px;"><button class="p-hire" onclick="hireProposal('${prop.id}','${prop.developer_id}','${prop.projectId}')">Hire</button><button class="p-msg" onclick="${devId ? `startThreadWith('${devId}','${safeDevName}')` : `showPage('messages')`}">Message</button></div></div>
+                  </div>`;
+            }).join('');
+          }
+        }
+        await loadSalesFinance(userId);
+      } else {
+        if (window._L) _L.warn("Project fetch error or no projects.");
+        renderEmptyCommissionerData();
+      }
+    }
+
+    async function loadSalesFinance(userId) {
+      if (!supabase || !userId) return;
+      try {
+      const { data: txs } = await supabase
+        .from('financial_transactions')
+        .select('*')
+        .eq('commissioner_id', userId)
+        .order('created_at', { ascending: false });
+      const rows = txs || [];
+      const now = new Date();
+      const thisMonth = rows
+        .filter(t => t.status === 'paid' && new Date(t.created_at).getMonth() === now.getMonth() && new Date(t.created_at).getFullYear() === now.getFullYear())
+        .reduce((a, t) => a + Number(t.commission_amount || 0), 0);
+      const ytd = rows
+        .filter(t => t.status === 'paid' && new Date(t.created_at).getFullYear() === now.getFullYear())
+        .reduce((a, t) => a + Number(t.commission_amount || 0), 0);
+      const pending = rows
+        .filter(t => t.status === 'pending' || t.status === 'held')
+        .reduce((a, t) => a + Number(t.commission_amount || 0), 0);
+
+      const cards = document.querySelectorAll('#page-earnings .g4 .sc .sc-val');
+      if (cards[0]) cards[0].textContent = `KSh ${Math.round(thisMonth).toLocaleString()}`;
+      if (cards[1]) cards[1].textContent = `KSh ${Math.round(ytd).toLocaleString()}`;
+      if (cards[2]) cards[2].textContent = `KSh ${Math.round(pending).toLocaleString()}`;
+
+      const dashMonth = document.getElementById('dash-commission-month');
+      if (dashMonth) dashMonth.textContent = `KSh ${Math.round(thisMonth).toLocaleString()}`;
+      const dashSub = document.getElementById('dash-commission-sub');
+      if (dashSub) dashSub.textContent = rows.length ? `${rows.filter(t => t.status === 'paid').length} paid transactions this year` : 'Commission updates will appear here';
+      const goal = 6000;
+      const pct = goal > 0 ? Math.max(0, Math.min(100, Math.round((thisMonth / goal) * 100))) : 0;
+      const dashProg = document.getElementById('dash-commission-progress');
+      if (dashProg) dashProg.style.width = `${pct}%`;
+      const dashProgLabel = document.getElementById('dash-commission-progress-label');
+      if (dashProgLabel) dashProgLabel.textContent = `${pct}%`;
+      const dashList = document.getElementById('dash-commission-list');
+      if (dashList) {
+        if (!rows.length) {
+          dashList.innerHTML = 'No commission transactions yet.';
+        } else {
+          dashList.innerHTML = rows.slice(0, 3).map(t => `
+            <div class="earn-row">
+              <div>
+                <div class="earn-title">${t.kind || 'transaction'}</div>
+                <div class="earn-meta">${t.created_at ? new Date(t.created_at).toLocaleDateString() : 'recently'}</div>
+              </div>
+              <div class="mono ${t.status === 'paid' ? 'ea-in' : 'ea-hold'}" style="font-size:13px">${t.status === 'paid' ? '+' : ''}KSh ${Number(t.commission_amount || 0).toLocaleString()}</div>
+            </div>
+          `).join('');
+        }
+      }
+
+      const tbody = document.querySelector('#page-earnings table.tbl tbody');
+      if (tbody) {
+        if (!rows.length) {
+          tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-5);padding:20px;font-size:13px;">No commission transactions yet.</td></tr>';
+        } else {
+          tbody.innerHTML = rows.slice(0, 12).map(t => `
+            <tr>
+              <td>${t.project_id ? String(t.project_id).slice(0, 8) : 'Project'}</td>
+              <td>${t.kind || 'transaction'}</td>
+              <td class="mono" style="color:${t.status === 'paid' ? 'var(--green)' : 'var(--amber)'}">${t.status === 'paid' ? '+' : ''}KSh ${Number(t.commission_amount || 0).toLocaleString()}</td>
+              <td style="font-size:11px;color:var(--text-5)">${t.created_at ? new Date(t.created_at).toLocaleDateString() : '-'}</td>
+              <td><span class="badge ${t.status === 'paid' ? 'b-g' : 'b-a'}">${t.status || 'pending'}</span></td>
+            </tr>
+          `).join('');
+        }
+      }
+
+      const head = document.querySelector('#page-earnings .card .card-head');
+      if (head && !document.getElementById('request-payout-btn')) {
+        const btn = document.createElement('button');
+        btn.id = 'request-payout-btn';
+        btn.className = 'btn btn-g btn-sm';
+        btn.textContent = 'Request Payout';
+        btn.onclick = requestPayout;
+        head.appendChild(btn);
+      }
+      } catch (e) {
+        if (window._L) _L.warn('Sales finance load skipped:', e?.message || e);
+      }
+    }
+
+    async function requestPayout() {
+      if (!supabase || !currentUserId) return;
+      const amountRaw = prompt('Enter payout amount (KES):');
+      const amount = Number(amountRaw);
+      if (!amount || amount <= 0) { toast('Invalid amount'); return; }
+      const note = prompt('Optional payout note:') || null;
+      const { error } = await supabase.from('payout_requests').insert({
+        requester_id: currentUserId,
+        amount,
+        notes: note,
+        status: 'pending'
+      });
+      if (error) {
+        toast('Payout request failed');
+        return;
+      }
+      await supabase.from('financial_transactions').insert({
+        kind: 'commission_payout',
+        status: 'pending',
+        amount,
+        commissioner_id: currentUserId,
+        created_by: currentUserId,
+        description: 'Commission payout request'
+      });
+      toast('Payout request submitted');
+      await loadSalesFinance(currentUserId);
+    }
+
+    function timeSince(dateStr) {
+      if (!dateStr) return 'recently';
+      const diff = Date.now() - new Date(dateStr).getTime();
+      const mins = Math.floor(diff / 60000);
+      if (mins < 60) return `${mins}m ago`;
+      const hrs = Math.floor(mins / 60);
+      if (hrs < 24) return `${hrs}h ago`;
+      return `${Math.floor(hrs / 24)}d ago`;
+    }
+
+    // -- Invoice System -----------------------------------------------
+    let COMMISSIONER_PROJECTS = [];
+
+    function buildClientPaymentReturnUrl() {
+      try {
+        const url = new URL('client_dashboard.html', window.location.href);
+        url.searchParams.set('payment_return', '1');
+        url.searchParams.set('source', 'invoice');
+        return url.toString();
+      } catch (_) {
+        return `${window.location.origin}/client_dashboard.html?payment_return=1&source=invoice`;
+      }
+    }
+
+    async function sendInvoice() {
+      const email = document.getElementById('inv-email')?.value.trim();
+      const name = document.getElementById('inv-name')?.value.trim() || 'Valued Client';
+      const desc = document.getElementById('inv-desc')?.value.trim();
+      const amount = parseFloat(document.getElementById('inv-amount')?.value || 0);
+      const due = document.getElementById('inv-due')?.value;
+      const notes = document.getElementById('inv-notes')?.value.trim();
+      const projId = document.getElementById('inv-project')?.value;
+
+      if (!email) { toast('Client email is required'); return; }
+      if (!desc) { toast('Description is required'); return; }
+      if (!amount || amount <= 0) { toast('Enter a valid amount'); return; }
+
+      const btn = document.getElementById('inv-send-btn');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const jwt = await getJwt();
+        const { data: { user } } = await supabase.auth.getUser();
+        const { data: profile } = await supabase.from('profiles').select('first_name, last_name').eq('id', user?.id).single();
+        const senderName = profile ? `${profile.first_name || ''} ${profile.last_name || ''}`.trim() : 'Your Commissioner';
+
+        // First create the invoice record
+        const { data: inv, error: invErr } = await supabase.from('invoices').insert({
+          project_id: projId || null,
+          created_by: user?.id,
+          client_email: email,
+          client_name: name,
+          description: desc,
+          amount,
+          due_date: due || null,
+          notes: notes || null,
+          status: 'pending',
+        }).select().single();
+
+        if (invErr) { toast('Failed to create invoice record'); btn.disabled = false; btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Invoice by Email'; return; }
+
+        await supabase.from('financial_transactions').insert({
+          kind: 'invoice',
+          status: 'pending',
+          amount,
+          commission_amount: Math.round(amount * 0.30 * 100) / 100,
+          currency: 'KES',
+          invoice_id: inv.id,
+          project_id: projId || null,
+          commissioner_id: currentUserId,
+          created_by: user?.id,
+          description: `Invoice sent to ${email}`,
+          transaction_ref: `INV-${String(inv.id).slice(0, 8)}`
+        });
+
+        // Call edge function
+        const result = await callEdgeFunction('send-invoice', {
+          invoice_id: inv.id,
+          project_id: projId || null,
+          client_email: email,
+          client_name: name,
+          description: desc,
+          amount,
+          currency: 'KES',
+          due_date: due || null,
+          notes: notes || null,
+          sender_name: senderName,
+          created_by: user?.id,
+          redirect_url: buildClientPaymentReturnUrl(),
+        }, jwt);
+
+        if (result.error && !result.authorization_url) {
+          toast('Warning: ' + result.error);
+        } else {
+          toast(`Invoice sent to ${email}.`);
+          // Clear form
+          ['inv-email', 'inv-name', 'inv-desc', 'inv-amount', 'inv-due', 'inv-notes'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.value = '';
+          });
+          loadInvoices();
+        }
+      } catch (e) {
+        toast('Error: ' + String(e));
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Invoice by Email';
+      }
+    }
+
+    async function loadInvoices() {
+      const el = document.getElementById('inv-list');
+      if (!el) return;
+      if (!supabase || !currentUserId) {
+        el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px">Sign in to view invoices</div>';
+        return;
+      }
+      el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px">Loading...</div>';
+
+      const { data: invs, error } = await supabase
+        .from('invoices')
+        .select('*, project:projects(title)')
+        .eq('created_by', currentUserId)
+        .order('created_at', { ascending: false });
+
+      if (error || !invs?.length) {
+        el.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px">No invoices yet - create your first one.</div>';
+        return;
+      }
+
+      const statusColor = { pending: 'var(--amber)', sent: 'var(--blue)', paid: 'var(--green)', failed: 'var(--red)', cancelled: 'var(--text-5)' };
+      const statusBg = { pending: 'var(--abg)', sent: 'var(--bbg)', paid: 'var(--gbg)', failed: 'var(--rbg)', cancelled: 'rgba(0,0,0,.04)' };
+
+      el.innerHTML = invs.map(inv => {
+        const ago = timeSince(inv.created_at);
+        const amt = new Intl.NumberFormat('en-KE', { style: 'currency', currency: 'KES' }).format(inv.amount);
+        const sc = statusColor[inv.status] || 'var(--text-5)';
+        const sb = statusBg[inv.status] || 'transparent';
+        return `<div style="padding:12px 16px;border-bottom:1px solid var(--border-0);display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div>
+              <div style="font-size:13px;font-weight:600;color:var(--text-1)">${inv.description}</div>
+              <div style="font-size:11px;color:var(--text-5);margin-top:2px">${inv.client_name || ''}  -  ${inv.client_email}  -  ${ago}</div>
+              ${inv.project ? `<div style="font-size:11px;color:var(--text-5)">[Doc] ${inv.project.title}</div>` : ''}
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:15px;font-weight:700;color:var(--text-1)">${amt}</div>
+              <span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;background:${sb};color:${sc};text-transform:uppercase;letter-spacing:.5px">${inv.status}</span>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            ${inv.paystack_authorization_url && inv.status !== 'paid' ? `<a href="${inv.paystack_authorization_url}" target="_blank" class="btn btn-g btn-xs">View Payment Link</a>` : ''}
+            ${inv.status !== 'paid' ? `<button class="btn btn-g btn-xs" onclick="resendInvoice('${inv.id}')">Resend</button>` : ''}
+            ${!['paid', 'cancelled'].includes(String(inv.status || '').toLowerCase()) ? `<button class="btn btn-g btn-xs" style="border-color:var(--red);color:var(--red);" onclick="cancelInvoice('${inv.id}')">Cancel</button>` : ''}
+            ${inv.status === 'paid' ? `<span style="font-size:11px;color:var(--green)">OK Paid ${inv.paid_at ? new Date(inv.paid_at).toLocaleDateString() : ''}</span>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+
+      // Populate project dropdown
+      const sel = document.getElementById('inv-project');
+      if (sel) {
+        const { data: projs } = await supabase.from('projects').select('id, title').eq('commissioner_id', currentUserId);
+        COMMISSIONER_PROJECTS = projs || [];
+        const opts = COMMISSIONER_PROJECTS.map(p => `<option value="${p.id}">${p.title}</option>`).join('');
+        sel.innerHTML = '<option value="">- No project -</option>' + opts;
+      }
+
+      // Update pending badge
+      const pending = invs.filter(i => i.status === 'sent' || i.status === 'pending').length;
+      const badge = document.getElementById('invoice-badge');
+      if (badge) badge.textContent = pending > 0 ? pending : '';
+    }
+
+    window.resendInvoice = async (invoiceId) => {
+      if (!supabase) return;
+      const { data: inv } = await supabase.from('invoices').select('*').eq('id', invoiceId).single();
+      if (!inv) { toast('Invoice not found'); return; }
+      toast('Resending invoice...');
+      const jwt = await getJwt();
+      const result = await callEdgeFunction('send-invoice', {
+        invoice_id: inv.id,
+        client_email: inv.client_email,
+        client_name: inv.client_name,
+        description: inv.description,
+        amount: inv.amount,
+        currency: inv.currency || 'KES',
+        due_date: inv.due_date,
+        notes: inv.notes,
+        redirect_url: buildClientPaymentReturnUrl(),
+      }, jwt);
+      if (result.error && !result.authorization_url) toast('Warning: ' + result.error);
+      else { toast(`Resent to ${inv.client_email}.`); loadInvoices(); }
+    };
+
+    window.cancelInvoice = async (invoiceId) => {
+      if (!supabase || !invoiceId) return;
+      const proceed = window.confirm('Cancel this invoice? Existing payment links will be invalidated.');
+      if (!proceed) return;
+
+      const nowIso = new Date().toISOString();
+      const { error } = await supabase
+        .from('invoices')
+        .update({ status: 'cancelled', updated_at: nowIso })
+        .eq('id', invoiceId)
+        .neq('status', 'paid');
+
+      if (error) {
+        toast('Unable to cancel invoice right now.');
+        return;
+      }
+
+      try {
+        await supabase
+          .from('financial_transactions')
+          .update({ status: 'cancelled' })
+          .eq('invoice_id', invoiceId)
+          .in('status', ['pending', 'sent']);
+      } catch (_) {
+        // Do not block invoice cancellation when finance tables differ.
+      }
+
+      toast('Invoice cancelled');
+      loadInvoices();
+    };
+
+    // -- Edge Function Helpers -----------------------------------------
+    const EDGE_BASE = window.SUPABASE_FUNCTIONS_BASE
+      || `${String(window.SUPABASE_URL || 'https://smdbfaomeghoejqqkplv.supabase.co').replace(/\/$/, '')}/functions/v1`;
+    const SUPABASE_ANON = String(window.SUPABASE_ANON_KEY || '').trim();
+
+    async function callEdgeFunction(fn, payload, userToken, retry401 = true) {
+      try {
+        const bearer = String(userToken || SUPABASE_ANON || '').trim();
+        if (!bearer) {
+          return { error: 'Missing auth token. Check Supabase config and sign in again.' };
+        }
+        const res = await fetch(`${EDGE_BASE}/${fn}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            apikey: SUPABASE_ANON || bearer,
+            Authorization: `Bearer ${bearer}`,
+          },
+          body: JSON.stringify(payload),
+        });
+        if (res.status === 401 && retry401 && supabase) {
+          const refreshed = await getJwt(true);
+          if (refreshed && refreshed !== userToken) {
+            return callEdgeFunction(fn, payload, refreshed, false);
+          }
+        }
+        const raw = await res.text();
+        let body = {};
+        if (raw) {
+          try { body = JSON.parse(raw); }
+          catch { body = { raw }; }
+        }
+        if (!res.ok) return { ...body, error: body.error || `Edge function ${fn} failed (${res.status})` };
+        return body;
+      } catch (e) {
+        console.warn(`Edge function ${fn} failed:`, e);
+        return { error: String(e) };
+      }
+    }
+
+    async function getJwt(forceRefresh = false) {
+      if (!supabase) return null;
+      let session = null;
+      try {
+        const { data } = await supabase.auth.getSession();
+        session = data?.session || null;
+      } catch (_) { }
+      if (!session?.access_token && forceRefresh) {
+        try {
+          const { data } = await supabase.auth.refreshSession();
+          session = data?.session || session;
+        } catch (_) { }
+      }
+      return session?.access_token || null;
+    }
+
+    window.hireProposal = async (proposalId, developerId, projectId) => {
+      if (!supabase) { toast('Not connected'); return; }
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { toast('Not authenticated'); return; }
+      // Update project to assign developer and set status to in-progress
+      const { error } = await supabase
+        .from('projects')
+        .update({ developer_id: developerId, status: 'in-progress' })
+        .eq('id', projectId);
+      if (error) { toast('Error hiring developer'); return; }
+
+      // Also update proposal status to accepted
+      await supabase.from('proposals').update({ status: 'accepted' }).eq('id', proposalId);
+
+      // Send email notification to developer
+      try {
+        const { data: devProfile } = await supabase.from('profiles').select('email, first_name').eq('id', developerId).single();
+        const { data: proj } = await supabase.from('projects').select('title').eq('id', projectId).single();
+        if (devProfile?.email) {
+          const jwt = await getJwt();
+          await callEdgeFunction('send-email', {
+            to: devProfile.email,
+            template: 'proposal_accepted',
+            data: { brief: proj?.title || 'Project', name: devProfile.first_name || 'Developer' }
+          }, jwt);
+        }
+      } catch (_) { }
+
+      toast('Developer hired! Project is now in-progress OK');
+      loadRealData(user.id);
+    };
+
+    window.postBrief = async () => {
+      const title = document.getElementById('brief-title')?.value?.trim();
+      const desc = document.getElementById('brief-desc')?.value?.trim();
+      const budget = parseFloat(document.getElementById('brief-budget')?.value || 0);
+      if (!title) { toast('Brief title required'); return; }
+      const { data: { user } } = await supabase.auth.getUser();
+      const { error } = await supabase.from('projects').insert({
+        title, description: desc, total_value: budget,
+        commissioner_id: user?.id, status: 'open'
+      });
+      if (error) { toast('Error posting brief'); return; }
+      toast('Brief posted successfully! OK');
+      loadRealData(user?.id);
+    };
+
+    window.takeLead = async (projectId) => {
+      if (!supabase || !currentUserId) return;
+      const { error } = await supabase
+        .from('projects')
+        .update({ commissioner_id: currentUserId, status: 'open' })
+        .eq('id', projectId);
+      if (error) {
+        toast('Failed to take lead');
+        return;
+      }
+      toast('Lead assigned to your queue');
+      await loadRealData(currentUserId);
+    };
+
+    function renderEmptyCommissionerData() {
+      const statVals = document.querySelectorAll('#page-dashboard .g4 .sc .sc-val');
+      statVals.forEach(v => v.textContent = '-');
+
+      const dashBriefs = document.getElementById('dash-briefs');
+      if (dashBriefs) dashBriefs.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">No briefs yet. Post a brief to get started.</div>';
+
+      const dashProps = document.getElementById('dash-proposals');
+      if (dashProps) dashProps.innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-5);font-size:13px;">No proposals yet. Incoming proposals will appear here.</div>';
+
+      const dashProjects = document.getElementById('dash-projects-body');
+      if (dashProjects) dashProjects.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-5);padding:20px;font-size:13px;">No active projects yet. New projects will appear here.</td></tr>';
+      const managedProjects = document.getElementById('managed-projects-body');
+      if (managedProjects) managedProjects.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--text-5);padding:20px;font-size:13px;">No active projects yet. New projects will appear here.</td></tr>';
+      const dashMonth = document.getElementById('dash-commission-month');
+      if (dashMonth) dashMonth.textContent = 'KSh 0';
+      const dashSub = document.getElementById('dash-commission-sub');
+      if (dashSub) dashSub.textContent = 'Commission updates will appear here';
+      const dashProgress = document.getElementById('dash-commission-progress');
+      if (dashProgress) dashProgress.style.width = '0%';
+      const dashProgressLabel = document.getElementById('dash-commission-progress-label');
+      if (dashProgressLabel) dashProgressLabel.textContent = '0%';
+      const dashCommissionList = document.getElementById('dash-commission-list');
+      if (dashCommissionList) dashCommissionList.innerHTML = 'No commission transactions yet.';
+
+      const briefsEl = document.getElementById('all-briefs-list');
+      if (briefsEl) briefsEl.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-5);font-size:13px;">No briefs yet. Post a brief to get started.</div>';
+
+      const proposalsPageGrid = document.getElementById('proposals-page-grid') || document.querySelector('#page-proposals .g2');
+      if (proposalsPageGrid) proposalsPageGrid.innerHTML = '<div class="card" style="grid-column:span 2;padding:30px;text-align:center;color:var(--text-5);">No proposal activity yet. Proposals will appear here.</div>';
+    }
+
+    const pageTitles = {
+      dashboard: ['Commissioner Hub', 'Manage briefs, proposals and projects'],
+      briefs: ['My Briefs', 'All briefs linked to your account'],
+      proposals: ['Developer Proposals', 'Incoming proposal activity'],
+      projects: ['Managed Projects', 'Commission-linked projects'],
+      earnings: ['Earnings', 'Your commission overview'],
+      analytics: ['Analytics', 'Project performance insights'],
+      messages: ['Messages', 'Real-time communication'],
+      profile: ['Profile Settings', 'Update your information'],
+    };
+
+    window.showPage = p => {
+      if (window._L) _L.info(`Navigating to page: ${p}`);
+      document.querySelectorAll('.page').forEach(x => x.classList.remove('active'));
+      document.querySelectorAll('.ni').forEach(x => x.classList.remove('active'));
+      const pg = document.getElementById('page-' + p);
+      if (pg) pg.classList.add('active');
+      const ni = document.querySelector(`.ni[data-page="${p}"]`);
+      if (ni) ni.classList.add('active');
+      const t = pageTitles[p] || [p, ''];
+      document.getElementById('topbar-title').textContent = t[0];
+      document.getElementById('topbar-sub').textContent = t[1];
+      if (p === 'messages') loadThreads();
+      if (p === 'invoices') loadInvoices();
+    };
+
+    document.addEventListener('click', e => {
+      const messageBtn = e.target.closest('.p-msg');
+      if (!messageBtn) return;
+      if (messageBtn.getAttribute('onclick')) return;
+      showPage('messages');
+    });
+
+    window.toggleTheme = function () {
+      const h = document.documentElement;
+      const current = h.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+
+      if (window.setTheme) {
+        window.setTheme(next);
+      } else {
+        h.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      }
+
+      const isNowDark = h.getAttribute('data-theme') === 'dark';
+      document.getElementById('theme-sw').classList.toggle('on', !isNowDark);
+      document.getElementById('theme-lbl').innerHTML = isNowDark ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Dark Mode' : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg> Light Mode';
+    };
+
+    function initThemeUI() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      document.getElementById('theme-sw').classList.toggle('on', !isDark);
+      document.getElementById('theme-lbl').innerHTML = isDark ? '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> Dark Mode' : '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg> Light Mode';
+    }
+    initThemeUI();
+
+    window.handleAvatarUpload = e => {
+      const f = e.target.files[0]; if (!f) return;
+      const r = new FileReader();
+      r.onload = ev => {
+        const src = ev.target.result;
+        ['profile-av-img', 'sb-av-img'].forEach(id => { const el = document.getElementById(id); if (el) { el.src = src; el.style.display = 'block'; } });
+        const sbInit = document.getElementById('sb-initials');
+        const profileInit = document.getElementById('profile-initials');
+        if (sbInit) sbInit.style.display = 'none';
+        if (profileInit) profileInit.style.display = 'none';
+        if (supabase) {
+          const ext = f.name.split('.').pop();
+          const userSeed = currentUserId || 'commissioner';
+          const objectPath = `avatars/${userSeed}_${Date.now()}.${ext}`;
+          supabase.storage.from('avatars').upload(objectPath, f, { upsert: true })
+            .then(async ({ error }) => {
+              if (error) return;
+              const { data: pub } = supabase.storage.from('avatars').getPublicUrl(objectPath);
+              const avatarUrl = pub?.publicUrl || '';
+              if (avatarUrl) {
+                ['profile-av-img', 'sb-av-img'].forEach(id => {
+                  const img = document.getElementById(id);
+                  if (img) {
+                    img.src = avatarUrl;
+                    img.style.display = 'block';
+                  }
+                });
+                if (currentUserId) {
+                  await supabase.from('profiles').update({
+                    avatar_url: avatarUrl,
+                    updated_at: new Date().toISOString()
+                  }).eq('id', currentUserId);
+                }
+                currentProfile = { ...(currentProfile || {}), avatar_url: avatarUrl };
+                window.generateOnboardingLink(false);
+              }
+              toast('Photo saved <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>');
+            });
+        }
+      };
+      r.readAsDataURL(f);
+    };
+
+    window.saveProfile = async () => {
+      const d = {
+        first_name: document.getElementById('f-fname').value.trim(),
+        last_name: document.getElementById('f-lname').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        phone: document.getElementById('f-phone').value.trim(),
+        updated_at: new Date().toISOString()
+      };
+      if (supabase && currentUserId) {
+        const { error } = await supabase.from('profiles').upsert({ id: currentUserId, ...d });
+        if (error) {
+          toast(`Profile save failed: ${error.message || 'Unknown error'}`);
+          return;
+        }
+      }
+      currentProfile = { ...(currentProfile || {}), ...d };
+      const displayName = `${d.first_name} ${d.last_name}`.trim() || d.email || 'Commissioner User';
+      document.getElementById('sb-name').textContent = displayName;
+      saveStoredOnboardConfig(readOnboardForm());
+      window.generateOnboardingLink(false);
+      toast('Profile saved <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>');
+    };
+
+    window.signOut = async () => {
+      if (supabase) await supabase.auth.signOut();
+      toast('Signing out...');
+      setTimeout(() => window.location.href = 'landing_page.html', 800);
+    };
+
+    window.toast = msg => window.showToast ? window.showToast(msg) : alert(msg);
+
+    // -- Real-time Messaging -----------------------------------------
+    let activeReceiverId = null;
+    let activeReceiverName = null;
+    let activeReceiverMeta = null;
+    let msgChannel = null;
+    let messageContacts = [];
+
+    function safeRole(role) {
+      const val = String(role || '').toLowerCase();
+      if (val === 'developer') return 'Developer';
+      if (val === 'commissioner') return 'Commissioner';
+      if (val === 'client') return 'Client';
+      if (val === 'admin') return 'Admin';
+      return 'Team';
+    }
+
+    function rolePill(role) {
+      const val = String(role || '').toLowerCase();
+      const palette = val === 'client'
+        ? { bg: 'var(--bbg)', fg: 'var(--blue)' }
+        : (val === 'developer'
+          ? { bg: 'var(--gbg)', fg: 'var(--green)' }
+          : (val === 'commissioner'
+            ? { bg: 'var(--abg)', fg: 'var(--amber)' }
+            : { bg: 'var(--bg-inset)', fg: 'var(--text-5)' }));
+      return `<span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px;background:${palette.bg};color:${palette.fg};letter-spacing:.03em;">${safeRole(val)}</span>`;
+    }
+
+    function availabilityMeta(meta = {}) {
+      const status = String(meta.status || '').toLowerCase();
+      if (status === 'inactive' || status === 'suspended' || status === 'offline') {
+        return { label: 'Offline', bg: 'var(--rbg)', fg: 'var(--red)' };
+      }
+      if (meta.available_for_work === false) {
+        return { label: 'Busy', bg: 'var(--abg)', fg: 'var(--amber)' };
+      }
+      return { label: 'Available', bg: 'var(--gbg)', fg: 'var(--green)' };
+    }
+
+    function availabilityPill(meta = {}) {
+      const av = availabilityMeta(meta);
+      return `<span style="font-size:10px;font-weight:600;padding:2px 7px;border-radius:999px;background:${av.bg};color:${av.fg};letter-spacing:.03em;">${av.label}</span>`;
+    }
+
+    function avatarNode(name = 'User', avatarUrl = '', size = 28, fontSize = 10) {
+      const initials = String(name || 'User').split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase() || 'TM';
+      const safeUrl = String(avatarUrl || '').trim();
+      if (!safeUrl) {
+        return `<div class="av" style="width:${size}px;height:${size}px;font-size:${fontSize}px">${initials}</div>`;
+      }
+      return `<div class="av" style="position:relative;width:${size}px;height:${size}px;font-size:${fontSize}px;overflow:hidden"><img src="${safeUrl}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.remove()">${initials}</div>`;
+    }
+
+    function getContactMeta(id) {
+      return (messageContacts || []).find(c => c.id === id) || null;
+    }
+
+    function getMessageFilters() {
+      const search = (document.getElementById('msg-search')?.value || '').trim().toLowerCase();
+      const filter = (document.getElementById('msg-role-filter')?.value || 'all').toLowerCase();
+      return { search, filter };
+    }
+
+    function filterThreadRows(rows) {
+      const { search, filter } = getMessageFilters();
+      return rows.filter(row => {
+        if (filter === 'unread' && !row.unread) return false;
+        if (filter !== 'all' && filter !== 'unread' && String(row.role || '').toLowerCase() !== filter) return false;
+        if (!search) return true;
+        const hay = `${row.name} ${row.role} ${row.projectTitle} ${row.preview} ${row.email || ''}`.toLowerCase();
+        return hay.includes(search);
+      });
+    }
+
+    function renderContactStarters() {
+      const starters = filterThreadRows((messageContacts || []).map(c => ({
+        id: c.id,
+        name: c.name || 'User',
+        role: safeRole(c.role),
+        projectTitle: c.project_title || '',
+        email: c.email || '',
+        avatar_url: c.avatar_url || '',
+        status: c.status || '',
+        available_for_work: c.available_for_work,
+        preview: c.email || '',
+        unread: 0
+      })));
+      if (!starters.length) {
+        return '<div style="padding:16px;text-align:center;color:var(--text-5);font-size:13px;">No matching contacts</div>';
+      }
+      return `<div style="padding:12px;">
+        <div style="font-size:11px;color:var(--text-5);margin:0 0 8px 2px;text-transform:uppercase;letter-spacing:.08em;">Start Conversation</div>
+        ${starters.map(c => {
+          const safe = (c.name || 'User').replace(/'/g, '');
+          return `<div class="msg" style="cursor:pointer;padding:10px 12px;" onclick="startThreadWith('${c.id}','${safe}')">
+            <div style="width:6px;flex-shrink:0"></div>
+            ${avatarNode(safe, c.avatar_url, 28, 10)}
+            <div style="flex:1;min-width:0">
+              <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+                <div class="msg-sender">${safe}</div>
+                ${rolePill(c.role)}
+              </div>
+              <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:2px 0 1px;">
+                ${availabilityPill(c)}
+                ${c.projectTitle ? `<span style="font-size:10px;color:var(--text-5)">Project: ${c.projectTitle}</span>` : ''}
+              </div>
+              <div class="msg-prev">${c.email || 'Start a conversation'}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>`;
+    }
+
+    function updateChatMeta(meta) {
+      const el = document.getElementById('chat-with-meta');
+      if (!el) return;
+      if (!meta) {
+        el.textContent = 'Role: - | Project: -';
+        return;
+      }
+      const role = safeRole(meta.role);
+      const project = meta.project_title || 'General';
+      const availability = availabilityMeta(meta).label;
+      el.innerHTML = `Role: <strong>${role}</strong> | Availability: <strong>${availability}</strong> | Project: <strong>${project}</strong>${meta.email ? ` | ${meta.email}` : ''}`;
+    }
+
+    window.focusMessageComposer = function () {
+      showPage('messages');
+      const searchInput = document.getElementById('msg-search');
+      if (searchInput) searchInput.focus();
+    };
+
+    window.startThreadWith = (receiverId, receiverName = 'User') => {
+      showPage('messages');
+      if (!receiverId) return;
+      setTimeout(() => openThread(receiverId, receiverName), 0);
+    };
+
+    async function loadThreads() {
+      if (!supabase || !currentUserId) {
+        document.getElementById('msg-threads').innerHTML = '<div style="padding:16px;text-align:center;color:var(--text-5);font-size:13px;">Sign in to view messages</div>';
+        return;
+      }
+      const { data: msgs } = await supabase
+        .from('messages')
+        .select(`id, content, created_at, is_read, sender_id, receiver_id,
+          sender:profiles!messages_sender_id_fkey(id, first_name, last_name, email, role, avatar_url, status, available_for_work),
+          receiver:profiles!messages_receiver_id_fkey(id, first_name, last_name, email, role, avatar_url, status, available_for_work)`)
+        .or(`sender_id.eq.${currentUserId},receiver_id.eq.${currentUserId}`)
+        .order('created_at', { ascending: false });
+
+      if (!msgs || msgs.length === 0) {
+        document.getElementById('msg-threads').innerHTML = renderContactStarters();
+        return;
+      }
+
+      const threads = {};
+      msgs.forEach(m => {
+        const sender = m.sender || {};
+        const receiver = m.receiver || {};
+        const other = sender.id === currentUserId ? receiver : sender;
+        const otherId = other.id;
+        if (!otherId) return;
+        const contactMeta = getContactMeta(otherId);
+        if (!threads[otherId]) {
+          threads[otherId] = {
+            person: other,
+            lastMsg: m,
+            unread: 0,
+            role: other.role || contactMeta?.role || 'team',
+            project_title: contactMeta?.project_title || '',
+            email: other.email || contactMeta?.email || '',
+            avatar_url: other.avatar_url || contactMeta?.avatar_url || '',
+            status: other.status || contactMeta?.status || '',
+            available_for_work: typeof other.available_for_work === 'boolean'
+              ? other.available_for_work
+              : contactMeta?.available_for_work
+          };
+        }
+        if (!m.is_read && sender.id !== currentUserId) threads[otherId].unread++;
+      });
+
+      let threadRows = Object.values(threads).map(t => {
+        const name = `${t.person.first_name || ''} ${t.person.last_name || ''}`.trim() || 'User';
+        const previewRaw = String(t.lastMsg.content || '').trim();
+        return {
+          id: t.person.id,
+          name,
+          role: safeRole(t.role),
+          roleRaw: t.role,
+          projectTitle: t.project_title || '',
+          email: t.email || '',
+          avatar_url: t.avatar_url || '',
+          status: t.status || '',
+          available_for_work: t.available_for_work,
+          preview: previewRaw.length > 56 ? `${previewRaw.slice(0, 56)}...` : (previewRaw || 'New message'),
+          ago: timeSince(t.lastMsg.created_at),
+          unread: t.unread
+        };
+      });
+
+      threadRows = filterThreadRows(threadRows.map(r => ({ ...r, role: safeRole(r.roleRaw || r.role) })));
+
+      document.getElementById('msg-threads').innerHTML = threadRows.length ? threadRows.map(t => {
+        return `<div class="msg" style="cursor:pointer;padding:10px 14px;" onclick="openThread('${t.id}','${t.name.replace(/'/g, '')}')">
+          ${t.unread > 0 ? '<div class="unread-dot"></div>' : '<div style="width:6px;flex-shrink:0"></div>'}
+          ${avatarNode(t.name, t.avatar_url, 28, 10)}
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:2px">
+              <span class="msg-sender">${t.name}</span>
+              <span class="msg-time">${t.ago}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px;flex-wrap:wrap;">
+              ${rolePill(t.roleRaw || t.role)}
+              ${availabilityPill(t)}
+              ${t.projectTitle ? `<span style="font-size:10px;color:var(--text-5)">Project: ${t.projectTitle}</span>` : ''}
+            </div>
+            <div class="msg-prev">${t.preview}</div>
+          </div>
+          ${t.unread ? `<span class="badge b-b">${t.unread}</span>` : ''}
+        </div>`;
+      }).join('') : '<div style="padding:16px;text-align:center;color:var(--text-5);font-size:13px;">No conversations match this filter.</div>';
+
+      const totalUnread = Object.values(threads).reduce((s, t) => s + t.unread, 0);
+      const badge = document.querySelector('.ni[data-page="messages"] .nc');
+      if (badge) badge.textContent = totalUnread > 0 ? totalUnread : '';
+    }
+    window.loadThreads = loadThreads;
+
+    window.openThread = async (receiverId, receiverName) => {
+      activeReceiverId = receiverId;
+      activeReceiverName = receiverName;
+      activeReceiverMeta = getContactMeta(receiverId);
+      document.getElementById('chat-with-name').textContent = receiverName;
+      updateChatMeta(activeReceiverMeta);
+      document.getElementById('chat-input').disabled = false;
+      document.getElementById('chat-send-btn').disabled = false;
+      document.getElementById('chat-messages').innerHTML = '<div style="text-align:center;color:var(--text-5);font-size:12px;">Loading...</div>';
+
+      const { data: history } = await supabase
+        .from('messages')
+        .select('id, content, created_at, sender_id, receiver_id, is_read')
+        .or(`and(sender_id.eq.${currentUserId},receiver_id.eq.${receiverId}),and(sender_id.eq.${receiverId},receiver_id.eq.${currentUserId})`)
+        .order('created_at', { ascending: true });
+
+      renderChatMessages(history || []);
+      await supabase.from('messages').update({ is_read: true })
+        .eq('receiver_id', currentUserId).eq('sender_id', receiverId);
+
+      if (msgChannel) supabase.removeChannel(msgChannel);
+      msgChannel = supabase.channel(`chat-${currentUserId}-${receiverId}`)
+        .on('postgres_changes', {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'messages',
+          filter: `receiver_id=eq.${currentUserId}`
+        }, payload => {
+          if (payload.new.sender_id === activeReceiverId) {
+            const msgs = document.getElementById('chat-messages');
+            msgs.appendChild(buildBubble(payload.new, false));
+            msgs.scrollTop = msgs.scrollHeight;
+          }
+          loadThreads();
+        })
+        .subscribe();
+    };
+
+    function renderChatMessages(messages) {
+      const el = document.getElementById('chat-messages');
+      if (!messages.length) {
+        el.innerHTML = '<div style="text-align:center;color:var(--text-5);font-size:12px;margin:auto;">No messages yet - start with project requirements.</div>';
+        return;
+      }
+      el.innerHTML = '';
+      messages.forEach(m => el.appendChild(buildBubble(m, m.sender_id === currentUserId)));
+      el.scrollTop = el.scrollHeight;
+    }
+
+    function buildBubble(m, isMine) {
+      const div = document.createElement('div');
+      div.style.cssText = `display:flex;justify-content:${isMine ? 'flex-end' : 'flex-start'};`;
+      const bubble = document.createElement('div');
+      bubble.style.cssText = `max-width:72%;padding:8px 12px;border-radius:${isMine ? '14px 14px 4px 14px' : '14px 14px 14px 4px'};font-size:13px;line-height:1.4;background:${isMine ? 'var(--text-1)' : 'var(--card-bg,var(--bg2))'};color:${isMine ? 'var(--bg0)' : 'var(--text-1)'};border:${isMine ? 'none' : '1px solid var(--border-0)'};`;
+      const body = document.createElement('div');
+      body.textContent = m.content || '';
+      const meta = document.createElement('div');
+      meta.style.cssText = `margin-top:5px;font-size:10px;opacity:.8;text-align:${isMine ? 'right' : 'left'};`;
+      const stamp = m.created_at ? new Date(m.created_at).toLocaleString() : 'now';
+      const status = isMine ? (m.is_read ? 'Seen' : 'Sent') : 'Received';
+      meta.textContent = `${stamp} | ${status}`;
+      bubble.appendChild(body);
+      bubble.appendChild(meta);
+      div.appendChild(bubble);
+      return div;
+    }
+
+    window.sendMessage = async () => {
+      const input = document.getElementById('chat-input');
+      const text = input.value.trim();
+      if (!text || !activeReceiverId || !supabase) return;
+      input.value = '';
+      const optimistic = buildBubble({ content: text, created_at: new Date().toISOString(), is_read: false }, true);
+      const msgs = document.getElementById('chat-messages');
+      msgs.appendChild(optimistic);
+      msgs.scrollTop = msgs.scrollHeight;
+
+      const { error } = await supabase.from('messages').insert({
+        sender_id: currentUserId,
+        receiver_id: activeReceiverId,
+        project_id: activeReceiverMeta?.project_id || null,
+        content: text,
+        is_read: false
+      });
+      if (error) {
+        toast('Failed to send');
+        optimistic.remove();
+      } else {
+        loadThreads();
+      }
+    };
+
+    renderEmptyCommissionerData();
+    initSupabase();
+
+
+
+
+
+
+    /* ===================================================
+       UNIVERSAL SIDEBAR TOGGLE - desktop collapse + mobile overlay
+    =================================================== */
+    (function () {
+      const LS_KEY = 'sc-sb-state';
+
+      function getToggleBtn() {
+        return document.getElementById('sb-toggle-btn');
+      }
+      function getSidebar() {
+        return document.querySelector('.sidebar');
+      }
+      function getBackdrop() {
+        return document.getElementById('sb-backdrop');
+      }
+
+      function isMobile() {
+        return window.innerWidth <= 900;
+      }
+
+      function openMobile() {
+        getSidebar().classList.add('mob-open');
+        getBackdrop().classList.add('open');
+        getToggleBtn().classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobile() {
+        getSidebar().classList.remove('mob-open');
+        getBackdrop().classList.remove('open');
+        getToggleBtn().classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      function collapseDesktop() {
+        document.body.classList.add('sb-collapsed');
+        localStorage.setItem(LS_KEY, 'collapsed');
+      }
+
+      function expandDesktop() {
+        document.body.classList.remove('sb-collapsed');
+        localStorage.setItem(LS_KEY, 'expanded');
+      }
+
+      function toggleSidebar() {
+        if (isMobile()) {
+          getSidebar().classList.contains('mob-open') ? closeMobile() : openMobile();
+        } else {
+          document.body.classList.contains('sb-collapsed') ? expandDesktop() : collapseDesktop();
+        }
+      }
+
+      // Restore desktop state from localStorage
+      const saved = localStorage.getItem(LS_KEY);
+      if (!isMobile() && saved === 'collapsed') {
+        document.body.classList.add('sb-collapsed');
+      }
+
+      // Inject toggle button into topbar
+      function injectToggle() {
+        const topbar = document.querySelector('.topbar');
+        if (!topbar || document.getElementById('sb-toggle-btn')) return;
+
+        const btn = document.createElement('button');
+        btn.id = 'sb-toggle-btn';
+        btn.className = 'sb-toggle';
+        btn.setAttribute('aria-label', 'Toggle sidebar');
+        btn.innerHTML = '<span class="sb-toggle-bar"></span><span class="sb-toggle-bar"></span><span class="sb-toggle-bar"></span>';
+        btn.addEventListener('click', toggleSidebar);
+        topbar.insertBefore(btn, topbar.firstChild);
+      }
+
+      // Inject backdrop
+      function injectBackdrop() {
+        if (document.getElementById('sb-backdrop')) return;
+        const bd = document.createElement('div');
+        bd.id = 'sb-backdrop';
+        bd.className = 'sb-backdrop';
+        bd.addEventListener('click', closeMobile);
+        document.body.appendChild(bd);
+      }
+
+      // Close mobile sidebar on nav item click
+      function wireNavItems() {
+        document.querySelectorAll('.ni, [onclick*="showPage"], [onclick*="nav("]').forEach(el => {
+          el.addEventListener('click', () => {
+            if (isMobile()) closeMobile();
+          });
+        });
+      }
+
+      // Reset on resize
+      window.addEventListener('resize', () => {
+        if (!isMobile()) {
+          closeMobile(); // clean up mobile classes
+        }
+      });
+
+      // ESC to close
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && isMobile()) closeMobile();
+      });
+
+      // Init
+      document.addEventListener('DOMContentLoaded', () => {
+        injectToggle();
+        injectBackdrop();
+        wireNavItems();
+      });
+      // Also run now in case DOM is ready
+      if (document.readyState !== 'loading') {
+        injectToggle();
+        injectBackdrop();
+        wireNavItems();
+      }
+    })();
+
+  </script>
+  <script src="broadcast-banner.js"></script>
+</body>
+
+</html>

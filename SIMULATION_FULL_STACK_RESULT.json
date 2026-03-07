@@ -1,0 +1,326 @@
+{
+  "tag": "FULL-SIM-1772110551931",
+  "startedAt": "2026-02-26T12:55:51.932Z",
+  "sections": [
+    "base_lifecycle",
+    "roles",
+    "messaging",
+    "cashflow",
+    "onboarding",
+    "admin_ops"
+  ],
+  "checks": [
+    {
+      "section": "base_lifecycle",
+      "name": "run_simulate_lifecycle",
+      "ok": true,
+      "details": "simulate-lifecycle executed",
+      "at": "2026-02-26T12:56:07.267Z"
+    },
+    {
+      "section": "base_lifecycle",
+      "name": "base_result_loaded",
+      "ok": true,
+      "details": "steps=28 pass=27 fail=1",
+      "at": "2026-02-26T12:56:07.268Z"
+    },
+    {
+      "section": "roles",
+      "name": "login_client",
+      "ok": true,
+      "details": "client@test.com authenticated",
+      "at": "2026-02-26T12:56:08.097Z"
+    },
+    {
+      "section": "roles",
+      "name": "login_admin",
+      "ok": true,
+      "details": "admin@test.com authenticated",
+      "at": "2026-02-26T12:56:08.365Z"
+    },
+    {
+      "section": "roles",
+      "name": "login_commissioner",
+      "ok": true,
+      "details": "commissioner@test.com authenticated",
+      "at": "2026-02-26T12:56:08.625Z"
+    },
+    {
+      "section": "roles",
+      "name": "login_developer",
+      "ok": true,
+      "details": "developer@test.com authenticated",
+      "at": "2026-02-26T12:56:08.896Z"
+    },
+    {
+      "section": "roles",
+      "name": "role_scope_client",
+      "ok": true,
+      "details": "projects=32, messages=4, invoices=58",
+      "at": "2026-02-26T12:56:10.643Z"
+    },
+    {
+      "section": "roles",
+      "name": "role_scope_admin",
+      "ok": true,
+      "details": "projects=43, messages=0, invoices=80",
+      "at": "2026-02-26T12:56:11.748Z"
+    },
+    {
+      "section": "roles",
+      "name": "role_scope_commissioner",
+      "ok": true,
+      "details": "projects=37, messages=13, invoices=17",
+      "at": "2026-02-26T12:56:12.513Z"
+    },
+    {
+      "section": "roles",
+      "name": "role_scope_developer",
+      "ok": true,
+      "details": "projects=32, messages=9, invoices=1",
+      "at": "2026-02-26T12:56:13.323Z"
+    },
+    {
+      "section": "messaging",
+      "name": "client_to_commissioner",
+      "ok": true,
+      "details": "message sent",
+      "at": "2026-02-26T12:56:14.390Z"
+    },
+    {
+      "section": "messaging",
+      "name": "commissioner_to_client_reply",
+      "ok": true,
+      "details": "reply sent",
+      "at": "2026-02-26T12:56:14.390Z"
+    },
+    {
+      "section": "messaging",
+      "name": "commissioner_to_developer",
+      "ok": true,
+      "details": "message sent",
+      "at": "2026-02-26T12:56:14.390Z"
+    },
+    {
+      "section": "messaging",
+      "name": "developer_to_commissioner_reply",
+      "ok": true,
+      "details": "reply sent",
+      "at": "2026-02-26T12:56:14.390Z"
+    },
+    {
+      "section": "messaging",
+      "name": "thread_fetch_project",
+      "ok": true,
+      "details": "thread_messages=4",
+      "at": "2026-02-26T12:56:14.390Z"
+    },
+    {
+      "section": "messaging",
+      "name": "client_mark_read",
+      "ok": true,
+      "details": "unread->read updated",
+      "at": "2026-02-26T12:56:14.390Z"
+    },
+    {
+      "section": "cashflow",
+      "name": "assume_paid_finalize_pending_invoices",
+      "ok": true,
+      "details": "pending invoices converted to paid for end-state simulation",
+      "at": "2026-02-26T12:56:14.569Z"
+    },
+    {
+      "section": "cashflow",
+      "name": "project_invoices_loaded",
+      "ok": true,
+      "details": "count=2",
+      "at": "2026-02-26T12:56:14.920Z"
+    },
+    {
+      "section": "cashflow",
+      "name": "project_transactions_loaded",
+      "ok": true,
+      "details": "count=9",
+      "at": "2026-02-26T12:56:14.920Z"
+    },
+    {
+      "section": "cashflow",
+      "name": "deposit_45pct_rule",
+      "ok": true,
+      "details": "deposit reflects ~45% rule",
+      "at": "2026-02-26T12:56:14.920Z"
+    },
+    {
+      "section": "cashflow",
+      "name": "cashflow_full_paid",
+      "ok": true,
+      "details": "project marked fully paid via invoices+transactions",
+      "at": "2026-02-26T12:56:14.920Z"
+    },
+    {
+      "section": "onboarding",
+      "name": "profile_link_share",
+      "ok": true,
+      "details": "http://localhost:3000/sales_onboarding.html?sid=369095e2-a42a-4cfc-9072-10877c22720d&sname=Commissioner+User&srole=commissioner&theme=glass",
+      "at": "2026-02-26T12:56:14.920Z"
+    },
+    {
+      "section": "onboarding",
+      "name": "sales_create_lead",
+      "ok": true,
+      "details": "project=8e13be9b-d3bc-4156-ad54-03c998fa8729",
+      "at": "2026-02-26T12:56:15.265Z"
+    },
+    {
+      "section": "onboarding",
+      "name": "invite_notification",
+      "ok": true,
+      "details": "notification inserted",
+      "at": "2026-02-26T12:56:15.448Z"
+    },
+    {
+      "section": "onboarding",
+      "name": "admin_assisted_project",
+      "ok": true,
+      "details": "project=b08c8faa-c95d-434f-9450-bcf6cad9db33",
+      "at": "2026-02-26T12:56:15.621Z"
+    },
+    {
+      "section": "onboarding",
+      "name": "admin_invoice_link",
+      "ok": true,
+      "details": "https://checkout.paystack.com/n1trid5yhgcbdto",
+      "at": "2026-02-26T12:56:17.425Z"
+    },
+    {
+      "section": "admin_ops",
+      "name": "admin_broadcast_insert",
+      "ok": true,
+      "details": "broadcast created",
+      "at": "2026-02-26T12:56:17.603Z"
+    },
+    {
+      "section": "admin_ops",
+      "name": "admin_profiles_visibility",
+      "ok": true,
+      "details": "profiles_visible=13",
+      "at": "2026-02-26T12:56:17.796Z"
+    },
+    {
+      "section": "admin_ops",
+      "name": "admin_project_finalize_patch",
+      "ok": true,
+      "details": "project set to complete/progress=100",
+      "at": "2026-02-26T12:56:17.980Z"
+    }
+  ],
+  "entities": {
+    "project_id": "e419c510-9874-4f77-8f19-7dcafcc34e8e",
+    "deposit_invoice_id": "55a0596e-2790-4a58-ab39-2540b66a13d9",
+    "final_invoice_id": "81f2768c-1bff-408b-b720-99f45ad8d0be",
+    "proposal_id": "1f208ca8-0a59-439b-8afb-b8461a1ccde6",
+    "dispute_id": "e3a3ea2a-fe92-4161-a91f-c9eb22fedf2c"
+  },
+  "cashflow": {
+    "invoices": 2,
+    "paidInvoices": 2,
+    "transactions": 9,
+    "paidTransactions": 7,
+    "invoicedTotal": 180000,
+    "paidInvoiceTotal": 180000,
+    "paidTransactionTotal": 405000,
+    "depositRuleSatisfied": true,
+    "fullPaid": true,
+    "kinds": {
+      "invoice_payment": 180000,
+      "commission_accrual": 54000,
+      "escrow_fund": 81000,
+      "milestone_release": 36000,
+      "refund": 54000
+    }
+  },
+  "onboarding": {
+    "profile_link_share": {
+      "ok": true,
+      "details": "http://localhost:3000/sales_onboarding.html?sid=369095e2-a42a-4cfc-9072-10877c22720d&sname=Commissioner+User&srole=commissioner&theme=glass"
+    },
+    "sales_create_lead": {
+      "ok": true,
+      "details": "project=8e13be9b-d3bc-4156-ad54-03c998fa8729"
+    },
+    "invite_notification": {
+      "ok": true,
+      "details": "notification inserted"
+    },
+    "admin_assisted_project": {
+      "ok": true,
+      "details": "project=b08c8faa-c95d-434f-9450-bcf6cad9db33"
+    },
+    "admin_invoice_link": {
+      "ok": true,
+      "details": "https://checkout.paystack.com/n1trid5yhgcbdto"
+    }
+  },
+  "messaging": {
+    "firstMessageId": "651fe647-587e-41f9-a003-d7e91a86196d",
+    "steps": [
+      {
+        "name": "client_to_commissioner",
+        "ok": true,
+        "details": "message sent"
+      },
+      {
+        "name": "commissioner_to_client_reply",
+        "ok": true,
+        "details": "reply sent"
+      },
+      {
+        "name": "commissioner_to_developer",
+        "ok": true,
+        "details": "message sent"
+      },
+      {
+        "name": "developer_to_commissioner_reply",
+        "ok": true,
+        "details": "reply sent"
+      },
+      {
+        "name": "thread_fetch_project",
+        "ok": true,
+        "details": "thread_messages=4"
+      },
+      {
+        "name": "client_mark_read",
+        "ok": true,
+        "details": "unread->read updated"
+      }
+    ]
+  },
+  "roleHealth": {
+    "client": {
+      "login": true,
+      "projectsVisible": 32,
+      "messagesVisible": 4,
+      "invoicesVisible": 58
+    },
+    "admin": {
+      "login": true,
+      "projectsVisible": 43,
+      "messagesVisible": 0,
+      "invoicesVisible": 80
+    },
+    "commissioner": {
+      "login": true,
+      "projectsVisible": 37,
+      "messagesVisible": 13,
+      "invoicesVisible": 17
+    },
+    "developer": {
+      "login": true,
+      "projectsVisible": 32,
+      "messagesVisible": 9,
+      "invoicesVisible": 1
+    }
+  },
+  "endedAt": "2026-02-26T12:56:17.980Z"
+}

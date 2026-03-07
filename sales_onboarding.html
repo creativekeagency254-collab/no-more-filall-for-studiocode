@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="aurora">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sales Onboarding Profile - CODE STUDIO ke</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg-1: #0f1224;
+      --bg-2: #131a36;
+      --panel: rgba(7, 11, 26, 0.75);
+      --panel-border: rgba(255, 255, 255, 0.16);
+      --text-1: #f6fbff;
+      --text-2: #c5d0df;
+      --accent: #65d68e;
+      --accent-2: #55b7ff;
+      --chip: rgba(255, 255, 255, 0.09);
+      --btn-fg: #05210d;
+      --shadow: 0 20px 56px rgba(0, 0, 0, 0.45);
+    }
+
+    html[data-theme="sunset"] {
+      --bg-1: #2a0d0f;
+      --bg-2: #522212;
+      --panel: rgba(32, 10, 9, 0.76);
+      --panel-border: rgba(255, 203, 169, 0.22);
+      --text-1: #fff7f2;
+      --text-2: #f9c8ac;
+      --accent: #ff9966;
+      --accent-2: #ffd166;
+      --chip: rgba(255, 201, 175, 0.12);
+      --btn-fg: #2b1104;
+      --shadow: 0 20px 56px rgba(38, 15, 8, 0.45);
+    }
+
+    html[data-theme="forest"] {
+      --bg-1: #081a14;
+      --bg-2: #0f2a20;
+      --panel: rgba(7, 20, 16, 0.78);
+      --panel-border: rgba(155, 255, 213, 0.2);
+      --text-1: #ebfff4;
+      --text-2: #b1d7c2;
+      --accent: #67df8f;
+      --accent-2: #5ed6c7;
+      --chip: rgba(158, 255, 212, 0.12);
+      --btn-fg: #05210d;
+      --shadow: 0 20px 56px rgba(3, 14, 8, 0.5);
+    }
+
+    html[data-theme="mono"] {
+      --bg-1: #161616;
+      --bg-2: #252525;
+      --panel: rgba(16, 16, 16, 0.8);
+      --panel-border: rgba(255, 255, 255, 0.2);
+      --text-1: #f5f5f5;
+      --text-2: #c2c2c2;
+      --accent: #ffffff;
+      --accent-2: #d2d2d2;
+      --chip: rgba(255, 255, 255, 0.1);
+      --btn-fg: #0a0a0a;
+      --shadow: 0 20px 56px rgba(0, 0, 0, 0.5);
+    }
+
+    html[data-theme="ocean"] {
+      --bg-1: #041426;
+      --bg-2: #053455;
+      --panel: rgba(4, 19, 34, 0.78);
+      --panel-border: rgba(111, 224, 255, 0.22);
+      --text-1: #e9f9ff;
+      --text-2: #a8d1e2;
+      --accent: #68d6ff;
+      --accent-2: #79a6ff;
+      --chip: rgba(134, 228, 255, 0.12);
+      --btn-fg: #03233a;
+      --shadow: 0 20px 56px rgba(1, 15, 27, 0.54);
+    }
+
+    html[data-theme="kenya"] {
+      --bg-1: #050706;
+      --bg-2: #1a3d19;
+      --panel: rgba(5, 12, 8, 0.82);
+      --panel-border: rgba(255, 255, 255, 0.2);
+      --text-1: #f8fff8;
+      --text-2: #d5e2d3;
+      --accent: #ce2b37;
+      --accent-2: #5cab57;
+      --chip: rgba(255, 255, 255, 0.1);
+      --btn-fg: #091107;
+      --shadow: 0 20px 56px rgba(0, 0, 0, 0.52);
+    }
+
+    html[data-theme="tech"] {
+      --bg-1: #060e1a;
+      --bg-2: #101e34;
+      --panel: rgba(8, 14, 26, 0.82);
+      --panel-border: rgba(132, 197, 255, 0.25);
+      --text-1: #f1f8ff;
+      --text-2: #b2c8dd;
+      --accent: #49d7ff;
+      --accent-2: #7f8cff;
+      --chip: rgba(151, 204, 255, 0.12);
+      --btn-fg: #06182e;
+      --shadow: 0 20px 56px rgba(4, 10, 18, 0.58);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-1);
+      background:
+        radial-gradient(1400px 600px at -5% -10%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 60%),
+        radial-gradient(1200px 540px at 110% -10%, color-mix(in srgb, var(--accent-2) 24%, transparent), transparent 63%),
+        linear-gradient(155deg, var(--bg-1), var(--bg-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 26px 14px;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity .35s ease;
+    }
+
+    html[data-theme="kenya"] body::before {
+      opacity: 0.5;
+      background:
+        linear-gradient(
+          180deg,
+          #111 0%,
+          #111 24%,
+          #f3f3f3 24%,
+          #f3f3f3 28%,
+          #bb1f2d 28%,
+          #bb1f2d 50%,
+          #f3f3f3 50%,
+          #f3f3f3 54%,
+          #0a7a3d 54%,
+          #0a7a3d 100%
+        );
+      background-size: 100% 130%;
+      animation: kenyaWave 9s ease-in-out infinite alternate;
+    }
+
+    html[data-theme="tech"] body::before {
+      opacity: 0.35;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(87, 203, 255, 0.32), transparent 28%),
+        radial-gradient(circle at 80% 80%, rgba(116, 115, 255, 0.24), transparent 31%),
+        repeating-linear-gradient(90deg, rgba(110, 178, 255, 0.18) 0 1px, transparent 1px 24px),
+        repeating-linear-gradient(0deg, rgba(110, 178, 255, 0.12) 0 1px, transparent 1px 24px);
+      animation: techPulse 10s ease-in-out infinite;
+    }
+
+    @keyframes kenyaWave {
+      0% {
+        transform: translateY(-2%) skewY(0deg);
+      }
+      100% {
+        transform: translateY(2%) skewY(-1.2deg);
+      }
+    }
+
+    @keyframes techPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 0.32;
+      }
+      50% {
+        transform: scale(1.03);
+        opacity: 0.46;
+      }
+    }
+
+    .theme-video {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .4s ease;
+      filter: saturate(1.12) contrast(1.08);
+    }
+
+    .theme-video.active {
+      opacity: 0.28;
+    }
+
+    .mesh {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+      mask-image: radial-gradient(ellipse at center, black 20%, transparent 76%);
+      opacity: 0.32;
+      animation: drift 22s linear infinite alternate;
+    }
+
+    @keyframes drift {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-18px);
+      }
+    }
+
+    .wrap {
+      width: min(980px, 100%);
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Sora', sans-serif;
+      letter-spacing: -0.01em;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--text-1);
+    }
+
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 9px;
+      background: var(--text-1);
+      color: #0b0b0b;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .brand-mark svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .badge {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      font-weight: 700;
+      border: 1px solid var(--panel-border);
+      border-radius: 999px;
+      padding: 5px 10px;
+      color: var(--text-2);
+      background: var(--chip);
+    }
+
+    .content {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 18px;
+    }
+
+    .card {
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 18px;
+      animation: rise .44s ease both;
+    }
+
+    @keyframes rise {
+      from {
+        transform: translateY(18px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .hero {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      border-radius: 22px;
+      overflow: hidden;
+      border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+      background: rgba(255, 255, 255, 0.08);
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-family: 'Sora', sans-serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-1);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .name {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .headline {
+      margin-top: 4px;
+      color: var(--text-2);
+      font-size: 14px;
+    }
+
+    .kicker {
+      margin-top: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip {
+      padding: 5px 9px;
+      font-size: 10px;
+      font-weight: 700;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-2);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: var(--chip);
+    }
+
+    .message {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-1);
+      white-space: pre-wrap;
+    }
+
+    .section-title {
+      font-family: 'Sora', sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--text-2);
+      margin-bottom: 10px;
+    }
+
+    .links {
+      display: grid;
+      gap: 10px;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 14px;
+      padding: 12px;
+      color: var(--text-1);
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: rgba(255, 255, 255, 0.03);
+      transition: .15s ease;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .link:hover {
+      border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+      transform: translateY(-1px);
+    }
+
+    .cta {
+      margin-top: 14px;
+      display: grid;
+      gap: 9px;
+    }
+
+    .btn {
+      width: 100%;
+      border-radius: 13px;
+      padding: 12px 14px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: .15s ease;
+      text-align: center;
+      font-family: 'Manrope', sans-serif;
+    }
+
+    .btn-primary {
+      color: var(--btn-fg);
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: saturate(1.06);
+    }
+
+    .btn-secondary {
+      color: var(--text-1);
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary:hover {
+      border-color: color-mix(in srgb, var(--accent) 70%, transparent);
+    }
+
+    .meta {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--text-2);
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .footer {
+      padding: 14px 18px 18px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-2);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    @media(max-width:920px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media(max-width:520px) {
+      .topbar {
+        padding: 13px;
+      }
+
+      .content {
+        padding: 13px;
+      }
+
+      .card {
+        padding: 14px;
+      }
+
+      .hero {
+        align-items: flex-start;
+      }
+
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <video class="theme-video" id="theme-video-bg" autoplay muted loop playsinline></video>
+  <div class="mesh"></div>
+  <main class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+            <path d="M12 2 4 6v12l8 4 8-4V6l-8-4Z"/>
+            <path d="M4 6l8 4 8-4"/>
+            <path d="M12 10v12"/>
+          </svg>
+        </div>
+        <span>CODE STUDIO ke</span>
+      </div>
+      <div class="badge" id="theme-badge">Theme: Aurora</div>
+    </div>
+    <section class="content">
+      <article class="card">
+        <div class="hero">
+          <div class="avatar" id="sales-avatar">
+            <span id="sales-initials">SA</span>
+          </div>
+          <div>
+            <h1 class="name" id="sales-name">Sales Advisor</h1>
+            <p class="headline" id="sales-headline">Your trusted software delivery partner</p>
+            <div class="kicker">
+              <span class="chip">Cube Identity</span>
+              <span class="chip">Client Onboarding</span>
+              <span class="chip">Project Planning</span>
+              <span class="chip">Escrow Guidance</span>
+            </div>
+          </div>
+        </div>
+        <p class="message" id="sales-message">I will help you define scope, budget, delivery timeline, and the right team setup before development begins.</p>
+      </article>
+      <article class="card">
+        <div class="section-title">Portfolio & Contact</div>
+        <div class="links" id="sales-links"></div>
+        <div class="cta">
+          <a class="btn btn-primary" id="join-btn" href="landing_page.html?mode=onboard">Join with this advisor</a>
+          <a class="btn btn-secondary" id="signin-btn" href="landing_page.html">Already have an account? Sign in</a>
+          <button class="btn btn-secondary" id="copy-btn" type="button">Copy this profile link</button>
+        </div>
+        <div class="meta" id="sales-meta">You will be routed to the client dashboard after signup/signin.</div>
+      </article>
+    </section>
+    <div class="footer">
+      CODE STUDIO ke onboarding profile
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const themes = {
+        aurora: 'Aurora',
+        sunset: 'Sunset',
+        forest: 'Forest',
+        mono: 'Mono',
+        ocean: 'Ocean',
+        kenya: 'Kenya Live',
+        tech: 'Tech Grid',
+      };
+
+      const themeVideoSources = {
+        kenya: 'https://cdn.pixabay.com/video/2022/10/07/133886-757919173_tiny.mp4',
+        tech: 'https://cdn.pixabay.com/video/2023/01/17/146781-790040166_tiny.mp4',
+      };
+
+      function clean(value, fallback = '', limit = 320) {
+        const txt = String(value || '').trim();
+        if (!txt) return fallback;
+        return txt.slice(0, limit);
+      }
+
+      function normalizeTheme(value) {
+        const t = String(value || '').toLowerCase();
+        return Object.prototype.hasOwnProperty.call(themes, t) ? t : 'aurora';
+      }
+
+      function asUrl(value) {
+        const raw = clean(value);
+        if (!raw) return '';
+        const candidate = /^https?:\/\//i.test(raw) ? raw : `https://${raw}`;
+        try {
+          const parsed = new URL(candidate);
+          if (!['http:', 'https:'].includes(parsed.protocol)) return '';
+          return parsed.toString();
+        } catch (_) {
+          return '';
+        }
+      }
+
+      function initials(name) {
+        const parts = clean(name).split(/\s+/).filter(Boolean).slice(0, 2);
+        if (!parts.length) return 'SA';
+        return parts.map(p => p[0]).join('').toUpperCase();
+      }
+
+      const theme = normalizeTheme(params.get('theme'));
+      document.documentElement.setAttribute('data-theme', theme);
+      document.getElementById('theme-badge').textContent = `Theme: ${themes[theme]}`;
+      const themeVideo = document.getElementById('theme-video-bg');
+      if (themeVideo) {
+        const src = themeVideoSources[theme];
+        if (src) {
+          themeVideo.src = src;
+          themeVideo.classList.add('active');
+          themeVideo.play().catch(() => {
+            themeVideo.classList.remove('active');
+          });
+          themeVideo.addEventListener('error', () => themeVideo.classList.remove('active'));
+        } else {
+          themeVideo.classList.remove('active');
+        }
+      }
+
+      const salesId = clean(params.get('sid'), '');
+      const salesName = clean(params.get('sname'), 'Sales Advisor', 140);
+      const salesEmail = clean(params.get('semail'), '', 200);
+      const avatar = asUrl(params.get('savatar'));
+      const headline = clean(params.get('headline'), 'Your trusted software delivery partner', 180);
+      const message = clean(params.get('message'), 'I will help you define scope, budget, delivery timeline, and the right team setup before development begins.', 800);
+
+      const website = asUrl(params.get('website'));
+      const linkedin = asUrl(params.get('linkedin'));
+      const whatsapp = asUrl(params.get('whatsapp'));
+      const calendar = asUrl(params.get('calendar'));
+
+      document.getElementById('sales-name').textContent = salesName;
+      document.getElementById('sales-headline').textContent = headline;
+      document.getElementById('sales-message').textContent = message;
+      document.getElementById('sales-initials').textContent = initials(salesName);
+      if (avatar) {
+        const holder = document.getElementById('sales-avatar');
+        holder.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = avatar;
+        img.alt = salesName;
+        holder.appendChild(img);
+      }
+
+      const links = [
+        { label: 'Website', href: website },
+        { label: 'LinkedIn', href: linkedin },
+        { label: 'WhatsApp', href: whatsapp },
+        { label: 'Book a call', href: calendar },
+      ].filter(x => !!x.href);
+
+      const linksWrap = document.getElementById('sales-links');
+      if (!links.length) {
+        linksWrap.innerHTML = '<div class="meta" style="text-align:left;">Portfolio links will appear here once added by the sales advisor.</div>';
+      } else {
+        linksWrap.innerHTML = links.map(item => (
+          `<a class="link" href="${item.href}" target="_blank" rel="noopener noreferrer"><span>${item.label}</span><span>Open</span></a>`
+        )).join('');
+      }
+
+      const landingUrl = new URL('landing_page.html', `${window.location.origin}/`);
+      landingUrl.searchParams.set('mode', 'onboard');
+      landingUrl.searchParams.set('theme', theme);
+      if (salesId) landingUrl.searchParams.set('sid', salesId);
+      if (salesName) landingUrl.searchParams.set('sname', salesName);
+      if (salesEmail) landingUrl.searchParams.set('semail', salesEmail);
+      if (avatar) landingUrl.searchParams.set('savatar', avatar);
+      landingUrl.searchParams.set('src', 'sales_portfolio');
+
+      const joinBtn = document.getElementById('join-btn');
+      joinBtn.href = landingUrl.toString();
+      joinBtn.textContent = `Join with ${salesName.split(' ')[0] || 'Advisor'}`;
+      document.getElementById('signin-btn').href = landingUrl.toString();
+      if (salesEmail) {
+        document.getElementById('sales-meta').textContent = `Advisor contact: ${salesEmail}. You will be routed to your client dashboard after signin.`;
+      }
+
+      document.getElementById('copy-btn').addEventListener('click', async function () {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          this.textContent = 'Profile link copied';
+          setTimeout(() => { this.textContent = 'Copy this profile link'; }, 1400);
+        } catch (_) {
+          this.textContent = 'Copy failed';
+          setTimeout(() => { this.textContent = 'Copy this profile link'; }, 1400);
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,218 @@
+{
+  "generated_at": "2026-02-26T12:51:06.647Z",
+  "status_counts": {
+    "PASS": 417,
+    "WARN": 1551,
+    "FAIL": 32
+  },
+  "probes": {
+    "invoiceProbe": {
+      "ok": true,
+      "step": "pipeline_complete",
+      "details": {
+        "invoice_id": "5565fb7f-98b1-498b-b6b7-51e2cb60fd5f",
+        "send_invoice_status": 200,
+        "send_invoice_body": {
+          "success": true,
+          "invoice_id": "5565fb7f-98b1-498b-b6b7-51e2cb60fd5f",
+          "status": "sent",
+          "reference": "PRQ_f0z9b3jpwvddqk3",
+          "authorization_url": "https://checkout.paystack.com/77d8kdjvivb9t0y",
+          "paystack_notification_triggered": true,
+          "email": {
+            "sent": true,
+            "skipped": false,
+            "provider": "paystack",
+            "note": "Payment request notification sent by Paystack"
+          }
+        },
+        "invoice_after": {
+          "id": "5565fb7f-98b1-498b-b6b7-51e2cb60fd5f",
+          "status": "sent",
+          "paystack_reference": "PRQ_f0z9b3jpwvddqk3",
+          "paystack_authorization_url": "https://checkout.paystack.com/77d8kdjvivb9t0y",
+          "updated_at": "2026-02-26T12:50:44.786258+00:00"
+        },
+        "notification": {
+          "id": "c5a3e944-320e-4c75-a6a1-50dfb10c3793",
+          "user_id": "3961d2b6-eb9e-44f4-a55f-918fd4ba6a84",
+          "title": "New invoice available",
+          "content": "SCAN_INVOICE_1772110242545 - Ksh 321.00",
+          "type": "invoice",
+          "created_at": "2026-02-26T12:50:45.036284+00:00"
+        }
+      },
+      "errors": []
+    },
+    "profileWriteProbe": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "success": true,
+        "profile": {
+          "id": "3961d2b6-eb9e-44f4-a55f-918fd4ba6a84",
+          "first_name": "Client",
+          "last_name": "User",
+          "email": "client@test.com",
+          "phone": null,
+          "role": "client",
+          "created_at": "2026-02-24T10:02:54.479159+00:00",
+          "updated_at": "2026-02-26T12:50:48.964+00:00",
+          "available_for_work": false,
+          "bio": null,
+          "skills": null,
+          "avatar_url": null,
+          "hourly_rate": null,
+          "status": "active",
+          "company": "CODE STUDIO QA"
+        },
+        "removed_columns": []
+      },
+      "error": null
+    },
+    "topupProbe": {
+      "ok": true,
+      "status": 200,
+      "body": {
+        "success": true,
+        "topup_id": "f9b61f9d-0d0d-49d7-9c11-ccb8f41daf2b",
+        "invoice_id": "f9b61f9d-0d0d-49d7-9c11-ccb8f41daf2b",
+        "reference": "topup_f9b61f9d0d0d49d79c11ccb8f41daf2b",
+        "authorization_url": "https://checkout.paystack.com/lfcifgrw2pxppa9",
+        "status": "pending",
+        "message": "Top-up created. Redirect to Paystack checkout."
+      },
+      "error": null
+    },
+    "loginPassCount": 4,
+    "auditPass": 25,
+    "auditFail": 0,
+    "pageStatus": [
+      {
+        "route": "/admin_dashboard.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/agency_blog.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/client_dashboard.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/developer_dashboard.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/developer_profile.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/index.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/landing_page.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/sales_dashboard.html",
+        "status": 200,
+        "ok": true
+      },
+      {
+        "route": "/sales_onboarding.html",
+        "status": 200,
+        "ok": true
+      }
+    ],
+    "functionStatus": {
+      "admin-users": 200,
+      "get-paystack-balance": 200,
+      "initiate-topup": 200,
+      "paystack-webhook": 200,
+      "profile-write": 200,
+      "send-email": 200,
+      "send-invoice": 200,
+      "send_gmail": 200,
+      "create-user": 404,
+      "paystack-initiate": 404,
+      "paystack-verify": 404
+    },
+    "secretFindings": [
+      {
+        "file": ".env",
+        "pattern": "paystack_live_secret",
+        "count": 1
+      },
+      {
+        "file": ".env",
+        "pattern": "paystack_live_public",
+        "count": 1
+      },
+      {
+        "file": ".env",
+        "pattern": "supabase_secret_key",
+        "count": 1
+      },
+      {
+        "file": ".env",
+        "pattern": "resend_key",
+        "count": 1
+      },
+      {
+        "file": ".env.local",
+        "pattern": "paystack_live_secret",
+        "count": 1
+      },
+      {
+        "file": ".env.local",
+        "pattern": "paystack_live_public",
+        "count": 1
+      },
+      {
+        "file": ".env.local",
+        "pattern": "supabase_secret_key",
+        "count": 1
+      },
+      {
+        "file": ".env.local",
+        "pattern": "resend_key",
+        "count": 1
+      }
+    ]
+  },
+  "issues": [
+    {
+      "severity": "P0",
+      "title": "Secret-Like Values Present In Local Files",
+      "details": "Pattern scan found likely secrets in env/docs/source files.",
+      "remediation": "Rotate exposed credentials and keep real keys only in secret managers. Replace local files with placeholders before sharing/repo sync.",
+      "evidence": [
+        ".env -> paystack_live_secret (1)",
+        ".env -> paystack_live_public (1)",
+        ".env -> supabase_secret_key (1)",
+        ".env -> resend_key (1)",
+        ".env.local -> paystack_live_secret (1)",
+        ".env.local -> paystack_live_public (1)",
+        ".env.local -> supabase_secret_key (1)",
+        ".env.local -> resend_key (1)"
+      ]
+    },
+    {
+      "severity": "P2",
+      "title": "Live pg_catalog Introspection Limited",
+      "details": "Supabase inspect/db dump commands are blocked by auth circuit-breaker in current CLI session.",
+      "remediation": "Set SUPABASE_DB_PASSWORD and rerun inspect/db dump commands to enrich index/trigger/constraint runtime evidence.",
+      "evidence": []
+    }
+  ]
+}

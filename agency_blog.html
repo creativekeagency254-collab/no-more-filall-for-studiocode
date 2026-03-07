@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CODESTUDIO.KENYA Blog | Agency Delivery, Security, Payments and Growth</title>
+  <meta name="description" content="Long-form agency knowledge base for software buyers: delivery systems, secure payments, role-based dashboards, onboarding, and practical growth playbooks." />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta property="og:title" content="CODESTUDIO.KENYA Blog | Agency Growth and Delivery Library" />
+  <meta property="og:description" content="200 deep-dive guides focused on software delivery, client conversion, secure payments, and scalable operations." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://liveteststudiocodemuchemi.netlify.app/agency_blog.html" />
+  <meta property="og:image" content="https://liveteststudiocodemuchemi.netlify.app/favicon.svg" />
+  <link rel="canonical" href="https://liveteststudiocodemuchemi.netlify.app/agency_blog.html" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #eef2f7;
+      --ink: #171a22;
+      --muted: #546174;
+      --line: #d7dde7;
+      --panel: #0f172a;
+      --panelText: #d5dff0;
+      --paper: #ffffff;
+      --accent: #16a34a;
+      --accent2: #0ea5e9;
+      --shadow: 0 12px 34px rgba(15, 23, 42, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f6f9fc, #edf2f8);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topbar-inner {
+      width: min(1400px, 100%);
+      margin: 0 auto;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.12);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: #0f172a;
+      border-radius: 10px;
+      padding: 9px 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.1);
+    }
+
+    .btn-primary {
+      border-color: #14532d;
+      background: linear-gradient(135deg, #16a34a, #0f9d58);
+      color: #fff;
+    }
+
+    .layout {
+      width: min(1400px, 100%);
+      margin: 0 auto;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 360px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 76px;
+      max-height: calc(100vh - 90px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #1e293b;
+      background: linear-gradient(180deg, #111827, #0b1220);
+      border-radius: 16px;
+      color: var(--panelText);
+      box-shadow: var(--shadow);
+    }
+
+    .sidebar-head {
+      padding: 14px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.26);
+    }
+
+    .sidebar-title {
+      margin: 0;
+      font-size: 0.92rem;
+      font-weight: 800;
+      font-family: 'Syne', sans-serif;
+      letter-spacing: 0.02em;
+    }
+
+    .sidebar-sub {
+      margin: 6px 0 0;
+      font-size: 0.76rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    .sidebar-tools {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .search {
+      width: 100%;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: rgba(15, 23, 42, 0.82);
+      color: #e2e8f0;
+      border-radius: 9px;
+      padding: 9px 10px;
+      font-size: 0.82rem;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    }
+
+    .topics {
+      overflow: auto;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .topic-group {
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.28);
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .topic-group-title {
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #86efac;
+      padding: 4px 4px 2px;
+      border-bottom: 1px dashed rgba(148, 163, 184, 0.24);
+      margin-bottom: 2px;
+    }
+
+    .topic-item {
+      border: 1px solid rgba(148, 163, 184, 0.28);
+      background: rgba(15, 23, 42, 0.46);
+      color: #dbe7f8;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: left;
+      cursor: pointer;
+      transition: 0.15s ease;
+      width: 100%;
+      font-size: 0.8rem;
+      line-height: 1.35;
+      display: grid;
+      gap: 6px;
+    }
+
+    .topic-item:hover {
+      border-color: rgba(34, 197, 94, 0.85);
+      transform: translateX(2px);
+    }
+
+    .topic-item.active {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.15);
+    }
+
+    .topic-meta {
+      font-size: 0.69rem;
+      color: #93c5fd;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .doc-wrap {
+      min-width: 0;
+    }
+
+    .doc-paper {
+      border: 1px solid var(--line);
+      background: var(--paper);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .doc-header {
+      padding: 22px 24px 14px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff, #f9fbff);
+    }
+
+    .doc-kicker {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0f766e;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .doc-title {
+      margin: 0;
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      line-height: 1.12;
+      letter-spacing: -0.015em;
+      color: #0f172a;
+    }
+
+    .doc-meta {
+      margin-top: 10px;
+      font-size: 0.84rem;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+    }
+
+    .doc-body {
+      padding: 22px 24px 28px;
+    }
+
+    .doc-image {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid #d9e1ed;
+      margin-bottom: 18px;
+      aspect-ratio: 21 / 8;
+      object-fit: cover;
+      display: block;
+      background: #0b1220;
+    }
+
+    .doc-summary {
+      border-left: 4px solid #16a34a;
+      background: #ecfdf5;
+      color: #14532d;
+      border-radius: 0 10px 10px 0;
+      padding: 11px 12px;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .doc-section {
+      margin-top: 18px;
+    }
+
+    .doc-section h2 {
+      margin: 0 0 8px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.14rem;
+      color: #111827;
+      letter-spacing: -0.01em;
+    }
+
+    .doc-section p {
+      margin: 0;
+      color: #1f2937;
+      font-size: 1rem;
+      line-height: 1.82;
+      text-align: left;
+    }
+
+    .doc-checklist {
+      margin: 14px 0 0;
+      padding: 12px 14px;
+      border: 1px dashed #9ca3af;
+      background: #f8fafc;
+      border-radius: 10px;
+      display: grid;
+      gap: 9px;
+      font-size: 0.92rem;
+      color: #1e293b;
+    }
+
+    .doc-checkitem {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.55;
+    }
+
+    .doc-checkitem::before {
+      content: "[ok]";
+      color: #0f766e;
+      font-weight: 800;
+      margin-top: 1px;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 0.78rem;
+      color: #0f766e;
+      font-weight: 700;
+      min-height: 1.1em;
+    }
+
+    @media (max-width: 768px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        top: 0;
+        max-height: 55vh;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        padding: 12px;
+      }
+
+      .doc-header,
+      .doc-body {
+        padding: 16px;
+      }
+
+      .doc-section p {
+        font-size: 0.95rem;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+  <script type="application/ld+json" id="blog-schema"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <span class="brand-dot" aria-hidden="true"></span>
+        <span>CODESTUDIO.KENYA Blog Library</span>
+      </div>
+      <div class="top-actions">
+        <button class="btn btn-primary" id="copy-all-btn">Copy Entire Blog</button>
+        <a class="btn" href="landing_page.html">Back to Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar" aria-label="Blog library navigation">
+      <div class="sidebar-head">
+        <h2 class="sidebar-title">Blog Library</h2>
+        <p class="sidebar-sub">Select a topic to load a complete long-form article focused on conversion, delivery, trust, and secure payment operations.</p>
+        <div class="sidebar-tools">
+          <input id="topic-search" class="search" type="search" placeholder="Search topic, role, workflow..." />
+        </div>
+        <div class="status" id="copy-status"></div>
+      </div>
+      <div class="topics" id="topic-list"></div>
+    </aside>
+
+    <section class="doc-wrap">
+      <article class="doc-paper" id="doc-paper">
+        <div class="doc-header">
+          <div class="doc-kicker">Agency Playbook</div>
+          <h1 class="doc-title" id="doc-title">Loading topic...</h1>
+          <div class="doc-meta" id="doc-meta"></div>
+        </div>
+        <div class="doc-body">
+          <img id="doc-image" class="doc-image" alt="Technology concept illustration" />
+          <div class="doc-summary" id="doc-summary"></div>
+          <div id="doc-sections"></div>
+          <div class="doc-checklist" id="doc-checklist"></div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const serviceTracks = [
+      'Client Onboarding Portfolio Systems',
+      'Commissioner Pipeline Management',
+      'Developer Delivery Operations',
+      'Admin Revenue Command Center',
+      'Payment Verification and Ledger Controls',
+      'Project Estimation and Scope Discovery',
+      'Escrow Milestone Delivery Operations',
+      'Secure Agency Messaging Framework',
+      'Realtime Dashboard Performance Engineering',
+      'Google Sign-In Identity Reliability',
+      'Supabase Database Governance',
+      'Paystack Checkout and Reconciliation',
+      'Agency Website Conversion Optimization',
+      'Support Automation and SLA Management',
+      'Role-Based Access Control Workflows',
+      'Proposal and Bidding Marketplace',
+      'Invoice Lifecycle and Billing Operations',
+      'Mobile UX for High-Intent Buyers',
+      'Case Study and Social Proof Systems',
+      'Security Hardening and Audit Trails'
+    ];
+
+    const businessAngles = [
+      'Buyer Guide for Kenya SMEs',
+      'Implementation Blueprint',
+      'Cost Breakdown and Savings',
+      'KPI Framework for Sustainable Growth',
+      'Critical Mistakes to Avoid',
+      'Team Workflow Playbook',
+      'Security and Compliance Checklist',
+      'Scaling Strategy to 1000+ Clients',
+      'Automation Opportunities and Tooling',
+      'Conversion-First Content Strategy'
+    ];
+
+    const topics = [];
+    let idx = 0;
+    for (const service of serviceTracks) {
+      for (const angle of businessAngles) {
+        idx += 1;
+        const title = `${service}: ${angle}`;
+        topics.push({
+          id: idx,
+          title,
+          slug: `topic-${idx}`,
+          service,
+          angle
+        });
+      }
+    }
+
+    function escapeHtml(value) {
+      return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatWords(value) {
+      return value.toLocaleString('en-US');
+    }
+
+    function getWordCount(text) {
+      return text.trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    function buildTopicImage(topic) {
+      const hueA = (topic.id * 17) % 360;
+      const hueB = (topic.id * 29) % 360;
+      const title = escapeHtml(topic.service.slice(0, 32));
+      const subtitle = escapeHtml(topic.angle.slice(0, 38));
+      const svg = `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 420'>
+        <defs>
+          <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+            <stop offset='0%' stop-color='hsl(${hueA} 72% 16%)' />
+            <stop offset='100%' stop-color='hsl(${hueB} 68% 11%)' />
+          </linearGradient>
+        </defs>
+        <rect width='1200' height='420' fill='url(#g)' />
+        <g stroke='rgba(255,255,255,0.16)' fill='none'>
+          <path d='M80 350 L220 110 L380 280 L550 70 L730 240 L940 60 L1110 280' stroke-width='3'/>
+          <circle cx='220' cy='110' r='26'/>
+          <circle cx='550' cy='70' r='18'/>
+          <circle cx='940' cy='60' r='30'/>
+          <rect x='780' y='230' width='220' height='110' rx='10'/>
+          <rect x='130' y='230' width='260' height='110' rx='10'/>
+        </g>
+        <text x='70' y='122' fill='rgba(255,255,255,0.94)' font-size='34' font-family='Arial, sans-serif' font-weight='700'>${title}</text>
+        <text x='70' y='164' fill='rgba(255,255,255,0.84)' font-size='24' font-family='Arial, sans-serif'>${subtitle}</text>
+      </svg>`;
+      return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+    }
+
+    function buildArticle(topic) {
+      const p1 = `This guide explains ${topic.title.toLowerCase()} for software buyers and decision makers. The practical objective is straightforward: move from uncertainty to a controlled delivery plan where scope, budget, timelines, and payment checkpoints are transparent from day one. A professional agency should not force clients to guess quality. Instead, it should prove process maturity through structured onboarding, role clarity, and measurable delivery outcomes.`;
+      const p2 = `From a business standpoint, ${topic.service.toLowerCase()} matters because most projects fail when communication and accountability are vague. Teams often jump into development without clear acceptance criteria, causing cost expansion and timeline stress. The better approach is to define milestones, assign ownership per role, and maintain a single source of truth in the dashboard. Every update should be visible, timestamped, and linked to a project decision so stakeholders can track progress with confidence.`;
+      const p3 = `Implementation should start with a discovery framework that captures requirements, constraints, risk tolerance, and expected commercial impact. For CODESTUDIO.KENYA-style engagements, this means documenting user stories, required integrations, payment behavior, and reporting needs before major build work begins. It also means validating technical assumptions early. If architecture decisions are postponed, teams end up rewriting flows under pressure. A disciplined blueprint prevents rework and protects both client capital and delivery quality.`;
+      const p4 = `Security is not a checklist after launch. It is part of daily engineering behavior. Role-based access controls, row-level permissions, audit trails, webhook signature verification, and immutable transaction records should be active from the first sprint. This is especially critical when projects include invoice links, deposit workflows, and payout requests. Buyers should request concrete evidence: policy definitions, failure alerts, reconciliation logs, and rollback strategy. Mature agencies can show this without hesitation.`;
+      const p5 = `Payment trust directly affects conversion. The most effective model is clear: estimate range, approved scope, initial deposit, milestone approvals, and final release. When customers can see status transitions inside their dashboard, confidence rises and disputes drop. If payments are initiated by link, the platform still needs immediate feedback after confirmation so clients see "paid" and next steps without manual follow-up. Reliable reconciliation between provider events and internal records is therefore non-negotiable.`;
+      const p6 = `For growth teams, ${topic.angle.toLowerCase()} should drive both marketing and operations. High-performing agencies publish evidence-based content that answers buyer objections before sales calls. They map each article to real service pathways, include transparent pricing logic, and show risk controls in plain language. This attracts qualified leads instead of casual traffic. Over time, the brand wins because it combines expertise with execution discipline. Search engines and LLM systems reward that consistency.`;
+      const p7 = `Execution quality improves when every role knows what "done" means. Commissioners should capture opportunities with sufficient detail, developers should deliver against acceptance criteria, and admins should monitor revenue quality through verified transactions rather than assumptions. Clients should always know who to contact, what stage is active, and which action is required next. That level of clarity reduces support load and improves referral rates because the experience feels structured, not improvised.`;
+      const p8 = `The final recommendation is to treat this topic as an operating standard, not a one-time campaign. Review KPIs weekly, audit security monthly, and revalidate your pricing assumptions quarterly. When scope, communication, and payment controls stay aligned, project velocity increases while risk decreases. In practical terms, this means faster launches, fewer costly reversals, and a stronger reputation in competitive markets where trust is a deciding factor.`;
+
+      const sections = [
+        { heading: 'Direct Answer', text: p1 },
+        { heading: 'Business Context', text: p2 },
+        { heading: 'Implementation Blueprint', text: p3 },
+        { heading: 'Security and Trust Layer', text: p4 },
+        { heading: 'Payment and Invoice Reliability', text: p5 },
+        { heading: 'Growth and Conversion Logic', text: p6 },
+        { heading: 'Role Alignment Across Dashboards', text: p7 },
+        { heading: 'Operational Recommendation', text: p8 }
+      ];
+
+      let wordCount = sections.reduce((sum, section) => sum + getWordCount(section.text), 0);
+      while (wordCount < 420) {
+        const extra = `Additional execution note: maintain searchable project history, keep payment references unique, and ensure every status transition is confirmed through backend events before UI updates are marked final. This prevents false positives and keeps clients informed with credible, auditable information.`;
+        sections.push({ heading: `Execution Note ${sections.length - 7}`, text: extra });
+        wordCount += getWordCount(extra);
+      }
+
+      const checklist = [
+        `Define success metrics for ${topic.service.toLowerCase()} before build starts.`,
+        'Use explicit ownership per milestone with timestamps and approval state.',
+        'Verify payment events, status mapping, and ledger updates in one transaction.',
+        'Publish support response targets and escalation paths inside client dashboards.',
+        'Track conversion impact using qualified lead rate and signed project ratio.'
+      ];
+
+      return {
+        summary: `Practical agency guide: ${topic.title}. Focused on conversion, secure delivery, and reliable payment operations for serious software clients.`,
+        sections,
+        checklist,
+        wordCount
+      };
+    }
+
+    const topicListEl = document.getElementById('topic-list');
+    const searchEl = document.getElementById('topic-search');
+    const titleEl = document.getElementById('doc-title');
+    const metaEl = document.getElementById('doc-meta');
+    const imageEl = document.getElementById('doc-image');
+    const summaryEl = document.getElementById('doc-summary');
+    const sectionsEl = document.getElementById('doc-sections');
+    const checklistEl = document.getElementById('doc-checklist');
+    const copyBtn = document.getElementById('copy-all-btn');
+    const copyStatus = document.getElementById('copy-status');
+
+    let activeTopicId = topics[0].id;
+    let visibleTopics = [...topics];
+
+    function renderTopicList() {
+      if (!visibleTopics.length) {
+        topicListEl.innerHTML = '<div class="loading-text" style="padding:10px;color:#94a3b8;">No topics matched your search.</div>';
+        return;
+      }
+
+      const groups = new Map();
+      visibleTopics.forEach((topic) => {
+        if (!groups.has(topic.service)) groups.set(topic.service, []);
+        groups.get(topic.service).push(topic);
+      });
+
+      topicListEl.innerHTML = Array.from(groups.entries()).map(([service, groupTopics]) => {
+        const buttons = groupTopics.map((topic) => {
+          const activeClass = topic.id === activeTopicId ? 'active' : '';
+          return `<button class="topic-item ${activeClass}" data-topic-id="${topic.id}">
+            <span>${topic.id}. ${escapeHtml(topic.angle)}</span>
+            <span class="topic-meta">${escapeHtml(topic.slug)}</span>
+          </button>`;
+        }).join('');
+
+        return `<section class="topic-group">
+          <div class="topic-group-title">${escapeHtml(service)}</div>
+          ${buttons}
+        </section>`;
+      }).join('');
+    }
+
+    function renderArticle(topicId) {
+      const topic = topics.find((entry) => entry.id === topicId) || topics[0];
+      activeTopicId = topic.id;
+      const article = buildArticle(topic);
+
+      titleEl.textContent = topic.title;
+      metaEl.innerHTML = `<span>Topic #${topic.id}</span><span>${formatWords(article.wordCount)} words</span><span>SEO + LLM structured</span>`;
+      imageEl.src = buildTopicImage(topic);
+      summaryEl.textContent = article.summary;
+      sectionsEl.innerHTML = article.sections.map((section) => `
+        <section class="doc-section">
+          <h2>${escapeHtml(section.heading)}</h2>
+          <p>${escapeHtml(section.text)}</p>
+        </section>
+      `).join('');
+      checklistEl.innerHTML = article.checklist.map((item) => `<div class="doc-checkitem">${escapeHtml(item)}</div>`).join('');
+
+      document.title = `${topic.title} | CODESTUDIO.KENYA Blog`;
+      history.replaceState({}, '', `#${topic.slug}`);
+      renderTopicList();
+    }
+
+    topicListEl.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-topic-id]');
+      if (!button) return;
+      const topicId = Number(button.getAttribute('data-topic-id'));
+      renderArticle(topicId);
+    });
+
+    searchEl.addEventListener('input', () => {
+      const query = searchEl.value.trim().toLowerCase();
+      if (!query) {
+        visibleTopics = [...topics];
+        renderTopicList();
+        return;
+      }
+      visibleTopics = topics.filter((topic) =>
+        topic.title.toLowerCase().includes(query) ||
+        topic.service.toLowerCase().includes(query) ||
+        topic.angle.toLowerCase().includes(query)
+      );
+      renderTopicList();
+    });
+
+    async function copyAllArticles() {
+      const serialized = topics.map((topic) => {
+        const article = buildArticle(topic);
+        const blocks = article.sections.map((section) => `${section.heading}\n${section.text}`).join('\n\n');
+        const checklist = article.checklist.map((item) => `- ${item}`).join('\n');
+        return `${topic.id}. ${topic.title}\nWord Count: ${article.wordCount}\n\nSummary:\n${article.summary}\n\n${blocks}\n\nChecklist:\n${checklist}`;
+      }).join('\n\n============================================================\n\n');
+
+      try {
+        await navigator.clipboard.writeText(serialized);
+        copyStatus.textContent = 'Entire 200-topic blog copied to clipboard.';
+      } catch (error) {
+        copyStatus.textContent = 'Copy failed. Please allow clipboard permission and try again.';
+      }
+    }
+
+    copyBtn.addEventListener('click', copyAllArticles);
+
+    function buildSchema() {
+      const itemList = topics.map((topic, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: topic.title,
+        url: `https://liveteststudiocodemuchemi.netlify.app/agency_blog.html#${topic.slug}`
+      }));
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'CollectionPage',
+        name: 'CODESTUDIO.KENYA Blog Library',
+        description: '200 long-form practical articles for software buyers and agency operators.',
+        inLanguage: 'en',
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: itemList
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: 'CODESTUDIO.KENYA'
+        }
+      };
+      document.getElementById('blog-schema').textContent = JSON.stringify(schema);
+    }
+
+    function loadInitialTopic() {
+      const hash = window.location.hash.replace('#', '');
+      const hashTopic = topics.find((topic) => topic.slug === hash);
+      renderTopicList();
+      renderArticle(hashTopic ? hashTopic.id : topics[0].id);
+      buildSchema();
+    }
+
+    loadInitialTopic();
+  </script>
+</body>
+</html>

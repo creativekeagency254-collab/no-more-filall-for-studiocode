@@ -1,0 +1,5470 @@
+{
+  "generated_at": "2026-02-26T12:48:34.681Z",
+  "project_root": "C:\\Users\\user\\Downloads\\project-bolt-github-epghme6b\\project",
+  "mode": "phase1_discovery_non_destructive",
+  "limitations": [
+    "Direct Postgres inspect commands are currently rate-limited by Supabase pooler auth circuit breaker (requires valid DB password/session).",
+    "Indexes, triggers, constraints, and policy inventory are derived from migration SQL in repo, not live pg_catalog introspection.",
+    "Row counts are sampled through REST content-range headers using service role key."
+  ],
+  "env_safety": {
+    "placeholders_expected": [
+      "NEXT_PUBLIC_SUPABASE_URL=<SUPABASE_URL>",
+      "NEXT_PUBLIC_SUPABASE_ANON_KEY=<SUPABASE_ANON_KEY>",
+      "SUPABASE_SERVICE_ROLE_KEY=<SUPABASE_SERVICE_ROLE_KEY>",
+      "DATABASE_URL=<DATABASE_URL>",
+      "PAYSTACK_PK=<PAYSTACK_PK>",
+      "PAYSTACK_SK=<PAYSTACK_SK>",
+      "GOOGLE_CLIENT_ID=<GOOGLE_CLIENT_ID>",
+      "GOOGLE_CLIENT_SECRET=<GOOGLE_CLIENT_SECRET>"
+    ],
+    "live_secrets_in_repo_scan": {
+      "checked_files": [
+        ".env",
+        ".env.local",
+        "supabase/.env.functions.local"
+      ],
+      "action": "Use secret manager for real values; do not commit keys."
+    }
+  },
+  "app_surface": {
+    "pages": [
+      {
+        "file": "admin_dashboard.html",
+        "route": "/admin_dashboard.html",
+        "title": "Admin - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "admin"
+      },
+      {
+        "file": "agency_blog.html",
+        "route": "/agency_blog.html",
+        "title": "CODE STUDIO ke Blog | SEO + LLM Growth Playbook",
+        "is_dashboard": false,
+        "dashboard_role": null
+      },
+      {
+        "file": "client_dashboard.html",
+        "route": "/client_dashboard.html",
+        "title": "Client Dashboard - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "client"
+      },
+      {
+        "file": "developer_dashboard.html",
+        "route": "/developer_dashboard.html",
+        "title": "Developer Dashboard - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "developer"
+      },
+      {
+        "file": "developer_profile.html",
+        "route": "/developer_profile.html",
+        "title": "Developer Profile | CODE STUDIO ke",
+        "is_dashboard": false,
+        "dashboard_role": "developer"
+      },
+      {
+        "file": "index.html",
+        "route": "/index.html",
+        "title": "CODE STUDIO ke",
+        "is_dashboard": false,
+        "dashboard_role": null
+      },
+      {
+        "file": "landing_page.html",
+        "route": "/landing_page.html",
+        "title": "CODE STUDIO ke - Kenya & East Africa Web & App Developers",
+        "is_dashboard": false,
+        "dashboard_role": null
+      },
+      {
+        "file": "sales_dashboard.html",
+        "route": "/sales_dashboard.html",
+        "title": "Commissioner Dashboard - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "sales"
+      },
+      {
+        "file": "sales_onboarding.html",
+        "route": "/sales_onboarding.html",
+        "title": "Sales Onboarding Profile - CODE STUDIO ke",
+        "is_dashboard": false,
+        "dashboard_role": "sales"
+      }
+    ],
+    "dashboards": [
+      {
+        "file": "admin_dashboard.html",
+        "route": "/admin_dashboard.html",
+        "title": "Admin - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "admin"
+      },
+      {
+        "file": "client_dashboard.html",
+        "route": "/client_dashboard.html",
+        "title": "Client Dashboard - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "client"
+      },
+      {
+        "file": "developer_dashboard.html",
+        "route": "/developer_dashboard.html",
+        "title": "Developer Dashboard - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "developer"
+      },
+      {
+        "file": "sales_dashboard.html",
+        "route": "/sales_dashboard.html",
+        "title": "Commissioner Dashboard - CODE STUDIO ke",
+        "is_dashboard": true,
+        "dashboard_role": "sales"
+      }
+    ],
+    "api_endpoints": [
+      {
+        "path": "/admin_broadcasts",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/audit_logs",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/avatar_presets",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/conversation_participants",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/conversations",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/developer_profiles",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/disputes",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/escrow_transactions",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/financial_transactions",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/invoices",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/message_attachments",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/messages",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/milestones",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/notifications",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/payment_methods",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/payment_webhook_events",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/payout_requests",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/platform_settings",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/profiles",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/projects",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/proposals",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/read_receipts",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/rpc/current_role",
+        "methods": [
+          "get",
+          "post"
+        ]
+      },
+      {
+        "path": "/rpc/current_user_is_admin",
+        "methods": [
+          "get",
+          "post"
+        ]
+      },
+      {
+        "path": "/rpc/ensure_wallet",
+        "methods": [
+          "post"
+        ]
+      },
+      {
+        "path": "/rpc/is_admin_uid",
+        "methods": [
+          "get",
+          "post"
+        ]
+      },
+      {
+        "path": "/rpc/project_has_paid_deposit",
+        "methods": [
+          "get",
+          "post"
+        ]
+      },
+      {
+        "path": "/rpc/rls_auto_enable",
+        "methods": [
+          "post"
+        ]
+      },
+      {
+        "path": "/top_ups",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/wallet_topups",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      },
+      {
+        "path": "/wallets",
+        "methods": [
+          "delete",
+          "get",
+          "patch",
+          "post"
+        ]
+      }
+    ],
+    "edge_functions": {
+      "local": [
+        {
+          "name": "admin-users",
+          "path": "supabase/functions/admin-users"
+        },
+        {
+          "name": "get-paystack-balance",
+          "path": "supabase/functions/get-paystack-balance"
+        },
+        {
+          "name": "initiate-topup",
+          "path": "supabase/functions/initiate-topup"
+        },
+        {
+          "name": "paystack-webhook",
+          "path": "supabase/functions/paystack-webhook"
+        },
+        {
+          "name": "profile-write",
+          "path": "supabase/functions/profile-write"
+        },
+        {
+          "name": "send-email",
+          "path": "supabase/functions/send-email"
+        },
+        {
+          "name": "send-invoice",
+          "path": "supabase/functions/send-invoice"
+        },
+        {
+          "name": "send_gmail",
+          "path": "supabase/functions/send_gmail"
+        }
+      ],
+      "remote": [
+        {
+          "id": "590b6ff9-abad-4c7b-b329-d69410c292b3",
+          "name": "create-user",
+          "slug": "create-user",
+          "status": "ACTIVE",
+          "verify_jwt": true,
+          "version": 3,
+          "updated_at": 1771676606539
+        },
+        {
+          "id": "2ea35470-bee4-4d23-9421-3423c26f8111",
+          "name": "paystack-initiate",
+          "slug": "paystack-initiate",
+          "status": "ACTIVE",
+          "verify_jwt": true,
+          "version": 3,
+          "updated_at": 1771763741323
+        },
+        {
+          "id": "f9bceb9b-1ec9-416f-a19c-93c7a97e8266",
+          "name": "paystack-verify",
+          "slug": "paystack-verify",
+          "status": "ACTIVE",
+          "verify_jwt": false,
+          "version": 5,
+          "updated_at": 1771944064796
+        },
+        {
+          "id": "d8235779-2b83-43e5-a727-9a161d1e7c46",
+          "name": "send-email",
+          "slug": "send-email",
+          "status": "ACTIVE",
+          "verify_jwt": true,
+          "version": 12,
+          "updated_at": 1772047984519
+        },
+        {
+          "id": "5795e654-f589-4232-ad82-c16ad23045c1",
+          "name": "send-invoice",
+          "slug": "send-invoice",
+          "status": "ACTIVE",
+          "verify_jwt": true,
+          "version": 18,
+          "updated_at": 1772052534931
+        },
+        {
+          "id": "24d8fd0c-fc87-4d11-baca-81140833bc86",
+          "name": "paystack-webhook",
+          "slug": "paystack-webhook",
+          "status": "ACTIVE",
+          "verify_jwt": false,
+          "version": 11,
+          "updated_at": 1772052535869
+        },
+        {
+          "id": "efc46855-0461-46b5-931b-8c1ba32ac4c9",
+          "name": "initiate-topup",
+          "slug": "initiate-topup",
+          "status": "ACTIVE",
+          "verify_jwt": false,
+          "version": 11,
+          "updated_at": 1772050921025
+        },
+        {
+          "id": "1fb24922-ae9c-451a-aa67-e51f24e5535f",
+          "name": "profile-write",
+          "slug": "profile-write",
+          "status": "ACTIVE",
+          "verify_jwt": false,
+          "version": 7,
+          "updated_at": 1772039259042
+        },
+        {
+          "id": "1621d9ce-c3aa-4999-8551-dc4b62be3385",
+          "name": "admin-users",
+          "slug": "admin-users",
+          "status": "ACTIVE",
+          "verify_jwt": true,
+          "version": 8,
+          "updated_at": 1772039265960
+        },
+        {
+          "id": "fff908b7-d206-492a-add0-f25ed29e5c90",
+          "name": "send_gmail",
+          "slug": "send_gmail",
+          "status": "ACTIVE",
+          "verify_jwt": false,
+          "version": 6,
+          "updated_at": 1772048007185
+        },
+        {
+          "id": "ea7a3478-0706-47df-82cc-91cf76a96abd",
+          "name": "get-paystack-balance",
+          "slug": "get-paystack-balance",
+          "status": "ACTIVE",
+          "verify_jwt": true,
+          "version": 1,
+          "updated_at": 1772096615164
+        }
+      ]
+    },
+    "storage_buckets": {
+      "ok": true,
+      "status": 200,
+      "buckets": [],
+      "error": null
+    },
+    "integrations": {
+      "supabase": [
+        "AUTH_SETUP_COMPLETE.md",
+        "FULLSTACK_INTEGRATION_AUDIT.md",
+        "GOOGLE_OAUTH_SETUP.md",
+        "ISSUE_LIST.md",
+        "LOCALHOST_SETUP.md",
+        "PAYMENTS_SETUP.md",
+        "QUICK_START.md",
+        "README_AUTH.md",
+        "SCAN_REPORT.md",
+        "TESTING_GUIDE.md",
+        "admin_dashboard.html",
+        "client_dashboard.html",
+        "developer_dashboard.html",
+        "landing_page.html",
+        "sales_dashboard.html",
+        "scripts/cleanup-demo-users.mjs",
+        "scripts/deep-scan-phase1.mjs",
+        "scripts/deep-scan-phase3to9.mjs",
+        "scripts/force-test-users.mjs",
+        "scripts/fullstack-audit.mjs",
+        "scripts/generate-gmail-refresh-token.mjs",
+        "scripts/reconcile-paystack.mjs",
+        "scripts/seed-scale-users.mjs",
+        "scripts/simulate-full-agency.mjs",
+        "scripts/simulate-lifecycle.mjs",
+        "scripts/test-keys.mjs",
+        "scripts/verify-test-logins.mjs",
+        "supabase-client.js",
+        "supabase/audit_queries.sql",
+        "supabase/cleanup_demo_data.sql",
+        "supabase/functions/README.md",
+        "supabase/functions/_shared/supabase.ts",
+        "supabase/functions/admin-users/index.ts",
+        "supabase/functions/get-paystack-balance/index.ts",
+        "supabase/functions/initiate-topup/index.ts",
+        "supabase/functions/paystack-webhook/index.ts",
+        "supabase/functions/profile-write/index.ts",
+        "supabase/functions/send-email/index.ts",
+        "supabase/functions/send-invoice/index.ts",
+        "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql",
+        "supabase/migrations/20260226010000_client_admin_reliability_patch.sql",
+        "supabase/migrations/20260226041000_agency_feature_patch.sql",
+        "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql",
+        "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+      ],
+      "paystack": [
+        "AUTO_FIXES/20260225_safe_indexes.sql",
+        "FULLSTACK_INTEGRATION_AUDIT.md",
+        "ISSUE_LIST.md",
+        "LOCALHOST_SETUP.md",
+        "PAYMENTS_SETUP.md",
+        "SIMULATION_LIFECYCLE_REPORT.md",
+        "admin_dashboard.html",
+        "client_dashboard.html",
+        "sales_dashboard.html",
+        "scripts/deep-scan-phase1.mjs",
+        "scripts/deep-scan-phase3to9.mjs",
+        "scripts/fullstack-audit.mjs",
+        "scripts/reconcile-paystack.mjs",
+        "scripts/test-keys.mjs",
+        "supabase/audit_queries.sql",
+        "supabase/config.toml",
+        "supabase/functions/README.md",
+        "supabase/functions/_shared/cors.ts",
+        "supabase/functions/_shared/paystack.ts",
+        "supabase/functions/get-paystack-balance/index.ts",
+        "supabase/functions/initiate-topup/index.ts",
+        "supabase/functions/paystack-webhook/index.ts",
+        "supabase/functions/send-invoice/index.ts",
+        "supabase/migrations/20260224213000_finance_workflow_core.sql",
+        "supabase/migrations/20260224220000_payment_reconciliation.sql",
+        "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql",
+        "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+      ],
+      "resend": [
+        "FULLSTACK_INTEGRATION_AUDIT.md",
+        "ISSUE_LIST.md",
+        "LOCALHOST_SETUP.md",
+        "PAYMENTS_SETUP.md",
+        "QA_MVP_REPORT.md",
+        "admin_dashboard.html",
+        "sales_dashboard.html",
+        "scripts/deep-scan-phase1.mjs",
+        "scripts/deep-scan-phase3to9.mjs",
+        "scripts/fullstack-audit.mjs",
+        "scripts/test-keys.mjs",
+        "supabase/functions/README.md",
+        "supabase/functions/_shared/mailer.ts",
+        "supabase/functions/_shared/resend.ts"
+      ],
+      "google_oauth": [
+        "AUTH_SETUP_COMPLETE.md",
+        "GOOGLE_OAUTH_SETUP.md",
+        "LOCALHOST_SETUP.md",
+        "PAYMENTS_SETUP.md",
+        "QUICK_START.md",
+        "README_AUTH.md",
+        "TESTING_GUIDE.md",
+        "admin_dashboard.html",
+        "agency_blog.html",
+        "client_dashboard.html",
+        "developer_dashboard.html",
+        "landing_page.html",
+        "sales_dashboard.html",
+        "sales_onboarding.html",
+        "scripts/deep-scan-phase1.mjs",
+        "scripts/deep-scan-phase3to9.mjs",
+        "scripts/fullstack-audit.mjs",
+        "scripts/generate-gmail-refresh-token.mjs",
+        "scripts/test-keys.mjs",
+        "supabase-client.js",
+        "supabase/functions/README.md",
+        "supabase/functions/_shared/mailer.ts",
+        "supabase/functions/send_gmail/index.ts",
+        "supabase/migrations/20260224153224_create_profiles_and_auth.sql",
+        "supabase/migrations/20260225010000_google_avatar_sync.sql"
+      ],
+      "vercel": [
+        "LOCALHOST_SETUP.md",
+        "PAYMENTS_SETUP.md",
+        "admin_dashboard.html",
+        "scripts/deep-scan-phase1.mjs"
+      ],
+      "realtime": [
+        "PAYMENTS_SETUP.md",
+        "SIMULATION_LIFECYCLE_REPORT.md",
+        "broadcast-banner.js",
+        "client_dashboard.html",
+        "developer_dashboard.html",
+        "sales_dashboard.html",
+        "scripts/deep-scan-phase1.mjs",
+        "scripts/simulate-lifecycle.mjs",
+        "supabase-client.js",
+        "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql",
+        "supabase/migrations/20260226010000_client_admin_reliability_patch.sql",
+        "supabase/migrations/20260226041000_agency_feature_patch.sql",
+        "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql",
+        "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+      ]
+    },
+    "dashboard_widget_inventory": [
+      {
+        "dashboard_file": "admin_dashboard.html",
+        "route": "/admin_dashboard.html",
+        "role": "admin",
+        "nav_sections": [],
+        "card_titles": [
+          "Recent Users",
+          "Live Activity",
+          "Platform Health",
+          "All Active Projects",
+          "Open Disputes",
+          "Platform Ledger",
+          "All Users",
+          "All Projects",
+          "Per-Project Escrow",
+          "All Disputes",
+          "Send Invoice",
+          "Invoice History",
+          "Monthly Escrow Volume",
+          "User Growth",
+          "Revenue Breakdown",
+          "Top Developers by Earnings",
+          "Platform Fees",
+          "Platform Moderation System",
+          "Escrow Goals",
+          "Danger Zone",
+          "Platform Broadcast",
+          "Audit Logs - Immutable"
+        ]
+      },
+      {
+        "dashboard_file": "client_dashboard.html",
+        "route": "/client_dashboard.html",
+        "role": "client",
+        "nav_sections": [
+          "dashboard",
+          "projects",
+          "escrow",
+          "messages",
+          "notifications",
+          "billing",
+          "profile",
+          "${page}"
+        ],
+        "card_titles": [
+          "My Projects",
+          "Milestone Tracker",
+          "Escrow Breakdown",
+          "Messages",
+          "My Developers",
+          "Quick Actions",
+          "Active & Historical Projects",
+          "Invoices & Payments",
+          "Conversations",
+          "Select a conversation",
+          "All Notifications",
+          "Current Plan",
+          "Payment Method",
+          "Personal Information",
+          "Account Security",
+          "Supabase Status"
+        ]
+      },
+      {
+        "dashboard_file": "developer_dashboard.html",
+        "route": "/developer_dashboard.html",
+        "role": "developer",
+        "nav_sections": [
+          "dashboard",
+          "projects",
+          "milestones",
+          "browse",
+          "proposals",
+          "earnings",
+          "profile",
+          "messages",
+          "${p}"
+        ],
+        "card_titles": [
+          "Active Projects",
+          "Upcoming Milestones",
+          "Open Briefs",
+          "Earnings Snapshot",
+          "My Profile",
+          "Due & In Progress",
+          "Milestone History",
+          "Submitted Proposals",
+          "Transaction History",
+          "Conversations",
+          "Select a conversation",
+          "Developer Profile",
+          "Share Developer Profile",
+          "Ratings & Reviews",
+          "Supabase Connection"
+        ]
+      },
+      {
+        "dashboard_file": "sales_dashboard.html",
+        "route": "/sales_dashboard.html",
+        "role": "sales",
+        "nav_sections": [
+          "dashboard",
+          "briefs",
+          "proposals",
+          "projects",
+          "invoices",
+          "earnings",
+          "analytics",
+          "messages",
+          "${p}"
+        ],
+        "card_titles": [
+          "Active Briefs",
+          "Top Proposals",
+          "Managed Projects",
+          "Commission Earnings",
+          "All Posted Briefs",
+          "Send Invoice",
+          "Invoice History",
+          "Commission Breakdown",
+          "Monthly Commission History",
+          "Conversations",
+          "Select a conversation",
+          "Personal Information",
+          "Supabase Connection",
+          "",
+          "${p.title} - ${p.proposals.length} Proposal${p.proposals.length !== 1 ? 's' : ''}"
+        ]
+      }
+    ],
+    "webhook_endpoints": [
+      {
+        "provider": "paystack",
+        "endpoint": "https://smdbfaomeghoejqqkplv.supabase.co/functions/v1/paystack-webhook",
+        "source": "edge_function"
+      }
+    ]
+  },
+  "database": {
+    "schemas": [
+      "public",
+      "graphql_public"
+    ],
+    "tables_and_views": [
+      {
+        "schema": "public",
+        "name": "admin_broadcasts",
+        "required_columns": [
+          "id",
+          "title",
+          "body",
+          "target_roles",
+          "priority",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "created_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "body",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "target_roles",
+            "type": "array",
+            "format": "text[]",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "priority",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "normal",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "expires_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 1,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "0-0/1"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "audit_logs",
+        "required_columns": [
+          "id",
+          "action",
+          "diff",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "actor_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "action",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "target_table",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "target_id",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "diff",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "avatar_presets",
+        "required_columns": [
+          "id",
+          "role",
+          "label",
+          "image_url",
+          "sort_order",
+          "is_active",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "all",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "image_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "sort_order",
+            "type": "integer",
+            "format": "integer",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "is_active",
+            "type": "boolean",
+            "format": "boolean",
+            "enum": null,
+            "nullable": false,
+            "default": true,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 6,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/6"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "conversation_participants",
+        "required_columns": [
+          "id",
+          "conversation_id",
+          "user_id",
+          "joined_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "conversation_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `conversations.id`.<fk table='conversations' column='id'/>"
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "joined_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "left_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "conversations",
+        "required_columns": [
+          "id",
+          "created_by",
+          "conversation_type",
+          "created_at",
+          "updated_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "created_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "conversation_type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "direct",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "developer_profiles",
+        "required_columns": [
+          "developer_id",
+          "years_experience",
+          "completed_count",
+          "created_at",
+          "updated_at"
+        ],
+        "columns": [
+          {
+            "name": "developer_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "primary_stack",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "years_experience",
+            "type": "integer",
+            "format": "integer",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "portfolio_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "github_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "linkedin_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "rating",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "completed_count",
+            "type": "integer",
+            "format": "integer",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "disputes",
+        "required_columns": [
+          "id",
+          "reason",
+          "status",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "milestone_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "raised_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "reason",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "open",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "resolution",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "resolved_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "resolved_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 21,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/21"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "escrow_transactions",
+        "required_columns": [
+          "id",
+          "project_id",
+          "amount"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "milestone_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `milestones.id`.<fk table='milestones' column='id'/>"
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": "pending",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "metadata",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "invoice_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `invoices.id`.<fk table='invoices' column='id'/>"
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "financial_transactions",
+        "required_columns": [
+          "id",
+          "kind",
+          "status",
+          "amount",
+          "currency",
+          "commission_amount",
+          "metadata",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "transaction_ref",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "kind",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "pending",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "KES",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "payer_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "payee_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "commissioner_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "commission_amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "invoice_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `invoices.id`.<fk table='invoices' column='id'/>"
+          },
+          {
+            "name": "topup_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `wallet_topups.id`.<fk table='wallet_topups' column='id'/>"
+          },
+          {
+            "name": "payout_request_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `payout_requests.id`.<fk table='payout_requests' column='id'/>"
+          },
+          {
+            "name": "created_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "metadata",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 276,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/276"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "invoices",
+        "required_columns": [
+          "id",
+          "created_by",
+          "client_email",
+          "description",
+          "amount",
+          "currency",
+          "status",
+          "invoice_type"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "created_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "client_email",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "client_name",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "KES",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "pending",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "paystack_reference",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "paystack_authorization_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "paid_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "due_date",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "client_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "invoice_type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "standard",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 92,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/92"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "message_attachments",
+        "required_columns": [
+          "id",
+          "message_id",
+          "storage_path",
+          "created_by",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "message_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `messages.id`.<fk table='messages' column='id'/>"
+          },
+          {
+            "name": "conversation_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `conversations.id`.<fk table='conversations' column='id'/>"
+          },
+          {
+            "name": "storage_path",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "file_name",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "mime_type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "size_bytes",
+            "type": "integer",
+            "format": "bigint",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "messages",
+        "required_columns": [
+          "id",
+          "sender_id",
+          "receiver_id",
+          "content",
+          "status"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "sender_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "receiver_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "content",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "is_read",
+            "type": "boolean",
+            "format": "boolean",
+            "enum": null,
+            "nullable": true,
+            "default": false,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "read_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "sent",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "edited_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "reply_to_message_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `messages.id`.<fk table='messages' column='id'/>"
+          },
+          {
+            "name": "attachment_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "attachment_name",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "attachment_type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "conversation_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `conversations.id`.<fk table='conversations' column='id'/>"
+          }
+        ],
+        "row_count_sampled": 12,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/12"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "milestones",
+        "required_columns": [
+          "id",
+          "project_id",
+          "title",
+          "amount",
+          "updated_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": "locked",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "due_date",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "released_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "submitted_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "approved_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "paid_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 20,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/20"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "notifications",
+        "required_columns": [
+          "id",
+          "user_id",
+          "title",
+          "content",
+          "payload",
+          "channel",
+          "priority"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "content",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "is_read",
+            "type": "boolean",
+            "format": "boolean",
+            "enum": null,
+            "nullable": true,
+            "default": false,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "body",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "payload",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "read_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "channel",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "inbox",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "priority",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "normal",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "expires_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 141,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/141"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "payment_methods",
+        "required_columns": [
+          "id",
+          "user_id",
+          "provider",
+          "label",
+          "is_default",
+          "status",
+          "metadata",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "provider",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "label",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "account_ref",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "is_default",
+            "type": "boolean",
+            "format": "boolean",
+            "enum": null,
+            "nullable": false,
+            "default": false,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "active",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "metadata",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 6,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/6"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "payment_webhook_events",
+        "required_columns": [
+          "id",
+          "provider",
+          "event_type",
+          "status",
+          "payload",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "provider",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "event_type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "reference",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "received",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "payload",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "error",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "processed_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "payout_requests",
+        "required_columns": [
+          "id",
+          "requester_id",
+          "amount",
+          "status",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "requester_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "pending",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "notes",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "approved_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "approved_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "paid_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 46,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/46"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "platform_settings",
+        "required_columns": [
+          "key",
+          "value",
+          "updated_at"
+        ],
+        "columns": [
+          {
+            "name": "key",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "value",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          }
+        ],
+        "row_count_sampled": 9,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/9"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "profiles",
+        "required_columns": [
+          "id",
+          "role"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "first_name",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "last_name",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "email",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "phone",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "role",
+            "type": "string",
+            "format": "public.user_role",
+            "enum": [
+              "client",
+              "commissioner",
+              "developer",
+              "admin"
+            ],
+            "nullable": false,
+            "default": "client",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "available_for_work",
+            "type": "boolean",
+            "format": "boolean",
+            "enum": null,
+            "nullable": true,
+            "default": true,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "bio",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "skills",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "avatar_url",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "hourly_rate",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": "active",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "company",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 13,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/13"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "projects",
+        "required_columns": [
+          "id",
+          "client_id",
+          "title",
+          "requirements_json"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "client_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "developer_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "commissioner_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "title",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "total_value",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": true,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "escrow_balance",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": true,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": "active",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "due_date",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "progress",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": true,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_by",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "software_type",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "timeline_text",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "priority",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": "normal",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "bid_deadline",
+            "type": "string",
+            "format": "date",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "lead_scope",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "requirements_json",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "timeline",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "scope",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "requirements",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 39,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/39"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "proposals",
+        "required_columns": [
+          "id",
+          "project_id",
+          "developer_id",
+          "amount",
+          "status"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "project_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `projects.id`.<fk table='projects' column='id'/>"
+          },
+          {
+            "name": "developer_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "message",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "pending",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "commissioner_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          }
+        ],
+        "row_count_sampled": 27,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/27"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "read_receipts",
+        "required_columns": [
+          "id",
+          "message_id",
+          "user_id",
+          "read_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "message_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `messages.id`.<fk table='messages' column='id'/>"
+          },
+          {
+            "name": "conversation_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `conversations.id`.<fk table='conversations' column='id'/>"
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "read_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "delivered_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 0,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "*/0"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "top_ups",
+        "required_columns": [],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "profile_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "provider_payload",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 1,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "0-0/1"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "wallet_topups",
+        "required_columns": [
+          "id",
+          "user_id",
+          "amount",
+          "provider",
+          "status",
+          "metadata",
+          "created_at"
+        ],
+        "columns": [
+          {
+            "name": "id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": "gen_random_uuid()",
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>"
+          },
+          {
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": "Note:\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "amount",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "provider",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "status",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "pending",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "paystack_reference",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "mpesa_reference",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "metadata",
+            "type": "unknown",
+            "format": "jsonb",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "completed_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": true,
+            "default": null,
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 1,
+        "row_count_probe": {
+          "ok": true,
+          "status": 200,
+          "content_range": "0-0/1"
+        },
+        "source": "supabase_openapi"
+      },
+      {
+        "schema": "public",
+        "name": "wallets",
+        "required_columns": [
+          "user_id",
+          "balance",
+          "currency",
+          "created_at",
+          "updated_at"
+        ],
+        "columns": [
+          {
+            "name": "user_id",
+            "type": "string",
+            "format": "uuid",
+            "enum": null,
+            "nullable": false,
+            "default": null,
+            "is_primary_key": true,
+            "description": "Note:\nThis is a Primary Key.<pk/>\nThis is a Foreign Key to `profiles.id`.<fk table='profiles' column='id'/>"
+          },
+          {
+            "name": "balance",
+            "type": "number",
+            "format": "numeric",
+            "enum": null,
+            "nullable": false,
+            "default": 0,
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "currency",
+            "type": "string",
+            "format": "text",
+            "enum": null,
+            "nullable": false,
+            "default": "KES",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "created_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          },
+          {
+            "name": "updated_at",
+            "type": "string",
+            "format": "timestamp with time zone",
+            "enum": null,
+            "nullable": false,
+            "default": "now()",
+            "is_primary_key": false,
+            "description": null
+          }
+        ],
+        "row_count_sampled": 4,
+        "row_count_probe": {
+          "ok": true,
+          "status": 206,
+          "content_range": "0-0/4"
+        },
+        "source": "supabase_openapi"
+      }
+    ],
+    "migration_derived_metadata": {
+      "policies": [
+        {
+          "policy": "Users can view own profile",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "policy": "Users can update own profile",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "policy": "Users can insert own profile",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "policy": "wallets_select_own_or_admin",
+          "table": "public.wallets",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "wallets_update_own_or_admin",
+          "table": "public.wallets",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "payment_methods_own",
+          "table": "public.payment_methods",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "wallet_topups_own",
+          "table": "public.wallet_topups",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "payout_requests_select",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "payout_requests_insert_own",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "payout_requests_admin_update",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "financial_transactions_select_scope",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "financial_transactions_insert_scope",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "financial_transactions_admin_update",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "policy": "payment_webhook_events_admin_only",
+          "table": "public.payment_webhook_events",
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "policy": "messages_select_participants_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "messages_insert_sender_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "messages_update_receiver_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "projects_select_scope",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "projects_insert_scope",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "projects_update_scope",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "milestones_select_scope",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "milestones_insert_scope",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "milestones_update_scope",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "invoices_select_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "invoices_insert_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "invoices_update_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "proposals_select_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "proposals_insert_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "proposals_update_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "policy": "Users can view own profile",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260225003000_fix_profile_policy_recursion.sql"
+        },
+        {
+          "policy": "Users can update own profile",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260225003000_fix_profile_policy_recursion.sql"
+        },
+        {
+          "policy": "Users can insert own profile",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260225003000_fix_profile_policy_recursion.sql"
+        },
+        {
+          "policy": "profiles_admin_select_all",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "profiles_admin_update_all",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "projects_select_scope",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "projects_insert_scope",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "projects_update_scope",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "milestones_select_scope",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "milestones_insert_scope",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "milestones_update_scope",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "proposals_select_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "proposals_insert_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "proposals_update_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "messages_select_participants_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "messages_insert_sender_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "messages_update_receiver_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "invoices_select_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "invoices_insert_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "invoices_update_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "notifications_select_own_or_admin",
+          "table": "public.notifications",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "notifications_insert_own_or_admin",
+          "table": "public.notifications",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "notifications_update_own_or_admin",
+          "table": "public.notifications",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "disputes_select_scope",
+          "table": "public.disputes",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "disputes_insert_scope",
+          "table": "public.disputes",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "disputes_admin_update",
+          "table": "public.disputes",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "audit_logs_admin_read",
+          "table": "public.audit_logs",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "audit_logs_admin_insert",
+          "table": "public.audit_logs",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "policy": "platform_settings_admin_all",
+          "table": "public.platform_settings",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "wallets_select_own_or_admin",
+          "table": "public.wallets",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "wallets_update_own_or_admin",
+          "table": "public.wallets",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "payment_methods_own",
+          "table": "public.payment_methods",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "wallet_topups_own",
+          "table": "public.wallet_topups",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "payout_requests_select",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "payout_requests_insert_own",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "payout_requests_admin_update",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "financial_transactions_select_scope",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "financial_transactions_insert_scope",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "financial_transactions_admin_update",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "payment_webhook_events_admin_only",
+          "table": "public.payment_webhook_events",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "notifications_select_own_or_admin",
+          "table": "public.notifications",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "notifications_insert_own_or_admin",
+          "table": "public.notifications",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "notifications_update_own_or_admin",
+          "table": "public.notifications",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "messages_select_participants_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "messages_insert_sender_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "messages_update_receiver_or_admin",
+          "table": "public.messages",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "profiles_admin_select_all",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "profiles_admin_update_all",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "projects_admin_select_all",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "projects_admin_update_all",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "invoices_select_client_scope",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "invoices_insert_admin_or_creator",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "invoices_update_admin_or_creator",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "disputes_admin_select_all",
+          "table": "public.disputes",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "disputes_admin_update_all",
+          "table": "public.disputes",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "audit_logs_admin_read",
+          "table": "public.audit_logs",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "audit_logs_admin_insert",
+          "table": "public.audit_logs",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "policy": "profiles_select_own_or_admin",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260226030000_profiles_policy_nonrecursive.sql"
+        },
+        {
+          "policy": "profiles_update_own_or_admin",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260226030000_profiles_policy_nonrecursive.sql"
+        },
+        {
+          "policy": "profiles_insert_own_or_admin",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260226030000_profiles_policy_nonrecursive.sql"
+        },
+        {
+          "policy": "avatar_presets_select_all_authenticated",
+          "table": "public.avatar_presets",
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "policy": "avatar_presets_admin_manage",
+          "table": "public.avatar_presets",
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "policy": "proposals_insert_scope",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "policy": "payout_requests_insert_own",
+          "table": "public.payout_requests",
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "policy": "%I",
+          "table": "public.",
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "policy": "admin_broadcasts_admin_all",
+          "table": "public.admin_broadcasts",
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "policy": "developer_profiles_select_own_or_admin",
+          "table": "public.developer_profiles",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "developer_profiles_upsert_own_or_admin",
+          "table": "public.developer_profiles",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "conversations_select_participant_or_admin",
+          "table": "public.conversations",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "conversations_insert_creator_or_admin",
+          "table": "public.conversations",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "conversations_update_creator_or_admin",
+          "table": "public.conversations",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "participants_select_own_or_admin",
+          "table": "public.conversation_participants",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "participants_insert_creator_or_admin",
+          "table": "public.conversation_participants",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "participants_update_self_or_admin",
+          "table": "public.conversation_participants",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "attachments_select_participant_or_admin",
+          "table": "public.message_attachments",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "attachments_insert_sender_or_admin",
+          "table": "public.message_attachments",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "read_receipts_select_own_or_admin",
+          "table": "public.read_receipts",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "policy": "read_receipts_insert_own_or_admin",
+          "table": "public.read_receipts",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        }
+      ],
+      "functions": [
+        {
+          "function": "public.handle_updated_at",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "function": "public.handle_new_user",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "function": "public.current_role",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "function": "public.ensure_wallet",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "function": "public.handle_profile_wallet",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "function": "public.reconcile_invoice_paid",
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "function": "public.reconcile_wallet_topup_paid",
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "function": "public.current_role",
+          "source_file": "supabase/migrations/20260224232000_dashboard_data_isolation_rls.sql"
+        },
+        {
+          "function": "public.current_role",
+          "source_file": "supabase/migrations/20260225003000_fix_profile_policy_recursion.sql"
+        },
+        {
+          "function": "public.handle_new_user",
+          "source_file": "supabase/migrations/20260225010000_google_avatar_sync.sql"
+        },
+        {
+          "function": "public.current_role",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "function": "public.touch_updated_at",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "function": "public.current_role",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "function": "public.ensure_wallet",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "function": "public.handle_profile_wallet",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "function": "public.is_admin_uid",
+          "source_file": "supabase/migrations/20260226030000_profiles_policy_nonrecursive.sql"
+        },
+        {
+          "function": "public.project_has_paid_deposit",
+          "source_file": "supabase/migrations/20260226043000_invoice_deposit_rule.sql"
+        },
+        {
+          "function": "public.enforce_project_deposit_before_assignment",
+          "source_file": "supabase/migrations/20260226043000_invoice_deposit_rule.sql"
+        },
+        {
+          "function": "public.normalize_financial_transaction_participants",
+          "source_file": "supabase/migrations/20260226123000_financial_transaction_traceability.sql"
+        },
+        {
+          "function": "public.current_user_is_admin",
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        }
+      ],
+      "triggers": [
+        {
+          "trigger": "set_updated_at",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "trigger": "on_auth_user_created",
+          "table": "auth.users",
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "trigger": "on_profile_created_wallet",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "trigger": "trg_reconcile_invoice_paid",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "trigger": "trg_reconcile_wallet_topup_paid",
+          "table": "public.wallet_topups",
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "trigger": "trg_projects_updated_at",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "trigger": "trg_milestones_updated_at",
+          "table": "public.milestones",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "trigger": "trg_proposals_updated_at",
+          "table": "public.proposals",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "trigger": "trg_invoices_updated_at",
+          "table": "public.invoices",
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "trigger": "on_profile_created_wallet",
+          "table": "public.profiles",
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "trigger": "trg_projects_enforce_deposit_before_assignment",
+          "table": "public.projects",
+          "source_file": "supabase/migrations/20260226043000_invoice_deposit_rule.sql"
+        },
+        {
+          "trigger": "trg_normalize_financial_transactions",
+          "table": "public.financial_transactions",
+          "source_file": "supabase/migrations/20260226123000_financial_transaction_traceability.sql"
+        }
+      ],
+      "indexes": [
+        {
+          "unique": false,
+          "index_name": "idx_profiles_role",
+          "table": "public.profiles",
+          "columns": [
+            "role"
+          ],
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_profiles_email",
+          "table": "public.profiles",
+          "columns": [
+            "email"
+          ],
+          "source_file": "supabase/migrations/20260224153224_create_profiles_and_auth.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payment_methods_user",
+          "table": "public.payment_methods",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_wallet_topups_user",
+          "table": "public.wallet_topups",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_wallet_topups_status",
+          "table": "public.wallet_topups",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payout_requests_requester",
+          "table": "public.payout_requests",
+          "columns": [
+            "requester_id"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payout_requests_status",
+          "table": "public.payout_requests",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_kind",
+          "table": "public.financial_transactions",
+          "columns": [
+            "kind"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_status",
+          "table": "public.financial_transactions",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_project",
+          "table": "public.financial_transactions",
+          "columns": [
+            "project_id"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_invoice",
+          "table": "public.financial_transactions",
+          "columns": [
+            "invoice_id"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_commissioner",
+          "table": "public.financial_transactions",
+          "columns": [
+            "commissioner_id"
+          ],
+          "source_file": "supabase/migrations/20260224213000_finance_workflow_core.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payment_webhook_events_provider_ref",
+          "table": "public.payment_webhook_events",
+          "columns": [
+            "provider",
+            "reference"
+          ],
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payment_webhook_events_status",
+          "table": "public.payment_webhook_events",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260224220000_payment_reconciliation.sql"
+        },
+        {
+          "unique": true,
+          "index_name": "idx_invoices_paystack_reference",
+          "table": "public.invoices",
+          "columns": [
+            "paystack_reference"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_client_id",
+          "table": "public.projects",
+          "columns": [
+            "client_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_developer_id",
+          "table": "public.projects",
+          "columns": [
+            "developer_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_commissioner_id",
+          "table": "public.projects",
+          "columns": [
+            "commissioner_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_status",
+          "table": "public.projects",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_milestones_project_id",
+          "table": "public.milestones",
+          "columns": [
+            "project_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_milestones_status",
+          "table": "public.milestones",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_proposals_project_id",
+          "table": "public.proposals",
+          "columns": [
+            "project_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_proposals_developer_id",
+          "table": "public.proposals",
+          "columns": [
+            "developer_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_sender_id",
+          "table": "public.messages",
+          "columns": [
+            "sender_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_receiver_id",
+          "table": "public.messages",
+          "columns": [
+            "receiver_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_created_at",
+          "table": "public.messages",
+          "columns": [
+            "created_at desc"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_invoices_client_email",
+          "table": "public.invoices",
+          "columns": [
+            "client_email"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_invoices_status",
+          "table": "public.invoices",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_notifications_user_id",
+          "table": "public.notifications",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_disputes_project_id",
+          "table": "public.disputes",
+          "columns": [
+            "project_id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_platform_settings_updated_at",
+          "table": "public.platform_settings",
+          "columns": [
+            "updated_at desc"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payment_methods_user",
+          "table": "public.payment_methods",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_wallet_topups_user",
+          "table": "public.wallet_topups",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_wallet_topups_status",
+          "table": "public.wallet_topups",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payout_requests_requester",
+          "table": "public.payout_requests",
+          "columns": [
+            "requester_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payout_requests_status",
+          "table": "public.payout_requests",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_kind",
+          "table": "public.financial_transactions",
+          "columns": [
+            "kind"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_status",
+          "table": "public.financial_transactions",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_invoice",
+          "table": "public.financial_transactions",
+          "columns": [
+            "invoice_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_project",
+          "table": "public.financial_transactions",
+          "columns": [
+            "project_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_topup",
+          "table": "public.financial_transactions",
+          "columns": [
+            "topup_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_financial_transactions_participants",
+          "table": "public.financial_transactions",
+          "columns": [
+            "payer_id",
+            "payee_id"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payment_webhook_events_provider_ref",
+          "table": "public.payment_webhook_events",
+          "columns": [
+            "provider",
+            "reference"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_payment_webhook_events_status",
+          "table": "public.payment_webhook_events",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260226010000_client_admin_reliability_patch.sql"
+        },
+        {
+          "unique": true,
+          "index_name": "ux_avatar_presets_role_image",
+          "table": "public.avatar_presets",
+          "columns": [
+            "role",
+            "image_url"
+          ],
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_avatar_presets_role_active",
+          "table": "public.avatar_presets",
+          "columns": [
+            "role",
+            "is_active",
+            "sort_order"
+          ],
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_software_type",
+          "table": "public.projects",
+          "columns": [
+            "software_type"
+          ],
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_priority",
+          "table": "public.projects",
+          "columns": [
+            "priority"
+          ],
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_bid_deadline",
+          "table": "public.projects",
+          "columns": [
+            "bid_deadline"
+          ],
+          "source_file": "supabase/migrations/20260226041000_agency_feature_patch.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_invoices_project_type_status",
+          "table": "public.invoices",
+          "columns": [
+            "project_id",
+            "invoice_type",
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260226043000_invoice_deposit_rule.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_invoices_type_created",
+          "table": "public.invoices",
+          "columns": [
+            "invoice_type",
+            "created_at desc"
+          ],
+          "source_file": "supabase/migrations/20260226043000_invoice_deposit_rule.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_priority",
+          "table": "public.projects",
+          "columns": [
+            "priority"
+          ],
+          "source_file": "supabase/migrations/20260226112000_projects_detail_columns.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_projects_bid_deadline",
+          "table": "public.projects",
+          "columns": [
+            "bid_deadline"
+          ],
+          "source_file": "supabase/migrations/20260226112000_projects_detail_columns.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_status",
+          "table": "public.messages",
+          "columns": [
+            "status"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_project_created",
+          "table": "public.messages",
+          "columns": [
+            "project_id",
+            "created_at desc"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_reply_to",
+          "table": "public.messages",
+          "columns": [
+            "reply_to_message_id"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_notifications_type_created",
+          "table": "public.notifications",
+          "columns": [
+            "type",
+            "created_at desc"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_notifications_channel",
+          "table": "public.notifications",
+          "columns": [
+            "channel"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_admin_broadcasts_created",
+          "table": "public.admin_broadcasts",
+          "columns": [
+            "created_at desc"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_developer_profiles_stack",
+          "table": "public.developer_profiles",
+          "columns": [
+            "primary_stack"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": true,
+          "index_name": "ux_conversation_participants_unique",
+          "table": "public.conversation_participants",
+          "columns": [
+            "conversation_id",
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_conversation_participants_user",
+          "table": "public.conversation_participants",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_messages_conversation_id",
+          "table": "public.messages",
+          "columns": [
+            "conversation_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_message_attachments_message_id",
+          "table": "public.message_attachments",
+          "columns": [
+            "message_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_message_attachments_conversation_id",
+          "table": "public.message_attachments",
+          "columns": [
+            "conversation_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": true,
+          "index_name": "ux_read_receipts_unique",
+          "table": "public.read_receipts",
+          "columns": [
+            "message_id",
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_read_receipts_conversation_id",
+          "table": "public.read_receipts",
+          "columns": [
+            "conversation_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        },
+        {
+          "unique": false,
+          "index_name": "idx_read_receipts_user_id",
+          "table": "public.read_receipts",
+          "columns": [
+            "user_id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        }
+      ],
+      "constraints": [
+        {
+          "table": "public.projects",
+          "constraint": "projects_client_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "client_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.projects",
+          "constraint": "projects_developer_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "developer_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.projects",
+          "constraint": "projects_commissioner_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "commissioner_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.milestones",
+          "constraint": "milestones_project_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "project_id"
+          ],
+          "references_table": "public.projects",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.proposals",
+          "constraint": "proposals_project_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "project_id"
+          ],
+          "references_table": "public.projects",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.proposals",
+          "constraint": "proposals_developer_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "developer_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.proposals",
+          "constraint": "proposals_commissioner_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "commissioner_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.messages",
+          "constraint": "messages_project_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "project_id"
+          ],
+          "references_table": "public.projects",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.messages",
+          "constraint": "messages_sender_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "sender_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.messages",
+          "constraint": "messages_receiver_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "receiver_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.invoices",
+          "constraint": "invoices_project_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "project_id"
+          ],
+          "references_table": "public.projects",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.invoices",
+          "constraint": "invoices_client_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "client_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.invoices",
+          "constraint": "invoices_created_by_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "created_by"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.notifications",
+          "constraint": "notifications_user_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "user_id"
+          ],
+          "references_table": "public.profiles",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.disputes",
+          "constraint": "disputes_project_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "project_id"
+          ],
+          "references_table": "public.projects",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260225012000_expand_core_dashboard_connectivity.sql"
+        },
+        {
+          "table": "public.messages",
+          "constraint": "messages_reply_to_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "reply_to_message_id"
+          ],
+          "references_table": "public.messages",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260226143000_messaging_broadcast_upgrade.sql"
+        },
+        {
+          "table": "public.messages",
+          "constraint": "messages_conversation_id_fkey",
+          "type": "foreign_key",
+          "columns": [
+            "conversation_id"
+          ],
+          "references_table": "public.conversations",
+          "references_columns": [
+            "id"
+          ],
+          "source_file": "supabase/migrations/20260226162000_business_messaging_and_developer_profiles.sql"
+        }
+      ],
+      "rls_enabled_tables": [
+        "public.admin_broadcasts",
+        "public.audit_logs",
+        "public.avatar_presets",
+        "public.conversation_participants",
+        "public.conversations",
+        "public.developer_profiles",
+        "public.disputes",
+        "public.financial_transactions",
+        "public.invoices",
+        "public.message_attachments",
+        "public.messages",
+        "public.milestones",
+        "public.notifications",
+        "public.payment_methods",
+        "public.payment_webhook_events",
+        "public.payout_requests",
+        "public.platform_settings",
+        "public.profiles",
+        "public.projects",
+        "public.proposals",
+        "public.read_receipts",
+        "public.wallet_topups",
+        "public.wallets"
+      ],
+      "cron_jobs": []
+    },
+    "openapi_paths_count": 32,
+    "table_count": 25
+  }
+}

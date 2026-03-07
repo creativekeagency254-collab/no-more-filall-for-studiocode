@@ -1,0 +1,17 @@
+node_modules
+supabase
+scripts
+AUTO_FIXES
+.deploytmp-*
+.env
+.env.local
+.env.example
+*.md
+*.sql
+*.csv
+*.json
+server.log
+phase3_results.csv
+checks_list.csv
+db_inventory.json
+scan_phase3_results.json

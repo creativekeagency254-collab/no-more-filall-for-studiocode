@@ -1,0 +1,49 @@
+project_id = "smdbfaomeghoejqqkplv"
+
+[auth]
+enabled = true
+site_url = "https://liveteststudiocodemuchemi.netlify.app"
+additional_redirect_urls = [
+  "https://liveteststudiocodemuchemi.netlify.app",
+  "https://liveteststudiocodemuchemi.netlify.app/landing_page.html"
+]
+
+[auth.external.google]
+enabled = true
+client_id = "335856743456-l7qfqso7b6n3kdm3v854s0gbveu345kf.apps.googleusercontent.com"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+redirect_uri = ""
+url = ""
+skip_nonce_check = true
+email_optional = true
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = true
+secure_password_change = false
+max_frequency = "1m0s"
+otp_length = 8
+otp_expiry = 3600
+
+[functions.send-invoice]
+verify_jwt = false
+
+[functions.initiate-topup]
+verify_jwt = false
+
+[functions.profile-write]
+verify_jwt = false
+
+[functions.send-email]
+verify_jwt = true
+
+[functions.paystack-webhook]
+verify_jwt = false
+
+[functions.send_gmail]
+verify_jwt = false

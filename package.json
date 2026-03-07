@@ -1,0 +1,30 @@
+{
+  "name": "studio-code-landing",
+  "version": "1.0.0",
+  "description": "Landing page and dashboard for Studio Code",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx http-server -a localhost -p 3000 -c-1",
+    "dev:local": "npx http-server -a localhost -p 3000 -c-1",
+    "dev:lan": "npx http-server -a 0.0.0.0 -p 3000 -c-1",
+    "functions:local": "supabase functions serve --env-file supabase/.env.functions.local",
+    "build": "echo 'Static HTML site - no build required' && exit 0",
+    "test:keys": "node scripts/test-keys.mjs",
+    "audit:fullstack": "node scripts/fullstack-audit.mjs",
+    "verify:test-logins": "node scripts/verify-test-logins.mjs",
+    "cleanup:demo": "node scripts/cleanup-demo-users.mjs",
+    "force:test-users": "node scripts/force-test-users.mjs",
+    "seed:scale": "node scripts/seed-scale-users.mjs",
+    "paystack:track": "node scripts/reconcile-paystack.mjs",
+    "paystack:reconcile": "node scripts/reconcile-paystack.mjs --apply",
+    "gmail:refresh": "node scripts/generate-gmail-refresh-token.mjs",
+    "simulate:full": "node scripts/simulate-full-agency.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "supabase": "^2.76.15"
+  }
+}

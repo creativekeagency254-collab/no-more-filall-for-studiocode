@@ -1,0 +1,17 @@
+[
+  {
+    "type": "edge_function_deploy",
+    "status": "applied",
+    "details": "Deployed profile-write and initiate-topup edge functions to eliminate 404 failures.",
+    "commands": [
+      "npx supabase functions deploy profile-write",
+      "npx supabase functions deploy initiate-topup"
+    ]
+  },
+  {
+    "type": "sql_migration_generated",
+    "status": "generated_not_applied",
+    "details": "Safe index migration generated (requires operator apply/approval in DB migration flow).",
+    "file": "AUTO_FIXES/20260225_safe_indexes.sql"
+  }
+]
