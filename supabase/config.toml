@@ -2,20 +2,28 @@ project_id = "smdbfaomeghoejqqkplv"
 
 [auth]
 enabled = true
-site_url = "https://liveteststudiocodemuchemi.netlify.app"
+site_url = "https://studiocodekenya254.qzz.io"
 additional_redirect_urls = [
-  "https://liveteststudiocodemuchemi.netlify.app",
-  "https://liveteststudiocodemuchemi.netlify.app/landing_page.html"
+  "https://studiocodekenya254.qzz.io",
+  "https://studiocodekenya254.qzz.io/landing_page.html",
+  "https://studiocodekenya254.qzz.io/client_dashboard.html",
+  "https://studiocodekenya254.qzz.io/developer_dashboard.html",
+  "https://studiocodekenya254.qzz.io/sales_dashboard.html",
+  "https://studiocodekenya254.qzz.io/admin_dashboard.html",
+  "http://localhost:3000",
+  "http://localhost:3000/landing_page.html",
+  "http://127.0.0.1:3000",
+  "http://127.0.0.1:3000/landing_page.html"
 ]
 
 [auth.external.google]
 enabled = true
-client_id = "335856743456-l7qfqso7b6n3kdm3v854s0gbveu345kf.apps.googleusercontent.com"
+client_id = "335856743456-2pvdffj4kjrdm5os96ttgun7kpsg0944.apps.googleusercontent.com"
 secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
 redirect_uri = ""
 url = ""
 skip_nonce_check = true
-email_optional = true
+email_optional = false
 
 [auth.mfa.totp]
 enroll_enabled = true
@@ -24,7 +32,7 @@ verify_enabled = true
 [auth.email]
 enable_signup = true
 double_confirm_changes = true
-enable_confirmations = true
+enable_confirmations = false
 secure_password_change = false
 max_frequency = "1m0s"
 otp_length = 8
