@@ -3,10 +3,34 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Studio Code Kenya 254 builds modern websites, web applications, and software solutions for businesses and startups in Kenya." />
+  <meta name="keywords"
+    content="web development Kenya, software development Kenya, website developers Nairobi, custom software Kenya, Kenya web agency" />
+  <meta name="author" content="Studio Code Kenya 254" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Studio Code Kenya 254" />
+  <meta property="og:description" content="Professional website and software development services in Kenya." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kenyastudiocode254.indevs.in/" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#f0f1f5" id="tc" />
   <title>CODE STUDIO ke - Kenya & East Africa Web & App Developers</title>
+  <link rel="canonical" href="https://kenyastudiocode254.indevs.in/" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Studio Code Kenya 254",
+      "url": "https://kenyastudiocode254.indevs.in/",
+      "logo": "https://kenyastudiocode254.indevs.in/logo.png",
+      "description": "Software development and website design company based in Kenya.",
+      "areaServed": "Kenya",
+      "sameAs": []
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
@@ -121,6 +145,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 96px;
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -141,6 +166,12 @@
       overflow-x: hidden;
       transition: background .4s, color .4s;
       -webkit-font-smoothing: antialiased;
+    }
+
+    body.page-leave {
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .22s ease, transform .22s ease;
     }
 
     body.auth-open {
@@ -1055,6 +1086,9 @@
       letter-spacing: -.04em;
       color: var(--accent);
       display: block;
+      max-width: min(92vw, 820px);
+      margin: 0 auto;
+      white-space: nowrap;
       text-shadow: 0 2px 0 rgba(0, 0, 0, .3);
     }
 
@@ -1083,6 +1117,8 @@
     #tw {
       border-right: 3px solid var(--accent);
       padding-right: 2px;
+      display: inline-block;
+      min-height: 1em;
       animation: caret .9s step-end infinite
     }
 
@@ -4403,7 +4439,7 @@
       }
 
       .typed-big {
-        font-size: clamp(28px, 12vw, 52px)
+        font-size: clamp(24px, 11vw, 40px)
       }
 
       .hero-tagline {
@@ -4592,7 +4628,7 @@
       }
 
       .typed-big {
-        font-size: 32px
+        font-size: 28px
       }
 
       .hero-tagline {
@@ -5721,8 +5757,8 @@
 
     <h1>We Build Scalable</h1>
     <div class="hero-typed-block">
-      <span class="typed-big"><span id="tw">SAAS PRODUCTS, APPS, AND PLATFORMS</span></span>
-      <div class="tw-meta">For Startups, SMEs &amp; Enterprises</div>
+      <span class="typed-big"><span id="tw">WEB APPS</span></span>
+      <div class="tw-meta">For Kenya Businesses</div>
     </div>
     <div class="hero-tagline">That Actually Work.</div>
 
@@ -6921,7 +6957,7 @@
     <div class="dash-redirect-card">
       <div class="dash-redirect-cube" aria-hidden="true"></div>
       <div class="dash-redirect-title">Loading to dashboard...</div>
-      <div class="dash-redirect-text">(check your internet)</div>
+      <div class="dash-redirect-text">Preparing your dashboard...</div>
     </div>
   </div>
 
@@ -7032,9 +7068,16 @@
     (function () {
       if ('ontouchstart' in window) return;
       // Use native smooth scroll via CSS (set on html element)
-      // Just drive scroll-driven parallax via passive scroll listener
+      // Drive scroll animations via rAF to keep motion smooth
+      let scrollFxRaf = 0;
+      let pendingY = 0;
       window.addEventListener('scroll', () => {
-        animateScrollElements(window.scrollY);
+        pendingY = window.scrollY;
+        if (scrollFxRaf) return;
+        scrollFxRaf = requestAnimationFrame(() => {
+          animateScrollElements(pendingY);
+          scrollFxRaf = 0;
+        });
       }, { passive: true });
     })();
 
@@ -7084,16 +7127,23 @@
     }
 
     /* - Typed Cursor - */
-    const words = ['SAAS PRODUCTS, APPS, AND PLATFORMS', 'WEB APPS', 'MOBILE APPS', 'AI AUTOMATIONS', 'M-PESA INTEGRATIONS', 'CLIENT DASHBOARDS', 'CRM SYSTEMS', 'ERP SYSTEMS', 'API ECOSYSTEMS'];
+    const isPhoneView = window.matchMedia('(max-width: 600px)').matches;
+    const words = isPhoneView
+      ? ['WEB APPS', 'MOBILE APPS', 'AI TOOLS', 'M-PESA', 'DASHBOARDS', 'CRM', 'APIS']
+      : ['WEB APPS', 'MOBILE APPS', 'AI AUTOMATION', 'M-PESA FLOWS', 'CLIENT DASHBOARDS', 'CRM SYSTEMS', 'API INTEGRATIONS'];
     let wi = 0, ci = 0, del = false;
     const typedEl = document.getElementById('tw');
+    const typedMetaEl = document.querySelector('.tw-meta');
+    if (typedMetaEl && isPhoneView) typedMetaEl.textContent = 'For Kenya Teams';
+    if (typedEl && words.length) typedEl.textContent = words[0];
     function type() {
+      if (!typedEl || !words.length) return;
       const w = words[wi];
-      if (!del) { typedEl.textContent = w.slice(0, ++ci); if (ci === w.length) { del = true; setTimeout(type, 2200); return; } }
+      if (!del) { typedEl.textContent = w.slice(0, ++ci); if (ci === w.length) { del = true; setTimeout(type, 1900); return; } }
       else { typedEl.textContent = w.slice(0, --ci); if (ci === 0) { del = false; wi = (wi + 1) % words.length; } }
-      setTimeout(type, del ? 42 : 80);
+      setTimeout(type, del ? 36 : 64);
     }
-    type();
+    if (typedEl) type();
 
     /* - Hero Pills Stagger - */
     document.querySelectorAll('.hero-pills .pill').forEach((p, i) => {
@@ -7149,17 +7199,29 @@
       if (overlay) overlay.classList.remove('open');
     }
 
-    function showDashRedirectOverlay(message = '(check your internet)') {
+    function showDashRedirectOverlay(message = 'Preparing your dashboard...') {
       const overlay = document.getElementById('dash-redirect-overlay');
       if (!overlay) return;
       const textEl = overlay.querySelector('.dash-redirect-text');
-      if (textEl) textEl.textContent = String(message || '(check your internet)');
+      if (textEl) textEl.textContent = String(message || 'Preparing your dashboard...');
       overlay.classList.add('open');
     }
 
     function hideDashRedirectOverlay() {
       const overlay = document.getElementById('dash-redirect-overlay');
       if (overlay) overlay.classList.remove('open');
+    }
+
+    function smoothRedirectTo(targetUrl, message = 'Opening your dashboard...') {
+      const nextUrl = String(targetUrl || '').trim();
+      if (!nextUrl) return;
+      showDashRedirectOverlay(message);
+      document.body.classList.add('page-leave');
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const wait = prefersReduced ? 0 : 220;
+      setTimeout(() => {
+        window.location.assign(nextUrl);
+      }, wait);
     }
 
     function openLandingWhatsApp() {
@@ -8346,7 +8408,7 @@
     }
     function authGoogle() {
       if (typeof initiateGoogleAuth === 'function') {
-        showDashRedirectOverlay('(check your internet)');
+        showDashRedirectOverlay('Connecting to Google...');
         const isSignupTab = document.getElementById('tab-signup')?.classList.contains('active');
         initiateGoogleAuth({
           redirectPath: window.location.pathname,
@@ -8390,7 +8452,7 @@
         return;
       }
       LANDING_REDIRECT_IN_PROGRESS = true;
-      showDashRedirectOverlay('(check your internet)');
+      showDashRedirectOverlay('Preparing your dashboard...');
       if (typeof ensureWelcomeEmailForClient === 'function' && authData?.session) {
         Promise.resolve()
           .then(() => ensureWelcomeEmailForClient(authData.session))
@@ -8399,24 +8461,24 @@
       try {
         const preferredRole = String(options.preferredRole || '').trim().toLowerCase();
         if (preferredRole === 'client') {
-          window.location.href = appRoute(DASHBOARD_PATH_BY_ROLE.client);
+          smoothRedirectTo(appRoute(DASHBOARD_PATH_BY_ROLE.client));
           return;
         }
         const { intent: authIntent, role: authRole } = readAuthIntentHints();
         if (authIntent === 'signup' && authRole === 'client') {
-          window.location.href = appRoute(DASHBOARD_PATH_BY_ROLE.client);
+          smoothRedirectTo(appRoute(DASHBOARD_PATH_BY_ROLE.client));
           return;
         }
         const emailKey = String(user.email || '').trim().toLowerCase();
         if (FIXED_ROLE_ROUTES[emailKey]) {
-          window.location.href = FIXED_ROLE_ROUTES[emailKey];
+          smoothRedirectTo(FIXED_ROLE_ROUTES[emailKey]);
           return;
         }
 
         const roleTarget = await resolveLandingDashboardTarget(sessionLike);
         if (roleTarget) {
           const target = roleTarget;
-          window.location.href = target;
+          smoothRedirectTo(target);
           return;
         }
 
@@ -8446,7 +8508,7 @@
         };
         const metaRole = user?.user_metadata?.role || user?.app_metadata?.role || user?.app_metadata?.user_role;
         const resolvedRole = normalizeLandingRole(roleFromDb || metaRole || 'client');
-        window.location.href = routes[resolvedRole] || routes.client;
+        smoothRedirectTo(routes[resolvedRole] || routes.client);
       } catch (routeErr) {
         console.error('Dashboard redirect failed:', routeErr);
         hideDashRedirectOverlay();
