@@ -5661,6 +5661,7 @@
     <div class="mob-menu-btns">
       <button class="btn-g" style="font-size:15px;padding:14px;" onclick="closeMenu();openAuth('signup')">Sign Up</button>
       <button class="btn-f" style="font-size:15px;padding:14px;" onclick="closeMenu();openAuth('login')">Log In</button>
+      <button class="btn-f" style="font-size:15px;padding:14px;" onclick="closeMenu();window.location.href='tel:+254793832286'">Make a Call: 0793832286</button>
     </div>
   </div>
 
@@ -8346,14 +8347,43 @@
     function authGoogle() {
       if (typeof initiateGoogleAuth === 'function') {
         showDashRedirectOverlay('(check your internet)');
-        initiateGoogleAuth();
+        const isSignupTab = document.getElementById('tab-signup')?.classList.contains('active');
+        initiateGoogleAuth({
+          redirectPath: window.location.pathname,
+          intent: isSignupTab ? 'signup' : 'login',
+          roleHint: isSignupTab ? 'client' : ''
+        });
       } else {
         showToast('Initialize Google Sign-In...');
       }
     }
-    async function redirectAfterAuth(authData) {
+    function readAuthIntentHints() {
+      const qp = new URLSearchParams(window.location.search);
+      const intent = String(qp.get('auth_intent') || '').trim().toLowerCase();
+      const role = String(qp.get('auth_role') || '').trim().toLowerCase();
+      return { intent, role };
+    }
+    async function resolveLandingDashboardTarget(sessionLike) {
+      if (typeof getDashboardForRole !== 'function') return null;
+      const safeSession = sessionLike?.user ? sessionLike : null;
+      if (!safeSession) return null;
+      let target = await getDashboardForRole(safeSession, {
+        unresolvedFallback: null,
+        fastRoleLookup: true
+      });
+      if (!target) {
+        target = await getDashboardForRole(safeSession, {
+          unresolvedFallback: appRoute(DASHBOARD_PATH_BY_ROLE.client),
+          fastRoleLookup: false
+        });
+      }
+      return target || appRoute(DASHBOARD_PATH_BY_ROLE.client);
+    }
+    async function redirectAfterAuth(authData, options = {}) {
       if (LANDING_REDIRECT_IN_PROGRESS) return;
-      const user = authData?.user || authData?.session?.user;
+      const sessionLike = authData?.session
+        || (authData?.user ? { user: authData.user } : null);
+      const user = sessionLike?.user;
       if (!user) {
         hideDashRedirectOverlay();
         LANDING_REDIRECT_IN_PROGRESS = false;
@@ -8367,14 +8397,25 @@
           .catch((e) => console.warn('Welcome email trigger failed before redirect:', e));
       }
       try {
+        const preferredRole = String(options.preferredRole || '').trim().toLowerCase();
+        if (preferredRole === 'client') {
+          window.location.href = appRoute(DASHBOARD_PATH_BY_ROLE.client);
+          return;
+        }
+        const { intent: authIntent, role: authRole } = readAuthIntentHints();
+        if (authIntent === 'signup' && authRole === 'client') {
+          window.location.href = appRoute(DASHBOARD_PATH_BY_ROLE.client);
+          return;
+        }
         const emailKey = String(user.email || '').trim().toLowerCase();
         if (FIXED_ROLE_ROUTES[emailKey]) {
           window.location.href = FIXED_ROLE_ROUTES[emailKey];
           return;
         }
 
-        if (typeof getDashboardForRole === 'function') {
-          const target = await getDashboardForRole({ user }, { fastRoleLookup: true });
+        const roleTarget = await resolveLandingDashboardTarget(sessionLike);
+        if (roleTarget) {
+          const target = roleTarget;
           window.location.href = target;
           return;
         }
@@ -8468,7 +8509,7 @@
             email,
             password,
             options: {
-              emailRedirectTo: `${window.location.origin}/landing_page.html`,
+              emailRedirectTo: `${window.location.origin}/landing_page.html?auth_intent=signup&auth_role=client`,
               data: signupMeta
             }
           });
@@ -8480,7 +8521,7 @@
             if (onboardCtx) persistOnboardContext(onboardCtx);
             if (data?.session) {
               showToast('Success! Redirecting...');
-              await redirectAfterAuth(data);
+              await redirectAfterAuth(data, { preferredRole: 'client' });
             } else {
               showToast('Signup successful. Please confirm your email, then sign in.');
               hideDashRedirectOverlay();

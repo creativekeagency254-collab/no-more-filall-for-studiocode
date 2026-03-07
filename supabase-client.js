@@ -81,6 +81,21 @@ else _L.info("Supabase service-role client disabled in browser (secure default).
 
 const LANDING_PAGES = new Set(['', 'index.html', 'landing_page.html']);
 const VALID_ROLES = new Set(['client', 'developer', 'commissioner', 'admin']);
+const OAUTH_CONTEXT_QUERY_KEYS = Object.freeze([
+  'mode',
+  'sid',
+  'sales_id',
+  'sname',
+  'sales_name',
+  'semail',
+  'sales_email',
+  'savatar',
+  'sales_avatar',
+  'theme',
+  'client_email',
+  'auth_intent',
+  'auth_role'
+]);
 const ROLE_ALIASES = Object.freeze({
   sales: 'commissioner',
   commisioner: 'commissioner',
@@ -114,6 +129,22 @@ function pageNameFromUrlish(urlOrPath) {
   } catch (_) {
     return currentPageName();
   }
+}
+
+function buildOAuthRedirectUrl(pathHint = '') {
+  const fallbackLeaf = 'landing_page.html';
+  const hintedLeaf = pageNameFromUrlish(pathHint);
+  const currentLeaf = currentPageName();
+  const landingLeaf = isLandingPage(hintedLeaf)
+    ? hintedLeaf
+    : (isLandingPage(currentLeaf) ? currentLeaf : fallbackLeaf);
+  const redirectUrl = new URL(appUrl(landingLeaf || fallbackLeaf));
+  const currentUrl = new URL(window.location.href);
+  OAUTH_CONTEXT_QUERY_KEYS.forEach((key) => {
+    const value = currentUrl.searchParams.get(key);
+    if (value) redirectUrl.searchParams.set(key, value);
+  });
+  return redirectUrl.toString();
 }
 
 function isLandingPage(page = currentPageName()) {
@@ -480,6 +511,21 @@ async function getDashboardForRole(session, options = {}) {
   return dashboardForRole(role);
 }
 
+async function resolveDashboardTargetForSession(session) {
+  if (!session?.user) return appUrl('client_dashboard.html');
+  let dashboard = await getDashboardForRole(session, {
+    unresolvedFallback: null,
+    fastRoleLookup: true
+  });
+  if (!dashboard) {
+    dashboard = await getDashboardForRole(session, {
+      unresolvedFallback: appUrl('client_dashboard.html'),
+      fastRoleLookup: false
+    });
+  }
+  return dashboard || appUrl('client_dashboard.html');
+}
+
 function fixMojibakeText(str) {
   let input = String(str || '');
   if (!/[ÃÂâ]/.test(input)) return input;
@@ -538,10 +584,7 @@ document.addEventListener('DOMContentLoaded', () => sanitizeMojibake(document.bo
 async function handleAuthRedirect(session) {
   if (session && session.user) {
     _L.info('User session detected, checking dashboard for role...', { email: session.user.email });
-    const dashboard = await getDashboardForRole(session, {
-      unresolvedFallback: appUrl('client_dashboard.html'),
-      fastRoleLookup: true
-    });
+    const dashboard = await resolveDashboardTargetForSession(session);
     const currentPage = currentPageName();
     const targetPage = pageNameFromUrlish(dashboard);
 
@@ -597,18 +640,28 @@ async function redirectIfLoggedIn() {
 }
 
 // Use google auth configuration
-async function initiateGoogleAuth() {
+async function initiateGoogleAuth(options = {}) {
   if (!window.sbClient) {
     _L.error("Supabase client not initialized");
     if (window.showToast) window.showToast('Authentication system not ready. Please refresh.');
     return;
   }
 
+  const redirectUrl = new URL(buildOAuthRedirectUrl(options.redirectPath || ''));
+  const intent = String(options.intent || '').trim().toLowerCase();
+  const roleHint = normalizeRole(options.roleHint);
+  if (intent === 'signup' || intent === 'login') {
+    redirectUrl.searchParams.set('auth_intent', intent);
+  }
+  if (roleHint) {
+    redirectUrl.searchParams.set('auth_role', roleHint);
+  }
+  const redirectTo = redirectUrl.toString();
   _L.info("Initiating Google OAuth...");
   const { data, error } = await window.sbClient.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: appUrl('landing_page.html'),
+      redirectTo,
       queryParams: {
         access_type: 'offline',
         prompt: 'consent',
