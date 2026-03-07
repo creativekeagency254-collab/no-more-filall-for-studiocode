@@ -14,7 +14,7 @@ function escapeHtml(value: string): string {
 function renderTemplate(template: string, data: Record<string, unknown>): { subject: string; html: string } {
   if (template === "welcome_client") {
     const name = escapeHtml(String(data.name || data.first_name || "there"));
-    const dashboardUrl = escapeHtml(String(data.dashboard_url || data.site_url || "https://liveteststudiocodemuchemi.netlify.app/client_dashboard.html"));
+    const dashboardUrl = escapeHtml(String(data.dashboard_url || data.site_url || "https://kenyastudiocode254.indevs.in/client_dashboard.html"));
     const supportEmail = escapeHtml(String(data.support_email || "creative.keagency254@gmail.com"));
     const supportWhatsapp = escapeHtml(String(data.support_whatsapp || "+254793832286"));
     return {

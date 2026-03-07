@@ -2,14 +2,16 @@ project_id = "smdbfaomeghoejqqkplv"
 
 [auth]
 enabled = true
-site_url = "https://studiocodekenya254.qzz.io"
+site_url = "https://kenyastudiocode254.indevs.in"
 additional_redirect_urls = [
+  "https://kenyastudiocode254.indevs.in",
+  "https://kenyastudiocode254.indevs.in/landing_page.html",
+  "https://kenyastudiocode254.indevs.in/client_dashboard.html",
+  "https://kenyastudiocode254.indevs.in/developer_dashboard.html",
+  "https://kenyastudiocode254.indevs.in/sales_dashboard.html",
+  "https://kenyastudiocode254.indevs.in/admin_dashboard.html",
   "https://studiocodekenya254.qzz.io",
   "https://studiocodekenya254.qzz.io/landing_page.html",
-  "https://studiocodekenya254.qzz.io/client_dashboard.html",
-  "https://studiocodekenya254.qzz.io/developer_dashboard.html",
-  "https://studiocodekenya254.qzz.io/sales_dashboard.html",
-  "https://studiocodekenya254.qzz.io/admin_dashboard.html",
   "http://localhost:3000",
   "http://localhost:3000/landing_page.html",
   "http://127.0.0.1:3000",
