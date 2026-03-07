@@ -18,7 +18,7 @@ additional_redirect_urls = [
 
 [auth.external.google]
 enabled = true
-client_id = "335856743456-2pvdffj4kjrdm5os96ttgun7kpsg0944.apps.googleusercontent.com"
+client_id = "335856743456-bvgksj4s3v1ri680pbv8bp56o6kaj9gq.apps.googleusercontent.com"
 secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
 redirect_uri = ""
 url = ""
