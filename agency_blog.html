@@ -1,3 +1,4 @@
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,16 +17,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #eef2f7;
-      --ink: #171a22;
+      --bg: #f7f9fc;
+      --ink: #0f172a;
       --muted: #546174;
-      --line: #d7dde7;
-      --panel: #0f172a;
-      --panelText: #d5dff0;
+      --line: #e2e8f0;
       --paper: #ffffff;
       --accent: #16a34a;
       --accent2: #0ea5e9;
       --shadow: 0 12px 34px rgba(15, 23, 42, 0.12);
+      --soft: #f1f5f9;
     }
 
     * {
@@ -39,7 +39,7 @@
       min-height: 100%;
       font-family: 'DM Sans', sans-serif;
       color: var(--ink);
-      background: linear-gradient(180deg, #f6f9fc, #edf2f8);
+      background: var(--bg);
     }
 
     a {
@@ -50,20 +50,20 @@
     .topbar {
       position: sticky;
       top: 0;
-      z-index: 20;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(8px);
+      z-index: 40;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
 
     .topbar-inner {
-      width: min(1400px, 100%);
+      width: min(1200px, 100%);
       margin: 0 auto;
       padding: 14px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 14px;
       flex-wrap: wrap;
     }
 
@@ -85,6 +85,22 @@
       box-shadow: 0 0 0 6px rgba(22, 163, 74, 0.12);
     }
 
+    .nav-links {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 0.86rem;
+      color: #0f172a;
+    }
+
+    .nav-links a {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      font-weight: 600;
+    }
+
     .top-actions {
       display: flex;
       align-items: center;
@@ -92,13 +108,29 @@
       flex-wrap: wrap;
     }
 
+    .search {
+      width: min(260px, 100%);
+      border: 1px solid var(--line);
+      background: #ffffff;
+      color: #0f172a;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .search:focus {
+      border-color: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    }
+
     .btn {
       border: 1px solid var(--line);
       background: #fff;
       color: #0f172a;
-      border-radius: 10px;
-      padding: 9px 12px;
-      font-size: 0.85rem;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-size: 0.82rem;
       font-weight: 700;
       cursor: pointer;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -114,139 +146,238 @@
       background: linear-gradient(135deg, #16a34a, #0f9d58);
       color: #fff;
     }
-
-    .layout {
-      width: min(1400px, 100%);
+    .page {
+      width: min(1200px, 100%);
       margin: 0 auto;
-      padding: 18px;
+      padding: 22px 18px 60px;
       display: grid;
-      grid-template-columns: 360px minmax(0, 1fr);
-      gap: 16px;
-      align-items: start;
+      gap: 28px;
     }
 
-    .sidebar {
-      position: sticky;
-      top: 76px;
-      max-height: calc(100vh - 90px);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid #1e293b;
-      background: linear-gradient(180deg, #111827, #0b1220);
-      border-radius: 16px;
-      color: var(--panelText);
+    .hero {
+      display: grid;
+      gap: 22px;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      align-items: stretch;
+    }
+
+    .hero-content {
+      grid-column: span 7;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px 30px;
+      display: grid;
+      gap: 14px;
       box-shadow: var(--shadow);
     }
 
-    .sidebar-head {
-      padding: 14px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.26);
-    }
-
-    .sidebar-title {
-      margin: 0;
-      font-size: 0.92rem;
+    .hero-tag {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #0f766e;
       font-weight: 800;
+    }
+
+    .hero-title {
+      margin: 0;
       font-family: 'Syne', sans-serif;
-      letter-spacing: 0.02em;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.1;
     }
 
-    .sidebar-sub {
+    .hero-desc {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: #475569;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-media {
+      grid-column: span 5;
+      background: linear-gradient(135deg, #0f172a, #0b1220);
+      border-radius: 22px;
+      border: 1px solid #1f2937;
+      overflow: hidden;
+      position: relative;
+      min-height: 280px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.9;
+    }
+
+    .hero-chip {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .section-sub {
       margin: 6px 0 0;
-      font-size: 0.76rem;
-      color: #94a3b8;
-      line-height: 1.5;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
-    .sidebar-tools {
+    .chip-row {
       display: flex;
       gap: 8px;
-      margin-top: 10px;
+      flex-wrap: wrap;
     }
 
-    .search {
-      width: 100%;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      background: rgba(15, 23, 42, 0.82);
-      color: #e2e8f0;
-      border-radius: 9px;
-      padding: 9px 10px;
-      font-size: 0.82rem;
-      outline: none;
-    }
-
-    .search:focus {
-      border-color: #22c55e;
-      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
-    }
-
-    .topics {
-      overflow: auto;
-      padding: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .topic-group {
-      border: 1px solid rgba(148, 163, 184, 0.2);
-      border-radius: 12px;
-      background: rgba(15, 23, 42, 0.28);
-      padding: 8px;
-      display: grid;
-      gap: 6px;
-    }
-
-    .topic-group-title {
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #86efac;
-      padding: 4px 4px 2px;
-      border-bottom: 1px dashed rgba(148, 163, 184, 0.24);
-      margin-bottom: 2px;
-    }
-
-    .topic-item {
-      border: 1px solid rgba(148, 163, 184, 0.28);
-      background: rgba(15, 23, 42, 0.46);
-      color: #dbe7f8;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: left;
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      background: #fff;
       cursor: pointer;
       transition: 0.15s ease;
-      width: 100%;
-      font-size: 0.8rem;
-      line-height: 1.35;
+    }
+
+    .chip.active {
+      background: #dcfce7;
+      border-color: #16a34a;
+      color: #14532d;
+    }
+
+    .grid {
       display: grid;
-      gap: 6px;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
-    .topic-item:hover {
-      border-color: rgba(34, 197, 94, 0.85);
-      transform: translateX(2px);
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      display: grid;
+      gap: 0;
+      min-height: 100%;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .topic-item.active {
-      border-color: #22c55e;
-      background: rgba(34, 197, 94, 0.15);
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
     }
 
-    .topic-meta {
-      font-size: 0.69rem;
-      color: #93c5fd;
-      letter-spacing: 0.03em;
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      background: #0b1220;
+    }
+
+    .card-body {
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .card-tag {
+      font-size: 0.7rem;
       text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #0f766e;
+      font-weight: 800;
     }
 
-    .doc-wrap {
-      min-width: 0;
+    .card-title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
     }
 
-    .doc-paper {
+    .card-desc {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: #64748b;
+    }
+
+    .split {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: 2fr 1fr;
+      align-items: start;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .panel h3 {
+      margin: 0 0 6px;
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 0.92rem;
+    }
+    .reader {
       border: 1px solid var(--line);
       background: var(--paper);
       border-radius: 18px;
@@ -254,14 +385,14 @@
       overflow: hidden;
     }
 
-    .doc-header {
+    .reader-header {
       padding: 22px 24px 14px;
       border-bottom: 1px solid var(--line);
       background: linear-gradient(180deg, #ffffff, #f9fbff);
     }
 
-    .doc-kicker {
-      font-size: 0.75rem;
+    .reader-kicker {
+      font-size: 0.72rem;
       letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #0f766e;
@@ -269,16 +400,16 @@
       margin-bottom: 8px;
     }
 
-    .doc-title {
+    .reader-title {
       margin: 0;
       font-family: 'Syne', sans-serif;
-      font-size: clamp(1.55rem, 3vw, 2.35rem);
-      line-height: 1.12;
+      font-size: clamp(1.4rem, 3vw, 2.1rem);
+      line-height: 1.15;
       letter-spacing: -0.015em;
       color: #0f172a;
     }
 
-    .doc-meta {
+    .reader-meta {
       margin-top: 10px;
       font-size: 0.84rem;
       color: var(--muted);
@@ -287,11 +418,11 @@
       gap: 8px 14px;
     }
 
-    .doc-body {
+    .reader-body {
       padding: 22px 24px 28px;
     }
 
-    .doc-image {
+    .reader-image {
       width: 100%;
       border-radius: 12px;
       border: 1px solid #d9e1ed;
@@ -302,7 +433,7 @@
       background: #0b1220;
     }
 
-    .doc-summary {
+    .reader-summary {
       border-left: 4px solid #16a34a;
       background: #ecfdf5;
       color: #14532d;
@@ -313,19 +444,19 @@
       line-height: 1.6;
     }
 
-    .doc-section {
+    .reader-section {
       margin-top: 18px;
     }
 
-    .doc-section h2 {
+    .reader-section h3 {
       margin: 0 0 8px;
       font-family: 'Syne', sans-serif;
-      font-size: 1.14rem;
+      font-size: 1.08rem;
       color: #111827;
       letter-spacing: -0.01em;
     }
 
-    .doc-section p {
+    .reader-section p {
       margin: 0;
       color: #1f2937;
       font-size: 1rem;
@@ -333,7 +464,7 @@
       text-align: left;
     }
 
-    .doc-checklist {
+    .reader-checklist {
       margin: 14px 0 0;
       padding: 12px 14px;
       border: 1px dashed #9ca3af;
@@ -345,14 +476,14 @@
       color: #1e293b;
     }
 
-    .doc-checkitem {
+    .reader-checkitem {
       display: flex;
       align-items: flex-start;
       gap: 8px;
       line-height: 1.55;
     }
 
-    .doc-checkitem::before {
+    .reader-checkitem::before {
       content: "[ok]";
       color: #0f766e;
       font-weight: 800;
@@ -370,15 +501,34 @@
       min-height: 1.1em;
     }
 
-    @media (max-width: 768px) {
-      .layout {
+    .load-more {
+      display: flex;
+      justify-content: center;
+    }
+
+    .footer {
+      display: grid;
+      gap: 8px;
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 960px) {
+      .hero {
         grid-template-columns: 1fr;
       }
 
-      .sidebar {
-        position: relative;
-        top: 0;
-        max-height: 55vh;
+      .hero-content,
+      .hero-media {
+        grid-column: span 12;
+      }
+
+      .split {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        width: 100%;
       }
     }
 
@@ -387,17 +537,17 @@
         padding: 12px;
       }
 
-      .doc-header,
-      .doc-body {
-        padding: 16px;
+      .page {
+        padding: 18px 14px 40px;
       }
 
-      .doc-section p {
-        font-size: 0.95rem;
-      }
-
-      .btn {
+      .btn,
+      .search {
         width: 100%;
+      }
+
+      .hero-content {
+        padding: 22px;
       }
     }
   </style>
@@ -408,45 +558,87 @@
     <div class="topbar-inner">
       <div class="brand">
         <span class="brand-dot" aria-hidden="true"></span>
-        <span>CODESTUDIO.KENYA Blog Library</span>
+        <span>CODESTUDIO.KENYA Blog</span>
       </div>
+      <nav class="nav-links" aria-label="Blog sections">
+        <a href="#latest">Latest</a>
+        <a href="#topics">Topics</a>
+        <a href="#reader">Reader</a>
+        <a href="landing_page.html">Back to Home</a>
+      </nav>
       <div class="top-actions">
-        <button class="btn btn-primary" id="copy-all-btn">Copy Entire Blog</button>
-        <a class="btn" href="landing_page.html">Back to Home</a>
+        <input id="search-input" class="search" type="search" placeholder="Search articles, topics, roles..." />
+        <button class="btn btn-primary" id="copy-all-btn">Copy Full Library</button>
       </div>
     </div>
   </header>
 
-  <main class="layout">
-    <aside class="sidebar" aria-label="Blog library navigation">
-      <div class="sidebar-head">
-        <h2 class="sidebar-title">Blog Library</h2>
-        <p class="sidebar-sub">Select a topic to load a complete long-form article focused on conversion, delivery, trust, and secure payment operations.</p>
-        <div class="sidebar-tools">
-          <input id="topic-search" class="search" type="search" placeholder="Search topic, role, workflow..." />
+  <main class="page">
+    <section class="hero" id="latest">
+      <div class="hero-content">
+        <div class="hero-tag">Featured Story</div>
+        <h1 class="hero-title" id="hero-title">Loading featured article...</h1>
+        <p class="hero-desc" id="hero-desc"></p>
+        <div class="hero-meta" id="hero-meta"></div>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="hero-read-btn">Read Story</button>
+          <button class="btn" id="hero-save-btn">Save Topic</button>
         </div>
+      </div>
+      <div class="hero-media">
+        <img id="hero-image" alt="Featured article cover" />
+        <div class="hero-chip" id="hero-chip"></div>
+      </div>
+    </section>
+
+    <section class="split">
+      <div class="panel">
+        <div class="section-title">
+          <h2>Top stories this week</h2>
+        </div>
+        <p class="section-sub">Shortlist of conversion-first reads shaping how agencies sell, deliver, and protect their clients.</p>
+        <div class="grid" id="top-stories"></div>
+      </div>
+      <div class="panel">
+        <h3>Agency playbook cadence</h3>
+        <p>Each article is structured the way Google-style editorial teams do it: clear theme, fast value, and documented takeaways you can use with clients immediately.</p>
         <div class="status" id="copy-status"></div>
       </div>
-      <div class="topics" id="topic-list"></div>
-    </aside>
-
-    <section class="doc-wrap">
-      <article class="doc-paper" id="doc-paper">
-        <div class="doc-header">
-          <div class="doc-kicker">Agency Playbook</div>
-          <h1 class="doc-title" id="doc-title">Loading topic...</h1>
-          <div class="doc-meta" id="doc-meta"></div>
-        </div>
-        <div class="doc-body">
-          <img id="doc-image" class="doc-image" alt="Technology concept illustration" />
-          <div class="doc-summary" id="doc-summary"></div>
-          <div id="doc-sections"></div>
-          <div class="doc-checklist" id="doc-checklist"></div>
-        </div>
-      </article>
     </section>
-  </main>
 
+    <section id="topics">
+      <div class="section-title">
+        <div>
+          <h2>Latest stories</h2>
+          <p class="section-sub">Filter by topic to match the type of client or internal team you are serving.</p>
+        </div>
+        <div class="chip-row" id="category-chips"></div>
+      </div>
+      <div class="grid" id="article-grid"></div>
+      <div class="load-more">
+        <button class="btn" id="load-more-btn">Load more</button>
+      </div>
+    </section>
+
+    <section class="reader" id="reader">
+      <div class="reader-header">
+        <div class="reader-kicker" id="reader-kicker">Agency Playbook</div>
+        <h2 class="reader-title" id="reader-title">Select an article to read</h2>
+        <div class="reader-meta" id="reader-meta"></div>
+      </div>
+      <div class="reader-body">
+        <img id="reader-image" class="reader-image" alt="Article cover" />
+        <div class="reader-summary" id="reader-summary"></div>
+        <div id="reader-sections"></div>
+        <div class="reader-checklist" id="reader-checklist"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>CODESTUDIO.KENYA Blog Library — structured agency knowledge base for delivery, revenue, and trust systems.</div>
+      <div>Need a direct consultation? Use the contact form on the main site.</div>
+    </footer>
+  </main>
   <script>
     const serviceTracks = [
       'Client Onboarding Portfolio Systems',
@@ -484,21 +676,44 @@
       'Conversion-First Content Strategy'
     ];
 
+    const categoryMap = [
+      { label: 'Payments', match: ['Payment', 'Invoice', 'Paystack', 'Ledger'] },
+      { label: 'Security', match: ['Security', 'Audit'] },
+      { label: 'Growth', match: ['Conversion', 'Portfolio', 'Case Study'] },
+      { label: 'Operations', match: ['Operations', 'Workflow', 'Admin', 'Support'] },
+      { label: 'Delivery', match: ['Delivery', 'Milestone', 'Project', 'Scope'] },
+      { label: 'Platform', match: ['Supabase', 'Google'] },
+      { label: 'UX', match: ['UX', 'Mobile'] },
+      { label: 'Marketplace', match: ['Bidding', 'Marketplace'] }
+    ];
+
     const topics = [];
     let idx = 0;
     for (const service of serviceTracks) {
       for (const angle of businessAngles) {
         idx += 1;
         const title = `${service}: ${angle}`;
+        const category = categoryMap.find((entry) => entry.match.some((key) => service.includes(key)))?.label || 'Strategy';
+        const publishedAt = new Date(Date.now() - idx * 86400000).toISOString();
         topics.push({
           id: idx,
           title,
           slug: `topic-${idx}`,
           service,
-          angle
+          angle,
+          category,
+          publishedAt,
+          popularity: (idx * 17) % 100
         });
       }
     }
+
+    const state = {
+      activeCategory: 'All',
+      query: '',
+      visibleCount: 12,
+      activeTopicId: topics[0].id
+    };
 
     function escapeHtml(value) {
       return value
@@ -515,6 +730,11 @@
 
     function getWordCount(text) {
       return text.trim().split(/\s+/).filter(Boolean).length;
+    }
+
+    function formatDate(iso) {
+      const date = new Date(iso);
+      return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
     }
 
     function buildTopicImage(topic) {
@@ -543,16 +763,15 @@
       </svg>`;
       return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
     }
-
     function buildArticle(topic) {
-      const p1 = `This guide explains ${topic.title.toLowerCase()} for software buyers and decision makers. The practical objective is straightforward: move from uncertainty to a controlled delivery plan where scope, budget, timelines, and payment checkpoints are transparent from day one. A professional agency should not force clients to guess quality. Instead, it should prove process maturity through structured onboarding, role clarity, and measurable delivery outcomes.`;
-      const p2 = `From a business standpoint, ${topic.service.toLowerCase()} matters because most projects fail when communication and accountability are vague. Teams often jump into development without clear acceptance criteria, causing cost expansion and timeline stress. The better approach is to define milestones, assign ownership per role, and maintain a single source of truth in the dashboard. Every update should be visible, timestamped, and linked to a project decision so stakeholders can track progress with confidence.`;
-      const p3 = `Implementation should start with a discovery framework that captures requirements, constraints, risk tolerance, and expected commercial impact. For CODESTUDIO.KENYA-style engagements, this means documenting user stories, required integrations, payment behavior, and reporting needs before major build work begins. It also means validating technical assumptions early. If architecture decisions are postponed, teams end up rewriting flows under pressure. A disciplined blueprint prevents rework and protects both client capital and delivery quality.`;
-      const p4 = `Security is not a checklist after launch. It is part of daily engineering behavior. Role-based access controls, row-level permissions, audit trails, webhook signature verification, and immutable transaction records should be active from the first sprint. This is especially critical when projects include invoice links, deposit workflows, and payout requests. Buyers should request concrete evidence: policy definitions, failure alerts, reconciliation logs, and rollback strategy. Mature agencies can show this without hesitation.`;
-      const p5 = `Payment trust directly affects conversion. The most effective model is clear: estimate range, approved scope, initial deposit, milestone approvals, and final release. When customers can see status transitions inside their dashboard, confidence rises and disputes drop. If payments are initiated by link, the platform still needs immediate feedback after confirmation so clients see "paid" and next steps without manual follow-up. Reliable reconciliation between provider events and internal records is therefore non-negotiable.`;
-      const p6 = `For growth teams, ${topic.angle.toLowerCase()} should drive both marketing and operations. High-performing agencies publish evidence-based content that answers buyer objections before sales calls. They map each article to real service pathways, include transparent pricing logic, and show risk controls in plain language. This attracts qualified leads instead of casual traffic. Over time, the brand wins because it combines expertise with execution discipline. Search engines and LLM systems reward that consistency.`;
-      const p7 = `Execution quality improves when every role knows what "done" means. Commissioners should capture opportunities with sufficient detail, developers should deliver against acceptance criteria, and admins should monitor revenue quality through verified transactions rather than assumptions. Clients should always know who to contact, what stage is active, and which action is required next. That level of clarity reduces support load and improves referral rates because the experience feels structured, not improvised.`;
-      const p8 = `The final recommendation is to treat this topic as an operating standard, not a one-time campaign. Review KPIs weekly, audit security monthly, and revalidate your pricing assumptions quarterly. When scope, communication, and payment controls stay aligned, project velocity increases while risk decreases. In practical terms, this means faster launches, fewer costly reversals, and a stronger reputation in competitive markets where trust is a deciding factor.`;
+      const p1 = `This guide explains ${topic.title.toLowerCase()} for software buyers and decision makers. The practical objective is straightforward: move from uncertainty to a controlled delivery plan where scope, budget, timelines, and payment checkpoints are transparent from day one.`;
+      const p2 = `From a business standpoint, ${topic.service.toLowerCase()} matters because most projects fail when communication and accountability are vague. Teams often jump into development without clear acceptance criteria, causing cost expansion and timeline stress.`;
+      const p3 = `Implementation should start with a discovery framework that captures requirements, constraints, risk tolerance, and expected commercial impact. For CODESTUDIO.KENYA-style engagements, this means documenting user stories, required integrations, payment behavior, and reporting needs before major build work begins.`;
+      const p4 = `Security is not a checklist after launch. It is part of daily engineering behavior. Role-based access controls, row-level permissions, audit trails, webhook signature verification, and immutable transaction records should be active from the first sprint.`;
+      const p5 = `Payment trust directly affects conversion. The most effective model is clear: estimate range, approved scope, initial deposit, milestone approvals, and final release. When customers can see status transitions inside their dashboard, confidence rises and disputes drop.`;
+      const p6 = `For growth teams, ${topic.angle.toLowerCase()} should drive both marketing and operations. High-performing agencies publish evidence-based content that answers buyer objections before sales calls.`;
+      const p7 = `Execution quality improves when every role knows what "done" means. Commissioners should capture opportunities with sufficient detail, developers should deliver against acceptance criteria, and admins should monitor revenue quality through verified transactions rather than assumptions.`;
+      const p8 = `The final recommendation is to treat this topic as an operating standard, not a one-time campaign. Review KPIs weekly, audit security monthly, and revalidate your pricing assumptions quarterly.`;
 
       const sections = [
         { heading: 'Direct Answer', text: p1 },
@@ -567,7 +786,7 @@
 
       let wordCount = sections.reduce((sum, section) => sum + getWordCount(section.text), 0);
       while (wordCount < 420) {
-        const extra = `Additional execution note: maintain searchable project history, keep payment references unique, and ensure every status transition is confirmed through backend events before UI updates are marked final. This prevents false positives and keeps clients informed with credible, auditable information.`;
+        const extra = `Additional execution note: maintain searchable project history, keep payment references unique, and ensure every status transition is confirmed through backend events before UI updates are marked final.`;
         sections.push({ heading: `Execution Note ${sections.length - 7}`, text: extra });
         wordCount += getWordCount(extra);
       }
@@ -588,93 +807,108 @@
       };
     }
 
-    const topicListEl = document.getElementById('topic-list');
-    const searchEl = document.getElementById('topic-search');
-    const titleEl = document.getElementById('doc-title');
-    const metaEl = document.getElementById('doc-meta');
-    const imageEl = document.getElementById('doc-image');
-    const summaryEl = document.getElementById('doc-summary');
-    const sectionsEl = document.getElementById('doc-sections');
-    const checklistEl = document.getElementById('doc-checklist');
-    const copyBtn = document.getElementById('copy-all-btn');
-    const copyStatus = document.getElementById('copy-status');
+    function buildCardSummary(topic) {
+      return `How to deliver ${topic.service.toLowerCase()} with clear scope, secure payments, and measurable outcomes for ${topic.angle.toLowerCase()}.`;
+    }
 
-    let activeTopicId = topics[0].id;
-    let visibleTopics = [...topics];
-
-    function renderTopicList() {
-      if (!visibleTopics.length) {
-        topicListEl.innerHTML = '<div class="loading-text" style="padding:10px;color:#94a3b8;">No topics matched your search.</div>';
-        return;
-      }
-
-      const groups = new Map();
-      visibleTopics.forEach((topic) => {
-        if (!groups.has(topic.service)) groups.set(topic.service, []);
-        groups.get(topic.service).push(topic);
+    function getFilteredTopics() {
+      return topics.filter((topic) => {
+        const matchesCategory = state.activeCategory === 'All' || topic.category === state.activeCategory;
+        const q = state.query.trim().toLowerCase();
+        const matchesQuery = !q || topic.title.toLowerCase().includes(q) || topic.service.toLowerCase().includes(q) || topic.angle.toLowerCase().includes(q);
+        return matchesCategory && matchesQuery;
       });
+    }
 
-      topicListEl.innerHTML = Array.from(groups.entries()).map(([service, groupTopics]) => {
-        const buttons = groupTopics.map((topic) => {
-          const activeClass = topic.id === activeTopicId ? 'active' : '';
-          return `<button class="topic-item ${activeClass}" data-topic-id="${topic.id}">
-            <span>${topic.id}. ${escapeHtml(topic.angle)}</span>
-            <span class="topic-meta">${escapeHtml(topic.slug)}</span>
-          </button>`;
-        }).join('');
+    function renderHero(topic) {
+      const article = buildArticle(topic);
+      document.getElementById('hero-title').textContent = topic.title;
+      document.getElementById('hero-desc').textContent = article.summary;
+      document.getElementById('hero-meta').innerHTML = `<span>${topic.category}</span><span>${formatDate(topic.publishedAt)}</span><span>${formatWords(article.wordCount)} words</span>`;
+      document.getElementById('hero-image').src = buildTopicImage(topic);
+      document.getElementById('hero-chip').textContent = `${topic.category} · ${topic.angle}`;
+      document.getElementById('hero-read-btn').onclick = () => openReader(topic.id);
+      document.getElementById('hero-save-btn').onclick = () => {
+        navigator.clipboard.writeText(topic.title).then(() => {
+          document.getElementById('copy-status').textContent = `Saved: ${topic.title}`;
+        }).catch(() => {
+          document.getElementById('copy-status').textContent = 'Save failed. Please allow clipboard permission.';
+        });
+      };
+    }
 
-        return `<section class="topic-group">
-          <div class="topic-group-title">${escapeHtml(service)}</div>
-          ${buttons}
-        </section>`;
+    function renderTopStories(list) {
+      const container = document.getElementById('top-stories');
+      container.innerHTML = list.map((topic) => {
+        return `<article class="card">
+          <img src="${buildTopicImage(topic)}" alt="${escapeHtml(topic.title)}" />
+          <div class="card-body">
+            <div class="card-tag">${escapeHtml(topic.category)}</div>
+            <h3 class="card-title">${escapeHtml(topic.title)}</h3>
+            <p class="card-desc">${escapeHtml(buildCardSummary(topic))}</p>
+            <div class="card-meta"><span>${formatDate(topic.publishedAt)}</span><span>${topic.angle}</span></div>
+            <button class="btn" data-read="${topic.id}">Read</button>
+          </div>
+        </article>`;
+      }).join('');
+    }
+    function renderCategoryChips() {
+      const categories = ['All', ...new Set(topics.map((t) => t.category))];
+      const chipRow = document.getElementById('category-chips');
+      chipRow.innerHTML = categories.map((cat) => {
+        const active = cat === state.activeCategory ? 'active' : '';
+        return `<button class="chip ${active}" data-category="${cat}">${cat}</button>`;
       }).join('');
     }
 
-    function renderArticle(topicId) {
-      const topic = topics.find((entry) => entry.id === topicId) || topics[0];
-      activeTopicId = topic.id;
-      const article = buildArticle(topic);
+    function renderGrid() {
+      const list = getFilteredTopics();
+      const grid = document.getElementById('article-grid');
+      const visible = list.slice(0, state.visibleCount);
+      grid.innerHTML = visible.map((topic) => {
+        return `<article class="card">
+          <img src="${buildTopicImage(topic)}" alt="${escapeHtml(topic.title)}" />
+          <div class="card-body">
+            <div class="card-tag">${escapeHtml(topic.category)}</div>
+            <h3 class="card-title">${escapeHtml(topic.title)}</h3>
+            <p class="card-desc">${escapeHtml(buildCardSummary(topic))}</p>
+            <div class="card-meta"><span>${formatDate(topic.publishedAt)}</span><span>${topic.angle}</span></div>
+            <button class="btn" data-read="${topic.id}">Read</button>
+          </div>
+        </article>`;
+      }).join('');
 
-      titleEl.textContent = topic.title;
-      metaEl.innerHTML = `<span>Topic #${topic.id}</span><span>${formatWords(article.wordCount)} words</span><span>SEO + LLM structured</span>`;
-      imageEl.src = buildTopicImage(topic);
-      summaryEl.textContent = article.summary;
-      sectionsEl.innerHTML = article.sections.map((section) => `
-        <section class="doc-section">
-          <h2>${escapeHtml(section.heading)}</h2>
+      document.getElementById('load-more-btn').style.display = list.length > state.visibleCount ? 'inline-flex' : 'none';
+    }
+
+    function openReader(topicId) {
+      const topic = topics.find((entry) => entry.id === topicId) || topics[0];
+      state.activeTopicId = topic.id;
+      const article = buildArticle(topic);
+      document.getElementById('reader-title').textContent = topic.title;
+      document.getElementById('reader-meta').innerHTML = `<span>${topic.category}</span><span>${formatDate(topic.publishedAt)}</span><span>${formatWords(article.wordCount)} words</span>`;
+      document.getElementById('reader-image').src = buildTopicImage(topic);
+      document.getElementById('reader-summary').textContent = article.summary;
+      document.getElementById('reader-sections').innerHTML = article.sections.map((section) => `
+        <section class="reader-section">
+          <h3>${escapeHtml(section.heading)}</h3>
           <p>${escapeHtml(section.text)}</p>
         </section>
       `).join('');
-      checklistEl.innerHTML = article.checklist.map((item) => `<div class="doc-checkitem">${escapeHtml(item)}</div>`).join('');
-
+      document.getElementById('reader-checklist').innerHTML = article.checklist.map((item) => `<div class="reader-checkitem">${escapeHtml(item)}</div>`).join('');
       document.title = `${topic.title} | CODESTUDIO.KENYA Blog`;
       history.replaceState({}, '', `#${topic.slug}`);
-      renderTopicList();
+      document.getElementById('reader').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    topicListEl.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-topic-id]');
+    function handleReadClick(event) {
+      const button = event.target.closest('[data-read]');
       if (!button) return;
-      const topicId = Number(button.getAttribute('data-topic-id'));
-      renderArticle(topicId);
-    });
+      const id = Number(button.getAttribute('data-read'));
+      openReader(id);
+    }
 
-    searchEl.addEventListener('input', () => {
-      const query = searchEl.value.trim().toLowerCase();
-      if (!query) {
-        visibleTopics = [...topics];
-        renderTopicList();
-        return;
-      }
-      visibleTopics = topics.filter((topic) =>
-        topic.title.toLowerCase().includes(query) ||
-        topic.service.toLowerCase().includes(query) ||
-        topic.angle.toLowerCase().includes(query)
-      );
-      renderTopicList();
-    });
-
-    async function copyAllArticles() {
+    function copyAllArticles() {
       const serialized = topics.map((topic) => {
         const article = buildArticle(topic);
         const blocks = article.sections.map((section) => `${section.heading}\n${section.text}`).join('\n\n');
@@ -682,15 +916,12 @@
         return `${topic.id}. ${topic.title}\nWord Count: ${article.wordCount}\n\nSummary:\n${article.summary}\n\n${blocks}\n\nChecklist:\n${checklist}`;
       }).join('\n\n============================================================\n\n');
 
-      try {
-        await navigator.clipboard.writeText(serialized);
-        copyStatus.textContent = 'Entire 200-topic blog copied to clipboard.';
-      } catch (error) {
-        copyStatus.textContent = 'Copy failed. Please allow clipboard permission and try again.';
-      }
+      navigator.clipboard.writeText(serialized).then(() => {
+        document.getElementById('copy-status').textContent = 'Entire blog library copied to clipboard.';
+      }).catch(() => {
+        document.getElementById('copy-status').textContent = 'Copy failed. Please allow clipboard permission and try again.';
+      });
     }
-
-    copyBtn.addEventListener('click', copyAllArticles);
 
     function buildSchema() {
       const itemList = topics.map((topic, i) => ({
@@ -716,14 +947,40 @@
       };
       document.getElementById('blog-schema').textContent = JSON.stringify(schema);
     }
-
     function loadInitialTopic() {
+      renderCategoryChips();
+      const filtered = getFilteredTopics();
+      renderHero(filtered[0] || topics[0]);
+      renderTopStories(filtered.slice(1, 3));
+      renderGrid();
       const hash = window.location.hash.replace('#', '');
       const hashTopic = topics.find((topic) => topic.slug === hash);
-      renderTopicList();
-      renderArticle(hashTopic ? hashTopic.id : topics[0].id);
+      openReader(hashTopic ? hashTopic.id : topics[0].id);
       buildSchema();
     }
+
+    document.getElementById('search-input').addEventListener('input', (event) => {
+      state.query = event.target.value;
+      state.visibleCount = 12;
+      renderGrid();
+    });
+
+    document.getElementById('category-chips').addEventListener('click', (event) => {
+      const chip = event.target.closest('[data-category]');
+      if (!chip) return;
+      state.activeCategory = chip.getAttribute('data-category');
+      state.visibleCount = 12;
+      renderCategoryChips();
+      renderGrid();
+    });
+
+    document.getElementById('article-grid').addEventListener('click', handleReadClick);
+    document.getElementById('top-stories').addEventListener('click', handleReadClick);
+    document.getElementById('copy-all-btn').addEventListener('click', copyAllArticles);
+    document.getElementById('load-more-btn').addEventListener('click', () => {
+      state.visibleCount += 12;
+      renderGrid();
+    });
 
     loadInitialTopic();
   </script>
